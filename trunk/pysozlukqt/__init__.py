@@ -46,8 +46,7 @@ def main():
             QtCore.QObject.connect(self.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
             QtCore.QObject.connect(self.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
             QtCore.QObject.connect(self.actionOffline,QtCore.SIGNAL("activated()"),core.toggleOffline)
-            QtCore.QObject.connect(self.actionQuit,QtCore.SIGNAL("activated()"),core.quitApp)
-            QtCore.QObject.connect(self.parent, QtCore.SIGNAL("destroyed"), core.quitApp)
+            QtCore.QObject.connect(self.actionQuit,QtCore.SIGNAL("activated()"),self.parent.close)
             QtCore.QObject.connect(self.actionSave,QtCore.SIGNAL("activated()"),core.save)
             QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("clicked()"),core.search)
             QtCore.QObject.connect(self.lineEdit,QtCore.SIGNAL("returnPressed()"),core.search)
@@ -61,12 +60,14 @@ def main():
     ui.makeConnections(core)
     ui.parent.setWindowTitle(_("Pysozluk-Qt"))
     if settings.contains("windowposition"):
-        ui.move(settings.value("windowposition").toPoint())
+        ui.parent.move(settings.value("windowposition").toPoint())
     ui.parent.show()
     #app.exec_()
     #pycallgraph.stop_trace()
     #pycallgraph.make_dot_graph('pysozluk-qt.png')
-    sys.exit(app.exec_())
+    exitCode = app.exec_()
+    settings.setValue("windowposition", QtCore.QVariant(ui.parent.pos()))
+    sys.exit(exitCode)
 
 if __name__ == "__main__":
     main()
