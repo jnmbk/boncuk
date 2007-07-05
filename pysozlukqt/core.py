@@ -123,7 +123,3 @@ class pysozlukCore:
                 file = open(str(file_path), "w")
                 file.write(unicode(description) + "\n")
                 file.close()
-    def quitApp(self):
-        self.settings.setValue("windowposition", QtCore.QVariant(self.ui.pos()))
-        self.ui.close()
-
