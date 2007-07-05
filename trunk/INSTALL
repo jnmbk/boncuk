@@ -1,0 +1,14 @@
+To install pysozluk-qt, type this command:
+sudo python setup.py install
+
+pysozluk-qt depends on these modules: PyQt4, pysqlite
+So make sure that you have installed those before trying to run pysozluk-qt.
+
+--------------------------------------------------------------------------------
+
+pysozluk-qt'yi kurmak için bu komutu kullanın:
+sudo python setup.py install
+
+pysozluk-qt bu modüllere bağımlıdır: PyQt4, pysqlite
+Bu yüzden pysozluk-qt'yi kullanabilmek için öncelikle bu Python modüllerini
+kurmalısınız.
