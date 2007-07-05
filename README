@@ -1,0 +1,18 @@
+http://sf.net/projects/pysozluk-qt
+pysozluk-qt is a qt port of tkinter application pysozluk.
+See INSTALL for installation instructions.
+You should use UTF8 encoding to use cli.
+
+You can get the latest codes by typing:
+
+svn co http://pysozluk-qt.googlecode.com/svn/trunk pysozluk-qt
+
+------------------------------------------------------------------------------------
+http://sf.net/projects/pysozluk-qt
+pysozluk-qt, pysozluk'un qt arayüz kütüphanesine uyarlanmış halidir.
+Kurulum bilgisi için INSTALL dosyasına bakın.
+Konsoldan kullanabilmek için UTF8 kodlama gereklidir.
+
+Son kodlara ulaşmak için şu komutu kullanabilirsiniz:
+
+svn co http://pysozluk-qt.googlecode.com/svn/trunk pysozluk-qt
