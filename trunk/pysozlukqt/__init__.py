@@ -20,53 +20,47 @@ import pysozlukglobals
 locale.setlocale(locale.LC_ALL, "C")
 _ = translation('pysozluk-qt', fallback=True).ugettext
 
+def retranslateUi(ui):
+    ui.label.setText(_("Keyword:"))
+    ui.pushButton.setText(_("&Search"))
+    ui.menuFile.setTitle(_("&File"))
+    ui.menuMode.setTitle(_("&Mode"))
+    ui.menuHelp.setTitle(_("&Help"))
+    ui.actionAbout_Pysozluk_Qt.setText(_("About &Pysozluk-Qt"))
+    ui.actionAbout_Qt.setText(_("About &Qt"))
+    ui.actionOffline.setText(_("&Offline"))
+    ui.actionSave.setText(_("&Save"))
+    ui.actionQuit.setText(_("&Quit"))
+    ui.setWindowTitle(_("Pysozluk-Qt"))
+def makeConnections(ui, core):
+    QtCore.QObject.connect(ui.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
+    QtCore.QObject.connect(ui.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
+    QtCore.QObject.connect(ui.actionOffline,QtCore.SIGNAL("activated()"),core.toggleOffline)
+    QtCore.QObject.connect(ui.actionQuit,QtCore.SIGNAL("activated()"),ui.close)
+    QtCore.QObject.connect(ui.actionSave,QtCore.SIGNAL("activated()"),core.save)
+    QtCore.QObject.connect(ui.pushButton,QtCore.SIGNAL("clicked()"),core.search)
+    QtCore.QObject.connect(ui.lineEdit,QtCore.SIGNAL("returnPressed()"),core.search)
 
 def main():
     app = QtGui.QApplication(sys.argv)
     app.setOrganizationName("pysozluk-qt")
     app.setApplicationName("pysozluk-qt")
     settings = QtCore.QSettings()
-    formclass = uic.loadUiType(pysozlukglobals.mainWindowFileName)[0]
+    ui = uic.loadUi(pysozlukglobals.mainWindowFileName)
 
-    class mainWindow(formclass):
-        parent = None
-
-        def retranslateUi(self, mw):
-            self.label.setText(_("Keyword:"))
-            self.pushButton.setText(_("&Search"))
-            self.menuFile.setTitle(_("&File"))
-            self.menuMode.setTitle(_("&Mode"))
-            self.menuHelp.setTitle(_("&Help"))
-            self.actionAbout_Pysozluk_Qt.setText(_("About &Pysozluk-Qt"))
-            self.actionAbout_Qt.setText(_("About &Qt"))
-            self.actionOffline.setText(_("&Offline"))
-            self.actionSave.setText(_("&Save"))
-            self.actionQuit.setText(_("&Quit"))
-        def makeConnections(self, core):
-            QtCore.QObject.connect(self.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
-            QtCore.QObject.connect(self.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
-            QtCore.QObject.connect(self.actionOffline,QtCore.SIGNAL("activated()"),core.toggleOffline)
-            QtCore.QObject.connect(self.actionQuit,QtCore.SIGNAL("activated()"),self.parent.close)
-            QtCore.QObject.connect(self.actionSave,QtCore.SIGNAL("activated()"),core.save)
-            QtCore.QObject.connect(self.pushButton,QtCore.SIGNAL("clicked()"),core.search)
-            QtCore.QObject.connect(self.lineEdit,QtCore.SIGNAL("returnPressed()"),core.search)
-
-    ui = mainWindow()
-    ui.parent = QtGui.QMainWindow()
-    ui.setupUi(ui.parent)
     #import pycallgraph
     #pycallgraph.start_trace()
     core = pysozlukCore(ui)
-    ui.makeConnections(core)
-    ui.parent.setWindowTitle(_("Pysozluk-Qt"))
+    retranslateUi(ui)
+    makeConnections(ui, core)
     if settings.contains("windowposition"):
-        ui.parent.move(settings.value("windowposition").toPoint())
-    ui.parent.show()
+        ui.move(settings.value("windowposition").toPoint())
+    ui.show()
     #app.exec_()
     #pycallgraph.stop_trace()
     #pycallgraph.make_dot_graph('pysozluk-qt.png')
     exitCode = app.exec_()
-    settings.setValue("windowposition", QtCore.QVariant(ui.parent.pos()))
+    settings.setValue("windowposition", QtCore.QVariant(ui.pos()))
     sys.exit(exitCode)
 
 if __name__ == "__main__":
