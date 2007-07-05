@@ -87,7 +87,7 @@ class pysozlukCore:
         self.searcherThread.start()
 
     def about(self):
-        QtGui.QMessageBox.about(self.ui.parent,
+        QtGui.QMessageBox.about(self.ui,
                                 _("About Pysozluk-Qt"),
                                 "Pysozluk-Qt v%s\n" % pysozlukglobals.version +\
                                 "http://code.google.com/p/pysozluk-qt\n\n" +\
@@ -97,7 +97,7 @@ class pysozlukCore:
                                 u"Uğur Çetin <ugur.jnmbk at gmail.com>")
 
     def aboutQt(self):
-        QtGui.QMessageBox.aboutQt(self.ui.parent)
+        QtGui.QMessageBox.aboutQt(self.ui)
 
     def toggleOffline(self):
         self.settings.setValue("offline",
@@ -105,12 +105,12 @@ class pysozlukCore:
 
     def save(self):
         if not self.ui.textBrowser.toPlainText():
-            QtGui.QMessageBox.warning(self.ui.parent,
+            QtGui.QMessageBox.warning(self.ui,
             _("Warning"),
             _("If you want to save a description, you must search a keyword."))
         else:
             #TODO: Add HTML and Plain Text file filters
-            file_path = QtGui.QFileDialog.getSaveFileName(self.ui.parent,
+            file_path = QtGui.QFileDialog.getSaveFileName(self.ui,
                                                           _("Save"),
                                                           os.getenv("HOME"),
                                                           "All Files (*)")
