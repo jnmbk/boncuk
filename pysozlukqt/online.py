@@ -22,7 +22,6 @@ from HTMLParser import HTMLParser
 import urllib
 
 def convertToTurkishWeb(word):
-    #TODO: There must be a better way
     turkishCharacters = ((u"ı","%%FD"), (u"İ","%%DD"), (u"ö","%%F6"),
                          (u"Ö","%%D6"), (u"ç","%%E7"), (u"Ç","%%C7"),
                          (u"ş","%%FE"), (u"Ş","%%DE"), (u"ğ","%%F0"),
