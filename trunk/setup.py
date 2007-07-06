@@ -43,8 +43,8 @@ datas.extend(locales)
 
 setup(name = "pysozluk-qt",
       version = "0.1",
-      description = "Online/offline Turkish<->English dictionary.",
-      license = "GNU General Public License, Version 2",
+      description = "Online/offline dictionary.",
+      license = "GNU General Public License, Version 3",
       author = "pysozluk-qt developers",
       author_email = "pysozluk-qt@googlegroups.com",
       url = "http://code.google.com/p/pysozluk-qt",
