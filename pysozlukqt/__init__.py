@@ -32,6 +32,7 @@ def retranslateUi(ui):
     ui.actionSave.setText(_("&Save"))
     ui.actionQuit.setText(_("&Quit"))
     ui.setWindowTitle(_("Pysozluk-Qt"))
+
 def makeConnections(ui, core):
     QtCore.QObject.connect(ui.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
     QtCore.QObject.connect(ui.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
@@ -56,11 +57,10 @@ def main():
     if settings.contains("windowposition"):
         ui.move(settings.value("windowposition").toPoint())
     ui.show()
-    #app.exec_()
-    #pycallgraph.stop_trace()
-    #pycallgraph.make_dot_graph('pysozluk-qt.png')
     exitCode = app.exec_()
     settings.setValue("windowposition", QtCore.QVariant(ui.pos()))
+    #pycallgraph.stop_trace()
+    #pycallgraph.make_dot_graph('pysozluk-qt.png')
     sys.exit(exitCode)
 
 if __name__ == "__main__":
