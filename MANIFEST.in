@@ -1,2 +1,3 @@
 include AUTHORS COPYING INSTALL README
 recursive-include data pysozluk-qt.db.bz2 pysozluk-qt.desktop pysozluk-qt.svg
+recursive-include po *.po*
