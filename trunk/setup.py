@@ -13,6 +13,10 @@
 import os
 from distutils.core import setup
 
+def getVersion():
+    import pysozlukqt.pysozlukglobals
+    return pysozlukqt.pysozlukglobals.version
+
 #compile translations
 locales = []
 translations = ["tr"]
@@ -22,7 +26,8 @@ for i in translations:
     except:
         pass
     os.system("msgfmt po/%s.po -o po/%s/pysozluk-qt.mo" % (i, i))
-    locales.append(('share/locale/%s/LC_MESSAGES' % i, ['po/%s/pysozluk-qt.mo' % i]))
+    locales.append(('share/locale/%s/LC_MESSAGES' % i,
+                    ['po/%s/pysozluk-qt.mo' % i]))
 
 #extract database
 if not os.path.exists("data/pysozluk-qt.db"):
@@ -36,13 +41,19 @@ datas = [('share/pysozluk-qt',                 ['data/pysozluk-qt.db']),
 datas.extend(locales)
 
 setup(name = "pysozluk-qt",
-      version = "0.1",
-      description = "Online/offline dictionary.",
-      license = "GNU General Public License, Version 3",
+      version = getVersion(),
+      description = "Online/offline dictionary",
+      long_description = "pysozluk is a lightweight online/offline dictionary "
+          "application written in Python with tkinter GUI. This port of "
+          "pysozluk looks better than the original (thanks Qt) and is much "
+          "faster.",
+      license = "GNU General Public License, Version 2",
       author = "pysozluk-qt developers",
       author_email = "pysozluk-qt@googlegroups.com",
-      url = "http://code.google.com/p/pysozluk-qt",
+      url = "http://pysozluk-qt.wiki.sourceforge.net",
+      download_url =
+          "http://sourceforge.net/project/showfiles.php?group_id=200295",
       packages = ["pysozlukqt"],
       data_files = datas,
-      scripts = ['scripts/pysozluk-qt']
+      scripts = ['scripts/pysozluk-qt'],
       )
