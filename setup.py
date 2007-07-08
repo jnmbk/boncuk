@@ -36,8 +36,7 @@ if not os.path.exists("data/pysozluk-qt.db"):
 datas = [('share/pysozluk-qt',                 ['data/pysozluk-qt.db']),
          ('share/applications',                ['data/pysozluk-qt.desktop']),
          ('share/icons/hicolor/scalable/apps', ['data/pysozluk-qt.svg']),
-         ('share/pysozluk-qt/flags',           ['data/en.gif', 'data/tr.gif']),
-         ('share/pysozluk-qt',                 ['pysozlukqt/mainWindow.ui'])]
+         ('share/pysozluk-qt',                 ['ui/mainWindow.ui'])]
 datas.extend(locales)
 
 setup(name = "pysozluk-qt",
