@@ -53,7 +53,8 @@ class onlineDatabase(QtNetwork.QHttp):
         if threaded:
             self.get("/?word=%s" % self.keyword)
         else:
-            text = urllib.urlopen("http://www.seslisozluk.com/?word=%s" % self.keyword).read()
+            text = urllib.urlopen(
+                "http://www.seslisozluk.com/?word=%s" % self.keyword).read()
             return self.parse(text, threaded = False)
 
     def continueSearch(self, id, error):
@@ -63,7 +64,7 @@ class onlineDatabase(QtNetwork.QHttp):
 
     def parse(self, text, threaded = True):
         parser = sesliSozlukParser()
-        parser.feed(text.replace("<link", "")) #remove stupid error caused by javascript
+        parser.feed(text.replace("<link", "")) #remove javascript error
         parser.close()
         tr = parser.data.index("Turkish Translation")
         en = parser.data.index("English Translation")

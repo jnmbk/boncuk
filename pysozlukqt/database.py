@@ -22,7 +22,8 @@ class Translation:
         self.lang, self.word, self.text = inittext
 
 class pysozlukDatabase(QtCore.QObject):
-    """This class provides some methods to search words and read a pysozluk database file"""
+    """This class provides some methods to search words
+    and read a pysozluk database file"""
 
     def __init__(self, databaseFile = pysozlukglobals.database):
         """Initialise database"""
