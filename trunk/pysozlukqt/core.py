@@ -30,15 +30,16 @@ class searcherThread(QtCore.QThread):
             self.database = pysozlukDatabase()
         else:
             self.database = onlineDatabase()
-        QtCore.QObject.connect(self.database, QtCore.SIGNAL("found"), self.formatTranslation)
+        QtCore.QObject.connect(self.database, QtCore.SIGNAL("found"),
+                               self.formatTranslation)
         self.database.search(self.keyword)
         self.exec_()
 
     def formatTranslation(self, translation):
         turkish = []
         english = []
-        tr = "<b>" + _("Turkish translation of %s") % self.keyword + "</b><br>"
-        en = "<b>" + _("English translation of %s") % self.keyword + "</b><br>"
+        tr = "<b>%s</b><br>" % _("Turkish translation of %s") % self.keyword
+        en = "<b>%s</b><br>" % _("English translation of %s") % self.keyword
         result = ""
 
         if translation:
@@ -59,7 +60,8 @@ class searcherThread(QtCore.QThread):
                 result += en
             self.sendResult(result.replace('"',''))
         else:
-            self.sendResult("<b>" + _("Cannot find \"%s\"") % self.keyword + "</b>")
+            self.sendResult(
+                "<b>%s</b>" % _("Cannot find \"%s\"") % self.keyword)
 
     def sendResult(self, result):
         self.emit(QtCore.SIGNAL("finishedSearching"), result)
@@ -69,8 +71,8 @@ class pysozlukCore:
     def __init__(self, ui):
         self.ui = ui
         self.settings = QtCore.QSettings()
-        self.ui.actionOffline.setChecked(self.settings.value("offline",
-                                                             QtCore.QVariant(False)).toBool())
+        self.ui.actionOffline.setChecked(
+            self.settings.value("offline", QtCore.QVariant(False)).toBool())
         self.searcherThread = None
 
     def search(self):
@@ -80,7 +82,8 @@ class pysozlukCore:
             self.searcherThread.terminate()
         self.searcherThread = searcherThread(keyword, self.settings)
         self.ui.textBrowser.clearHistory()
-        self.ui.textBrowser.setHtml("<b>%s</b>" % _("searching \"%s\"") % keyword)
+        self.ui.textBrowser.setHtml(
+            "<b>%s</b>" % _("searching \"%s\"") % keyword)
         QtCore.QObject.connect(self.searcherThread,
                                QtCore.SIGNAL("finishedSearching"),
                                self.ui.textBrowser.setHtml)
@@ -88,32 +91,31 @@ class pysozlukCore:
 
     def about(self):
         QtGui.QMessageBox.about(self.ui,
-                                _("About Pysozluk-Qt"),
-                                "Pysozluk-Qt v%s\n" % pysozlukglobals.version +\
-                                "http://code.google.com/p/pysozluk-qt\n\n" +\
-                                _("Developers:") + "\n" +\
-                                u"İlker Kesen <ilker.kde at gmail.com>" + "\n" +\
-                                u"İşbaran Akçayır <isbaran at gmail.com>" + "\n" +\
-                                u"Uğur Çetin <ugur.jnmbk at gmail.com>")
+            _("About Pysozluk-Qt"),
+            "Pysozluk-Qt v%s\n" % pysozlukglobals.version +\
+            "http://pysozluk-qt.wiki.sourceforge.net\n\n" +\
+            _("Developers:") + "\n" +\
+            u"İlker Kesen <ilker.kde at gmail.com>" + "\n" +\
+            u"İşbaran Akçayır <isbaran at gmail.com>" + "\n" +\
+            u"Uğur Çetin <ugur.jnmbk at gmail.com>")
 
     def aboutQt(self):
         QtGui.QMessageBox.aboutQt(self.ui)
 
     def toggleOffline(self):
         self.settings.setValue("offline",
-                               QtCore.QVariant(self.ui.actionOffline.isChecked()))
+            QtCore.QVariant(self.ui.actionOffline.isChecked()))
 
     def save(self):
         if not self.ui.textBrowser.toPlainText():
             QtGui.QMessageBox.warning(self.ui,
             _("Warning"),
-            _("If you want to save a description, you must search a keyword."))
+                _("If you want to save a description,"
+                " you must search a keyword."))
         else:
             #TODO: Add HTML and Plain Text file filters
-            file_path = QtGui.QFileDialog.getSaveFileName(self.ui,
-                                                          _("Save"),
-                                                          os.getenv("HOME"),
-                                                          "All Files (*)")
+            file_path = QtGui.QFileDialog.getSaveFileName(
+                self.ui, _("Save"), os.getenv("HOME"), "All Files (*)")
             if file_path:
                 if str(file_path).endswith(".html"):
                     description = self.ui.textBrowser.toHtml()
