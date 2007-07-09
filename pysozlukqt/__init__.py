@@ -17,10 +17,7 @@ from core import pysozlukCore
 from gettext import translation
 import pysozlukglobals
 
-#TODO: The following line is a workaround for non-UTF-8 sqlite module,
-#      we should put a "" instead of "C" when cartman fixes this bug:
-#      http://bugs.pardus.org.tr/show_bug.cgi?id=6010
-locale.setlocale(locale.LC_ALL, "C")
+locale.setlocale(locale.LC_ALL, "")
 _ = translation('pysozluk-qt', fallback=True).ugettext
 
 def retranslateUi(ui):
