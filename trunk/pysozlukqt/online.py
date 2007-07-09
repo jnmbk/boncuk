@@ -48,7 +48,7 @@ class onlineDatabase(QtNetwork.QHttp):
                                QtCore.SIGNAL("requestFinished(int, bool)"),
                                self.continueSearch)
 
-    def search(self, keyword, dicts = "all", threaded = True):
+    def search(self, keyword, threaded = True):
         self.keyword = convertToTurkishWeb(keyword)
         if threaded:
             self.get("/?word=%s" % self.keyword)

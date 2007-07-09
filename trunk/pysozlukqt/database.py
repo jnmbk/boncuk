@@ -12,9 +12,11 @@
 
 """pysozluk database api"""
 
-from PyQt4 import QtCore
-from pysqlite2 import dbapi2 as sqlite
+from PyQt4 import QtCore, QtSql
 import pysozlukglobals
+
+class Language:
+    tr, en = range(2)
 
 class Translation:
     """Holds translation information of a word"""
@@ -28,50 +30,32 @@ class pysozlukDatabase(QtCore.QObject):
     def __init__(self, databaseFile = pysozlukglobals.database):
         """Initialise database"""
         QtCore.QObject.__init__(self)
-        self.readDatabase(databaseFile)
+        db = QtSql.QSqlDatabase.database()
+        if not db.isValid():
+            db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
+            db.setDatabaseName(databaseFile)
+            db.open()
 
-    def search(self, keyword, dicts = "all", threaded = True):
+    def search(self, keyword, threaded = True):
         """Search given keyword
 
         keyword is a string,
-        dicts is a list of dictionary indexes to search in,
         if threaded is True emits "found" signal with translations
         if not, just returns translations
         """
-        if dicts == "all":
-            dicts = []
-            for dict in self.languages:
-                dicts.append(dict[0])
 
-        query = "select home, word, text from translations where word = ?"
-        dictlist = ""
-        if dicts:
-            dictlist += " and ("
-        i=0
-        while i < len(dicts):
-            dictlist += " home = %d" % dicts[i]
-            if i != len(dicts) - 1:
-                dictlist += " or"
-            i+=1
-        if dicts:
-            dictlist += " )"
-        cur = self.con.cursor()
-
-        cur.execute(query, (keyword,))
-        result = cur.fetchall()
+        query = QtSql.QSqlQuery()
+        query.prepare(
+            "SELECT home, word, text FROM translations WHERE word = :keyword")
+        query.bindValue(":keyword", QtCore.QVariant(keyword))
+        query.exec_()
         results = []
-        for i in result:
-            results.append(Translation(i))
+        while(query.next()):
+            results.append(Translation((
+                query.value(0).toInt()[0],
+                query.value(1).toString(),
+                query.value(2).toString())))
         if threaded:
             self.emit(QtCore.SIGNAL("found"), results)
         else:
             return results
-
-    def readDatabase(self, databaseFile):
-        """Reads dictionary information from given database"""
-        self.con = sqlite.connect(databaseFile)
-        cur = self.con.cursor()
-
-        query = "select id, englishname, nativename from languages"
-        cur.execute(query)
-        self.languages = cur.fetchall()
