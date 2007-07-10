@@ -20,8 +20,10 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
     def __init__(self, ui, app):
         QtGui.QSystemTrayIcon.__init__(
             self, QtGui.QIcon(pysozlukglobals.icon_main))
+        self.ui = ui
         action_translate = QtGui.QAction(
-            QtGui.QIcon(pysozlukglobals.icon_translate), _("Translate"), self)
+            QtGui.QIcon(pysozlukglobals.icon_translate),
+            _("Translate Clipboard"), self)
         action_configure = QtGui.QAction(
             QtGui.QIcon(pysozlukglobals.icon_configure),
             _("Configure PySozluk-Qt"), self)
@@ -37,6 +39,22 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         self.menu.addAction(action_exit)
 
         QtCore.QObject.connect(
-            action_exit, QtCore.SIGNAL("triggered()"), app.exit)
+            action_exit, QtCore.SIGNAL("triggered()"), app.quit)
+        QtCore.QObject.connect(
+            action_translate, QtCore.SIGNAL("triggered()"),
+            self.translateClipboard)
+        QtCore.QObject.connect(self,
+            QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"),
+            self.showOrHideUi)
 
         self.setContextMenu(self.menu)
+
+    def translateClipboard(self):
+        cb = QtGui.QApplication.clipboard()
+        keyword = cb.text(cb.Selection).toLower()
+        #TODO: get result
+
+    def showOrHideUi(self, activationReason):
+        if activationReason != self.Trigger:
+            return
+        self.ui.setVisible(not self.ui.isVisible())
