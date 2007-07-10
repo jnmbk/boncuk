@@ -9,6 +9,7 @@
 # (at your option) any later version.
 #
 # Please read the COPYING file.
+from uic.Compiler.qtproxies import QtGui
 
 import sys
 import locale
@@ -51,7 +52,6 @@ def main():
     app = QtGui.QApplication(sys.argv)
     app.setOrganizationName("pysozluk-qt")
     app.setApplicationName("pysozluk-qt")
-    app.setQuitOnLastWindowClosed(False)
     settings = QtCore.QSettings()
     ui = uic.loadUi(pysozlukglobals.mainWindowFileName)
 
@@ -65,8 +65,11 @@ def main():
 
     if QtGui.QSystemTrayIcon.isSystemTrayAvailable() and \
         settings.value("trayIcon", QtCore.QVariant(True)).toBool():
-        icon = trayicon.PySozlukTrayIcon(ui)
+        icon = trayicon.PySozlukTrayIcon(ui, app)
         icon.show()
+        if settings.value(
+            "minimizeToTrayOnClose", QtCore.QVariant(False)).toBool():
+            app.setQuitOnLastWindowClosed(False)
     if not settings.value("startHidden", QtCore.QVariant(False)).toBool():
         ui.show()
     exitCode = app.exec_()
