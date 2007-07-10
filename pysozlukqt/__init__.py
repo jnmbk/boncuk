@@ -16,6 +16,7 @@ from PyQt4 import QtCore, QtGui, uic
 from core import pysozlukCore
 from gettext import translation
 import pysozlukglobals
+import trayicon
 
 locale.setlocale(locale.LC_ALL, "")
 _ = translation('pysozluk-qt', fallback=True).ugettext
@@ -50,6 +51,7 @@ def main():
     app = QtGui.QApplication(sys.argv)
     app.setOrganizationName("pysozluk-qt")
     app.setApplicationName("pysozluk-qt")
+    app.setQuitOnLastWindowClosed(False)
     settings = QtCore.QSettings()
     ui = uic.loadUi(pysozlukglobals.mainWindowFileName)
 
@@ -58,11 +60,17 @@ def main():
     core = pysozlukCore(ui)
     retranslateUi(ui)
     makeConnections(ui, core)
-    if settings.contains("windowposition"):
-        ui.move(settings.value("windowposition").toPoint())
-    ui.show()
+    if settings.contains("windowPosition"):
+        ui.move(settings.value("windowPosition").toPoint())
+
+    if QtGui.QSystemTrayIcon.isSystemTrayAvailable() and \
+        settings.value("trayIcon", QtCore.QVariant(True)).toBool():
+        icon = trayicon.PySozlukTrayIcon(ui)
+        icon.show()
+    if not settings.value("startHidden", QtCore.QVariant(False)).toBool():
+        ui.show()
     exitCode = app.exec_()
-    settings.setValue("windowposition", QtCore.QVariant(ui.pos()))
+    settings.setValue("windowPosition", QtCore.QVariant(ui.pos()))
     #pycallgraph.stop_trace()
     #pycallgraph.make_dot_graph('pysozluk-qt.png')
     sys.exit(exitCode)
