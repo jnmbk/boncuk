@@ -9,7 +9,6 @@
 # (at your option) any later version.
 #
 # Please read the COPYING file.
-from uic.Compiler.qtproxies import QtGui
 
 import sys
 import locale
