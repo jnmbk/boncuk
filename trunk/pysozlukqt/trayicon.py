@@ -10,20 +10,11 @@
 #
 # Please read the COPYING file.
 
-import os
+from PyQt4 import QtGui
+import pysozlukglobals
 
-#directories
-dataDirectory = "/usr/share/pysozluk-qt"
-
-#file names
-databaseFileName = "pysozluk-qt.db"
-mainWindowFileName = os.path.join(dataDirectory, "mainWindow.ui")
-
-#absolute paths
-database = os.path.join(dataDirectory, databaseFileName)
-icon = "/usr/share/icons/hicolor/scalable/apps/pysozluk-qt.svg"
-
-#other
-version = "0.1"
-
-updateServer = 'http://ish.kodzilla.org/pyqtsozluk/'
+class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
+    def __init__(self, ui):
+        QtGui.QSystemTrayIcon.__init__(self, QtGui.QIcon(pysozlukglobals.icon))
+        self.ui = ui
+        
