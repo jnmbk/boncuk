@@ -10,8 +10,7 @@
 #
 # Please read the COPYING file.
 
-from PyQt4 import QtGui
-from uic.Compiler.qtproxies import QtCore
+from PyQt4 import QtGui, QtCore
 import gettext
 import pysozlukglobals
 
@@ -37,7 +36,7 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         self.menu.addSeparator()
         self.menu.addAction(action_exit)
 
-        #QtCore.QObject.connect(
-        #    action_exit, QtCore.SIGNAL("triggered()"), app.exit)
+        QtCore.QObject.connect(
+            action_exit, QtCore.SIGNAL("triggered()"), app.exit)
 
         self.setContextMenu(self.menu)
