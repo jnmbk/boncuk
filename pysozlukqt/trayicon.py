@@ -55,6 +55,5 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         #TODO: get result
 
     def showOrHideUi(self, activationReason):
-        if activationReason != self.Trigger:
-            return
-        self.ui.setVisible(not self.ui.isVisible())
+        if activationReason == self.Trigger:
+            self.ui.setVisible(not self.ui.isVisible())
