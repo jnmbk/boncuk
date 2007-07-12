@@ -53,6 +53,7 @@ def main():
     app.setApplicationName("pysozluk-qt")
     settings = QtCore.QSettings()
     ui = uic.loadUi(pysozlukglobals.mainWindowFileName)
+    ui.textBrowser.clearHistory() #this decreases memory usage
 
     #import pycallgraph
     #pycallgraph.start_trace()
