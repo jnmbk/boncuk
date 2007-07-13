@@ -34,14 +34,14 @@ def retranslateUi(ui):
     ui.actionQuit.setText(_("&Quit"))
     ui.setWindowTitle(_("Pysozluk-Qt"))
 
-def makeConnections(ui, core):
+def makeConnections(ui, core, app):
     QtCore.QObject.connect(
         ui.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
     QtCore.QObject.connect(
         ui.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
     QtCore.QObject.connect(
         ui.actionOffline,QtCore.SIGNAL("activated()"),core.toggleOffline)
-    QtCore.QObject.connect(ui.actionQuit,QtCore.SIGNAL("activated()"),ui.close)
+    QtCore.QObject.connect(ui.actionQuit,QtCore.SIGNAL("activated()"),app.quit)
     QtCore.QObject.connect(ui.actionSave,QtCore.SIGNAL("activated()"),core.save)
     QtCore.QObject.connect(ui.pushButton,QtCore.SIGNAL("clicked()"),core.search)
     QtCore.QObject.connect(
@@ -59,7 +59,7 @@ def main():
     #pycallgraph.start_trace()
     core = pysozlukCore(ui)
     retranslateUi(ui)
-    makeConnections(ui, core)
+    makeConnections(ui, core, app)
     if settings.contains("windowPosition"):
         ui.move(settings.value("windowPosition").toPoint())
 
@@ -68,7 +68,7 @@ def main():
         icon = trayicon.PySozlukTrayIcon(ui, app)
         icon.show()
         if settings.value(
-            "minimizeToTrayOnClose", QtCore.QVariant(False)).toBool():
+            "minimizeToTrayOnClose", QtCore.QVariant(True)).toBool():
             app.setQuitOnLastWindowClosed(False)
     if not settings.value("startHidden", QtCore.QVariant(False)).toBool():
         ui.show()
