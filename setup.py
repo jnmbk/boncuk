@@ -55,4 +55,5 @@ setup(name = "pysozluk-qt",
       packages = ["pysozlukqt"],
       data_files = datas,
       scripts = ['scripts/pysozluk-qt'],
+      platforms = ['all'],
       )
