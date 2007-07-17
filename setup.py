@@ -11,30 +11,46 @@
 # Please read the COPYING file.
 
 import os
+import shutil
 from distutils.core import setup
+from distutils.command.build import build
+from distutils.command.clean import clean
+from distutils.command.install import install
+
+def getTranslations():
+    return ("tr",)
 
 def getVersion():
     import pysozlukqt.pysozlukglobals
     return pysozlukqt.pysozlukglobals.version
 
-#compile translations
+def compileTranslations():
+    for i in getTranslations():
+        try:
+            os.mkdir("po/%s" %  i)
+        except OSError:
+            pass
+        os.system("msgfmt po/%s.po -o po/%s/pysozluk-qt.mo" % (i, i))
+
+class myBuild(build):
+    def run(self):
+        build.run(self)
+        compileTranslations()
+
+class myClean(clean):
+    def run(self):
+        clean.run(self)
+        dirList = os.listdir("po")
+        for dir in dirList:
+            if os.path.isdir(os.path.join("po", dir)) and dir != ".svn":
+                shutil.rmtree(os.path.join("po", dir), ignore_errors = True)
+
 locales = []
-translations = ["tr"]
-for i in translations:
-    try:
-        os.mkdir("po/%s" %  i)
-    except:
-        pass
-    os.system("msgfmt po/%s.po -o po/%s/pysozluk-qt.mo" % (i, i))
+for i in getTranslations():
     locales.append(('share/locale/%s/LC_MESSAGES' % i,
                     ['po/%s/pysozluk-qt.mo' % i]))
 
-#extract database
-if not os.path.exists("data/pysozluk-qt.db"):
-    os.system("tar xjf data/pysozluk-qt.db.bz2 -C data/")
-
-datas = [('share/pysozluk-qt',                 ['data/pysozluk-qt.db']),
-         ('share/applications',                ['data/pysozluk-qt.desktop']),
+datas = [('share/applications',                ['data/pysozluk-qt.desktop']),
          ('share/icons/hicolor/scalable/apps', ['data/pysozluk-qt.svg']),
          ('share/pysozluk-qt',                 ['ui/mainWindow.ui'])]
 datas.extend(locales)
@@ -56,4 +72,6 @@ setup(name = "pysozluk-qt",
       data_files = datas,
       scripts = ['scripts/pysozluk-qt'],
       platforms = ['all'],
+      cmdclass = {"build" : myBuild,
+                  "clean" : myClean}
       )
