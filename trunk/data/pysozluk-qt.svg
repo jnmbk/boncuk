@@ -13,7 +13,7 @@
    inkscape:version="0.45"
    width="64"
    height="64"
-   sodipodi:docbase="/home/jnmbk/workspace/pysozluk-qt/trunk/data"
+   sodipodi:docbase="/home/jnmbk/workspace/pysozluk-qt/data"
    sodipodi:docname="pysozluk-qt.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
@@ -30,86 +30,9 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs5">
-    <filter
-       inkscape:collect="always"
-       id="filter3208">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.18624439"
-         id="feGaussianBlur3210" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       x="-0.026219274"
-       width="1.0524385"
-       y="-0.14716494"
-       height="1.2943299"
-       id="filter3296">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.27624439"
-         id="feGaussianBlur3298" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       x="-0.026219274"
-       width="1.0524385"
-       y="-0.14716494"
-       height="1.2943299"
-       id="filter3300">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.27624439"
-         id="feGaussianBlur3302" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       x="-0.026219274"
-       width="1.0524385"
-       y="-0.14716494"
-       height="1.2943299"
-       id="filter3304">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.27624439"
-         id="feGaussianBlur3306" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter3356">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.32358673"
-         id="feGaussianBlur3358" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter3360">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.32358673"
-         id="feGaussianBlur3362" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter3364">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.32358673"
-         id="feGaussianBlur3366" />
-    </filter>
-    <filter
-       inkscape:collect="always"
-       id="filter3368">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.32358673"
-         id="feGaussianBlur3370" />
-    </filter>
-  </defs>
+     id="defs5" />
   <sodipodi:namedview
-     inkscape:window-height="740"
+     inkscape:window-height="742"
      inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -128,9 +51,9 @@
      inkscape:guide-bbox="false"
      inkscape:grid-bbox="false"
      inkscape:object-paths="false"
-     inkscape:zoom="8.46875"
-     inkscape:cx="32"
-     inkscape:cy="36.723247"
+     inkscape:zoom="1.4970776"
+     inkscape:cx="58.389561"
+     inkscape:cy="46.015163"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:current-layer="svg2"
@@ -157,49 +80,49 @@
      id="path3192"
      sodipodi:nodetypes="ccccc" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3296)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 7.25,29.25 C 12.879898,24.656505 20.539196,27.3877 27.25,27.25 C 20.550731,27.634109 13.478231,24.783559 7.25,29.25 z "
      id="path3198"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3300)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 9.25,31.25 C 14.879898,26.656505 22.539196,29.3877 29.25,29.25 C 22.550731,29.634109 15.478231,26.783559 9.25,31.25 z "
      id="path3202"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3208)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 11.25,33.25 C 16.879898,28.656505 24.539196,31.3877 31.25,31.25 C 24.550731,31.634109 17.478231,28.783559 11.25,33.25 z "
      id="path3204"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3304)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 13.25,35.249999 C 18.879898,30.656504 26.539196,33.387699 33.25,33.249999 C 26.550731,33.634108 19.478231,30.783558 13.25,35.249999 z "
      id="path3206"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3368)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 36.25,23.25 C 37.698128,15.49833 43.333368,13.691873 48.25,9.2500004 C 43.376867,13.631635 37.975664,14.775133 36.25,23.25 z "
      id="path3210"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3364)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 38.25,25.25 C 39.698128,17.49833 46.333368,14.691873 51.25,10.25 C 46.376867,14.631635 39.975664,16.775133 38.25,25.25 z "
      id="path3212"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3360)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 40.25,27.25 C 41.698128,19.49833 48.333368,16.691873 53.25,12.25 C 48.376867,16.631635 41.975664,18.775133 40.25,27.25 z "
      id="path3214"
      sodipodi:nodetypes="ccc"
      transform="matrix(0.9329609,0,0,0.9322595,4.6089135e-2,10.791096)" />
   <path
-     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3356)"
+     style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.07225943px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
      d="M 42.25,29.25 C 43.698128,21.49833 52.333368,17.691873 57.25,13.25 C 52.376867,17.631635 43.975664,20.775133 42.25,29.25 z "
      id="path3216"
      sodipodi:nodetypes="ccc"
