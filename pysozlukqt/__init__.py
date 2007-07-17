@@ -59,6 +59,7 @@ def main():
     #pycallgraph.start_trace()
     core = pysozlukCore(ui)
     retranslateUi(ui)
+    ui.show() #dirty workaround for KDE startup notifier(should be shown later)
     makeConnections(ui, core, app)
     if settings.contains("windowPosition"):
         ui.move(settings.value("windowPosition").toPoint())
@@ -70,8 +71,8 @@ def main():
         if settings.value(
             "minimizeToTrayOnClose", QtCore.QVariant(True)).toBool():
             app.setQuitOnLastWindowClosed(False)
-    if not settings.value("startHidden", QtCore.QVariant(False)).toBool():
-        ui.show()
+    if settings.value("startHidden", QtCore.QVariant(False)).toBool():
+        ui.hide()
     exitCode = app.exec_()
     settings.setValue("windowPosition", QtCore.QVariant(ui.pos()))
     #pycallgraph.stop_trace()
