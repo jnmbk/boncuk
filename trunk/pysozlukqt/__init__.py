@@ -71,8 +71,8 @@ def main():
         if settings.value(
             "minimizeToTrayOnClose", QtCore.QVariant(True)).toBool():
             app.setQuitOnLastWindowClosed(False)
-    if settings.value("startHidden", QtCore.QVariant(False)).toBool():
-        ui.hide()
+        if settings.value("startHidden", QtCore.QVariant(False)).toBool():
+            ui.hide()
     exitCode = app.exec_()
     settings.setValue("windowPosition", QtCore.QVariant(ui.pos()))
     #pycallgraph.stop_trace()
