@@ -65,13 +65,13 @@ def main():
         ui.move(settings.value("windowPosition").toPoint())
 
     if QtGui.QSystemTrayIcon.isSystemTrayAvailable() and \
-        settings.value("trayIcon", QtCore.QVariant(True)).toBool():
+        settings.value("tray/enabled", QtCore.QVariant(True)).toBool():
         icon = trayicon.PySozlukTrayIcon(ui, app)
         icon.show()
         if settings.value(
-            "minimizeToTrayOnClose", QtCore.QVariant(True)).toBool():
+            "tray/minimizeOnClose", QtCore.QVariant(True)).toBool():
             app.setQuitOnLastWindowClosed(False)
-        if settings.value("startHidden", QtCore.QVariant(False)).toBool():
+        if settings.value("tray/startHidden", QtCore.QVariant(False)).toBool():
             ui.hide()
     exitCode = app.exec_()
     settings.setValue("windowPosition", QtCore.QVariant(ui.pos()))
