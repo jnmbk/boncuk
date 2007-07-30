@@ -63,9 +63,11 @@ class onlineDatabase(QtNetwork.QHttp):
         self.parse(str(self.readAll()))
 
     def parse(self, text, threaded = True):
+        #print "%s\nParser took %d bytes." % (text, len(text))
         parser = sesliSozlukParser()
         parser.feed(text.replace("<link", "")) #remove javascript error
         parser.close()
+        #print "Parser output:\n%s" % str(parser.data)
         tr = parser.data.index("Turkish Translation")
         en = parser.data.index("English Translation")
         langs = [tr,en]
