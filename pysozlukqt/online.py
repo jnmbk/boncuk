@@ -68,13 +68,16 @@ class onlineDatabase(QtNetwork.QHttp):
         parser.feed(text.replace("<link", "")) #remove javascript error
         parser.close()
         #print "Parser output:\n%s" % str(parser.data)
-        tr = parser.data.index("Turkish Translation")
-        en = parser.data.index("English Translation")
+        try:
+            tr = parser.data.index("Turkish Translation")
+            en = parser.data.index("English Translation")
+        except ValueError:
+            tr = en = 0
         langs = [tr,en]
 
         try:
             de = parser.data.index("German Translation")
-        except:
+        except ValueError:
             pass
         else:
             langs.append(de)
