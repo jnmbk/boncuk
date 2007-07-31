@@ -15,6 +15,10 @@ from database import Translation
 from HTMLParser import HTMLParser
 import urllib
 
+from debugger import Debugger
+
+debugger = Debugger()
+
 def convertToTurkishWeb(word):
     turkishCharacters = ((u"ı","%%FD"), (u"İ","%%DD"), (u"ö","%%F6"),
                          (u"Ö","%%D6"), (u"ç","%%E7"), (u"Ç","%%C7"),
@@ -51,8 +55,10 @@ class onlineDatabase(QtNetwork.QHttp):
     def search(self, keyword, threaded = True):
         self.keyword = convertToTurkishWeb(keyword)
         if threaded:
+            debugger.debug("Starting threaded search for: %s" % self.keyword)
             self.get("/?word=%s" % self.keyword)
         else:
+            debugger.debug("Starting non-threaded search for: %s" % self.keyword)
             text = urllib.urlopen(
                 "http://www.seslisozluk.com/?word=%s" % self.keyword).read()
             return self.parse(text, threaded = False)
@@ -63,22 +69,23 @@ class onlineDatabase(QtNetwork.QHttp):
         self.parse(str(self.readAll()))
 
     def parse(self, text, threaded = True):
-        #print "%s\nParser took %d bytes." % (text, len(text))
+        debugger.debug("%s\nParser took %d bytes." % (text, len(text)))
         parser = sesliSozlukParser()
         parser.feed(text.replace("<link", "")) #remove javascript error
         parser.close()
-        #print "Parser output:\n%s" % str(parser.data)
+        debugger.debug("Parser output:\n%s" % str(parser.data))
         try:
             tr = parser.data.index("Turkish Translation")
             en = parser.data.index("English Translation")
         except ValueError:
             tr = en = 0
+            debugger.critical("Seslisozluk site may be changed")
         langs = [tr,en]
 
         try:
             de = parser.data.index("German Translation")
         except ValueError:
-            pass
+            debugger.warning("No German Translation found")
         else:
             langs.append(de)
         langs.sort()
@@ -90,10 +97,13 @@ class onlineDatabase(QtNetwork.QHttp):
         turkish = self.pick(self.keyword, turkish, 0)
         english = self.pick(self.keyword, english, 1)
 
+        result = turkish + english
+
+        debugger.debug("Search complete, returning result: %s" % str(result))
         if threaded:
-            self.emit(QtCore.SIGNAL("found"), turkish + english)
+            self.emit(QtCore.SIGNAL("found"), result)
         else:
-            return turkish + english
+            return result
 
     def pick(self, keyword, lang, home):
         translations = []
