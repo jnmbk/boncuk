@@ -70,4 +70,5 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
             self.settings.setValue("tray/startHidden",
                 QtCore.QVariant(self.ui.isVisible()))
             self.ui.setVisible(not self.ui.isVisible())
-            debugger.debug("Clicked tray icon, visible = %s" % str(self.ui.isVisible()))
+            debugger.debug(
+                "Clicked tray icon, visible = %s" % str(self.ui.isVisible()))
