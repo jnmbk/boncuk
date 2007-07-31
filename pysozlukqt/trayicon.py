@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # pysozluk-qt, Qt port of pysozluk (online/offline dictionary)
