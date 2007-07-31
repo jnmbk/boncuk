@@ -14,13 +14,17 @@ from PyQt4 import QtGui, QtCore
 import gettext
 import pysozlukglobals
 
+from debugger import Debugger
+
 _ = gettext.translation('pysozluk-qt', fallback=True).ugettext
+debugger = Debugger()
 
 class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
-    def __init__(self, ui, app):
+    def __init__(self, ui, app, settings):
         QtGui.QSystemTrayIcon.__init__(
             self, QtGui.QIcon(pysozlukglobals.icon_main))
         self.ui = ui
+        self.settings = settings
         action_translate = QtGui.QAction(
             QtGui.QIcon(pysozlukglobals.icon_translate),
             _("Translate Clipboard"), self)
@@ -32,17 +36,20 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
             _("Exit"), self)
 
         self.menu = QtGui.QMenu()
-        self.menu.addAction(action_translate)
-        self.menu.addSeparator()
+        #self.menu.addAction(action_translate)
+        #self.menu.addSeparator()
         self.menu.addAction(action_configure)
         self.menu.addSeparator()
         self.menu.addAction(action_exit)
 
         QtCore.QObject.connect(
             action_exit, QtCore.SIGNAL("triggered()"), app.quit)
-        QtCore.QObject.connect(
-            action_translate, QtCore.SIGNAL("triggered()"),
-            self.translateClipboard)
+        #QtCore.QObject.connect(
+        #    action_translate, QtCore.SIGNAL("triggered()"),
+        #    self.translateClipboard)
+        #QtCore.QObject.connect(
+        #    action_configure, QtCore.SIGNAL("triggered()"),
+        #    self.configure)
         QtCore.QObject.connect(self,
             QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"),
             self.showOrHideUi)
@@ -54,6 +61,13 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         keyword = cb.text(cb.Selection).toLower()
         #TODO: get result
 
+    def configure(self):
+        #TODO: Configuration window
+        pass
+
     def showOrHideUi(self, activationReason):
         if activationReason == self.Trigger:
+            self.settings.setValue("tray/startHidden",
+                QtCore.QVariant(self.ui.isVisible()))
             self.ui.setVisible(not self.ui.isVisible())
+            debugger.debug("Clicked tray icon, visible = %s" % str(self.ui.isVisible()))

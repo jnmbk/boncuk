@@ -66,7 +66,7 @@ def main():
 
     if QtGui.QSystemTrayIcon.isSystemTrayAvailable() and \
         settings.value("tray/enabled", QtCore.QVariant(True)).toBool():
-        icon = trayicon.PySozlukTrayIcon(ui, app)
+        icon = trayicon.PySozlukTrayIcon(ui, app, settings)
         icon.show()
         if settings.value(
             "tray/minimizeOnClose", QtCore.QVariant(True)).toBool():
