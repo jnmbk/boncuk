@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # pysozluk-qt, Qt port of pysozluk (online/offline dictionary)
@@ -45,14 +46,18 @@ class myClean(clean):
             if os.path.isdir(os.path.join("po", dir)) and dir != ".svn":
                 shutil.rmtree(os.path.join("po", dir), ignore_errors = True)
 
+        dirList = ("build",)
+        for dir in dirList:
+            if os.path.exists(dir):
+                shutil.rmtree(dir)
+
 locales = []
 for i in getTranslations():
-    locales.append(('share/locale/%s/LC_MESSAGES' % i,
-                    ['po/%s/pysozluk-qt.mo' % i]))
+    locales.append(("share/locale/%s/LC_MESSAGES" % i,
+            ["po/%s/pysozluk-qt.mo" % i]))
 
-datas = [('share/applications',                ['data/pysozluk-qt.desktop']),
-         ('share/icons/hicolor/scalable/apps', ['data/pysozluk-qt.svg']),
-         ('share/pysozluk-qt',                 ['ui/mainWindow.ui'])]
+datas = [("share/applications",                ["pysozlukqt/data/pysozluk-qt.desktop"]),
+         ("share/icons/hicolor/scalable/apps", ["pysozlukqt/data/pysozluk-qt.svg"])]
 datas.extend(locales)
 
 setup(name = "pysozluk-qt",
@@ -69,9 +74,15 @@ setup(name = "pysozluk-qt",
       download_url =
           "http://sourceforge.net/project/showfiles.php?group_id=200295",
       packages = ["pysozlukqt"],
+      package_data = {"pysozlukqt": [
+          "data/ui/*",
+          "data/icons/16x16/*",
+          "data/icons/32x32/*",
+          "data/icons/64x64/*",
+          "data/icons/128x128/*",]},
       data_files = datas,
-      scripts = ['scripts/pysozluk-qt'],
-      platforms = ['all'],
+      scripts = ["scripts/pysozluk-qt"],
+      platforms = ["all"],
       cmdclass = {"build" : myBuild,
                   "clean" : myClean}
       )

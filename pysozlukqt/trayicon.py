@@ -23,17 +23,17 @@ debugger = Debugger()
 class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
     def __init__(self, ui, app, settings):
         QtGui.QSystemTrayIcon.__init__(
-            self, QtGui.QIcon(pysozlukglobals.icon_main))
+            self, QtGui.QIcon(pysozlukglobals.getIcon("pysozluk-qt")))
         self.ui = ui
         self.settings = settings
-        action_translate = QtGui.QAction(
-            QtGui.QIcon(pysozlukglobals.icon_translate),
-            _("Translate Clipboard"), self)
+        #action_translate = QtGui.QAction(
+        #    QtGui.QIcon(pysozlukglobals.getIcon("locale")),
+        #    _("Translate Clipboard"), self)
         action_configure = QtGui.QAction(
-            QtGui.QIcon(pysozlukglobals.icon_configure),
+            QtGui.QIcon(pysozlukglobals.getIcon("configure")),
             _("Configure PySozluk-Qt"), self)
         action_exit = QtGui.QAction(
-            QtGui.QIcon(pysozlukglobals.icon_exit),
+            QtGui.QIcon(pysozlukglobals.getIcon("exit")),
             _("Exit"), self)
 
         self.menu = QtGui.QMenu()

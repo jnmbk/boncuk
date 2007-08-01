@@ -12,28 +12,34 @@
 # Please read the COPYING file.
 
 import os
+from debugger import Debugger
+
+debugger = Debugger()
 
 #directories
-dataDirectory = "/usr/share/pysozluk-qt"
-
-#file names
-databaseFileName = "pysozluk-qt.db"
-mainWindowFileName = os.path.join(dataDirectory, "mainWindow.ui")
+dataDirectory = "data"
 
 #absolute paths
-database = os.path.join(dataDirectory, databaseFileName)
+database = os.path.join(dataDirectory, "pysozluk-qt.db")
+mainWindow = os.path.join(dataDirectory, "ui", "mainWindow.ui")
+
 #icons
-#TODO: We should fix this mess, there are two ways to get rid of it
-# 1. (very dirty) Assume that person is using KDE, and use KDE 3.5 api to find
-#    the current icon directory
-# 2. Include Tulliana-2.0 icon set with pysozluk-qt
-#TODO: We sholud compile the svg icon to pngs, otherwise pisi package lacks icon
-iconPath = "/usr/share/icons/Tulliana-2.0/16x16"
-icon_main = "/usr/share/icons/hicolor/scalable/apps/pysozluk-qt.svg"
-icon_translate = os.path.join(iconPath, "apps/locale.png")
-icon_configure = os.path.join(iconPath, "actions/configure.png")
-icon_exit = os.path.join(iconPath, "actions/exit.png")
+iconDir = os.path.join(dataDirectory, "icons")
+iconSize = {"small":"16x16", "medium":"32x32", "big":"64x64", "huge":"128x128"}
+def getIcon(iconName, size="small"):
+    debugger.debug("requested icon: %s, size: %s" %  (iconName, size))
+    try:
+        size = iconSize[size]
+    except KeyError:
+        debugger.critical(
+            "icon size isn't valid. Valid sizes are:%s" % str(iconSize))
+        return None
+    iconFile = os.path.join(iconDir, size, iconName + ".png")
+    if not os.path.exists(iconFile):
+        debugger.critical("icon doesn't exist")
+    return iconFile
+
 #other
-version = "0.1"
+version = "0.2_beta1"
 
 updateServer = 'http://ish.kodzilla.org/pyqtsozluk/'
