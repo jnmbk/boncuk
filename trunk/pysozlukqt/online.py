@@ -48,7 +48,7 @@ class sesliSozlukParser(HTMLParser):
 class onlineDatabase(QtNetwork.QHttp):
     def __init__(self):
         QtNetwork.QHttp.__init__(self)
-        self.setHost("www.seslisozluk.com")
+        self.setHost("www1.seslisozluk.com")
         QtCore.QObject.connect(self,
                                QtCore.SIGNAL("requestFinished(int, bool)"),
                                self.continueSearch)
@@ -61,7 +61,7 @@ class onlineDatabase(QtNetwork.QHttp):
         else:
             debugger.debug("Starting non-threaded search for: %s" % self.keyword)
             text = urllib.urlopen(
-                "http://www.seslisozluk.com/?word=%s" % self.keyword).read()
+                "http://www1.seslisozluk.com/?word=%s" % self.keyword).read()
             return self.parse(text, threaded = False)
 
     def continueSearch(self, id, error):
