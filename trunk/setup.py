@@ -75,7 +75,6 @@ setup(name = "pysozluk-qt",
           "http://sourceforge.net/project/showfiles.php?group_id=200295",
       packages = ["pysozlukqt"],
       package_data = {"pysozlukqt": [
-          "data/ui/*",
           "data/icons/16x16/*",
           "data/icons/32x32/*",
           "data/icons/64x64/*",
