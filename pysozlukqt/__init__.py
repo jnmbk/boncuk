@@ -13,9 +13,11 @@
 
 import sys
 import locale
-from PyQt4 import QtCore, QtGui, uic
+from PyQt4 import QtCore, QtGui
 from core import pysozlukCore
 from gettext import translation
+
+from mainWindow import Ui_MainWindow
 import pysozlukglobals
 import trayicon
 
@@ -46,12 +48,17 @@ def makeConnections(ui, core, app):
     QtCore.QObject.connect(
         ui.lineEdit,QtCore.SIGNAL("returnPressed()"),core.search)
 
+class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        self.setupUi(self)
+
 def main():
     app = QtGui.QApplication(sys.argv)
     app.setOrganizationName("pysozluk-qt")
     app.setApplicationName("pysozluk-qt")
     settings = QtCore.QSettings()
-    ui = uic.loadUi(pysozlukglobals.mainWindow)
+    ui = MainWindow()
     ui.textBrowser.clearHistory() #this decreases memory usage
 
     #import pycallgraph
