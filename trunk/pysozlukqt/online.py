@@ -67,7 +67,8 @@ class onlineDatabase(QtNetwork.QHttp):
     def continueSearch(self, id, error):
         if self.hasPendingRequests():
             return
-        self.parse(unicode(self.readAll(), "cp1254", errors="ignore"))
+        page = unicode(self.readAll(), "cp1254", errors="ignore")
+        self.parse(page)
 
     def parse(self, text, threaded = True):
         debugger.debug("%s\nParser took %d bytes." % (text, len(text)))
