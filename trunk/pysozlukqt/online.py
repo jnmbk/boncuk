@@ -40,7 +40,7 @@ class sesliSozlukParser(HTMLParser):
             self.traslationTableStarted = True
     def handle_data(self, data):
         if self.traslationTableStarted:
-            self.data.append(unicode(data, "cp1254", errors="ignore"))
+            self.data.append(data)
     def handle_endtag(self, tag):
         if self.traslationTableStarted and tag == "table":
             self.traslationTableStarted = False
@@ -67,7 +67,7 @@ class onlineDatabase(QtNetwork.QHttp):
     def continueSearch(self, id, error):
         if self.hasPendingRequests():
             return
-        self.parse(str(self.readAll()))
+        self.parse(unicode(self.readAll(), "cp1254", errors="ignore"))
 
     def parse(self, text, threaded = True):
         debugger.debug("%s\nParser took %d bytes." % (text, len(text)))

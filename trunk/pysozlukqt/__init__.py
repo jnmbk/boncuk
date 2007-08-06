@@ -40,7 +40,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow=None):
         self.label.setText(_("Keyword:"))
         self.pushButton.setText(_("&Search"))
         self.menuFile.setTitle(_("&File"))
