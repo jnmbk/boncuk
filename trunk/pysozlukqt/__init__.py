@@ -26,10 +26,10 @@ def retranslateUi(ui):
     ui.label.setText(_("Keyword:"))
     ui.pushButton.setText(_("&Search"))
     ui.menuFile.setTitle(_("&File"))
-    ui.menuMode.setTitle(_("&Mode"))
     ui.menuHelp.setTitle(_("&Help"))
     ui.actionAbout_Pysozluk_Qt.setText(_("About &Pysozluk-Qt"))
     ui.actionAbout_Qt.setText(_("About &Qt"))
+    ui.actionConfigure.setText(_("&Configure PySozluk-Qt"))
     ui.actionOffline.setText(_("&Offline"))
     ui.actionSave.setText(_("&Save"))
     ui.actionQuit.setText(_("&Quit"))
@@ -40,8 +40,6 @@ def makeConnections(ui, core, app):
         ui.actionAbout_Pysozluk_Qt,QtCore.SIGNAL("activated()"),core.about)
     QtCore.QObject.connect(
         ui.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
-    QtCore.QObject.connect(
-        ui.actionOffline,QtCore.SIGNAL("activated()"),core.toggleOffline)
     QtCore.QObject.connect(ui.actionQuit,QtCore.SIGNAL("activated()"),app.quit)
     QtCore.QObject.connect(ui.actionSave,QtCore.SIGNAL("activated()"),core.save)
     QtCore.QObject.connect(ui.pushButton,QtCore.SIGNAL("clicked()"),core.search)
