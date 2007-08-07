@@ -68,12 +68,16 @@ class onlineDatabase(QtNetwork.QHttp):
         if self.hasPendingRequests():
             return
         page = unicode(self.readAll(), "cp1254", errors="ignore")
+        #remove things causing syntax error
+        page = page.replace("turkish english >", "\">")
+        page = page.replace("english german>", "\">")
+        page = page.replace("<link", "")
         self.parse(page)
 
     def parse(self, text, threaded = True):
         debugger.debug("%s\nParser took %d bytes." % (text, len(text)))
         parser = sesliSozlukParser()
-        parser.feed(text.replace("<link", "")) #remove javascript error
+        parser.feed(text)
         parser.close()
         debugger.debug("Parser output:\n%s" % str(parser.data))
         try:
