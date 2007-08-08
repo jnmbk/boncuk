@@ -32,7 +32,7 @@ class searcherThread(QtCore.QThread):
         else:
             self.database = onlineDatabase()
         QtCore.QObject.connect(self.database, QtCore.SIGNAL("found"),
-                               self.formatTranslation)
+            self.formatTranslation)
         self.database.search(self.keyword)
         self.exec_()
 
@@ -46,9 +46,9 @@ class searcherThread(QtCore.QThread):
         if translation:
             for var in translation:
                 if var.lang == 1 and not var.text in english:
-                        english.append(var.text)
+                    english.append(var.text)
                 elif var.lang == 0 and not var.text in turkish:
-                        turkish.append(var.text)
+                    turkish.append(var.text)
             if turkish:
                 for text in turkish:
                     tr += "%d. %s<br>" % (turkish.index(text)+1, text)
@@ -86,8 +86,8 @@ class pysozlukCore:
         self.ui.textBrowser.setHtml(
             "<b>%s</b>" % _("searching \"%s\"") % keyword)
         QtCore.QObject.connect(self.searcherThread,
-                               QtCore.SIGNAL("finishedSearching"),
-                               self.ui.textBrowser.setHtml)
+            QtCore.SIGNAL("finishedSearching"),
+            self.ui.textBrowser.setHtml)
         self.searcherThread.start()
 
     def about(self):
@@ -110,7 +110,7 @@ class pysozlukCore:
     def save(self):
         if not self.ui.textBrowser.toPlainText():
             QtGui.QMessageBox.warning(self.ui,
-            _("Warning"),
+                _("Warning"),
                 _("If you want to save a description,"
                 " you must search a keyword."))
         else:
