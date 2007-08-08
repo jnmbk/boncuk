@@ -59,7 +59,7 @@ class searcherThread(QtCore.QThread):
                 for text in english:
                     en += "%d. %s<br>" % (english.index(text)+1, text)
                 result += en
-            self.sendResult(result.replace('"',''))
+            self.sendResult(result)
         else:
             self.sendResult(
                 "<b>%s</b>" % _("Cannot find \"%s\"") % self.keyword)

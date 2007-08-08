@@ -15,6 +15,9 @@
 
 from PyQt4 import QtCore, QtSql
 import pysozlukglobals
+from debugger import Debugger
+
+debugger = Debugger()
 
 class Language:
     tr, en = range(2)
@@ -36,6 +39,7 @@ class pysozlukDatabase(QtCore.QObject):
             db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
             db.setDatabaseName(databaseFile)
             db.open()
+            debugger.debug("Opened database")
 
     def search(self, keyword, threaded = True):
         """Search given keyword
@@ -45,17 +49,21 @@ class pysozlukDatabase(QtCore.QObject):
         if not, just returns translations
         """
 
+        debugger.debug("Starting search for: %s" % keyword)
         query = QtSql.QSqlQuery()
         query.prepare(
             "SELECT home, word, text FROM translations WHERE word = :keyword")
         query.bindValue(":keyword", QtCore.QVariant(keyword))
         query.exec_()
+        debugger.debug(query.boundValue(0).toString())
+        debugger.debug(query.lastQuery() + "\n" + query.lastError().text())
         results = []
         while(query.next()):
             results.append(Translation((
                 query.value(0).toInt()[0],
                 query.value(1).toString(),
                 query.value(2).toString())))
+        debugger.debug("returning results: %s" % str(results))
         if threaded:
             self.emit(QtCore.SIGNAL("found"), results)
         else:
