@@ -36,10 +36,15 @@ class pysozlukDatabase(QtCore.QObject):
         QtCore.QObject.__init__(self)
         db = QtSql.QSqlDatabase.database()
         if not db.isValid():
+            if not db.isDriverAvailable("QSQLITE"):
+                debugger.critical("qt4 SQLITE driver not found")
             db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
             db.setDatabaseName(databaseFile)
             db.open()
-            debugger.debug("Opened database")
+            if db.isOpen():
+                debugger.debug("Opened database %s" % databaseFile)
+            else:
+                debugger.critical("Failed to open database %s" % databaseFile)
 
     def search(self, keyword, threaded = True):
         """Search given keyword
@@ -51,6 +56,8 @@ class pysozlukDatabase(QtCore.QObject):
 
         debugger.debug("Starting search for: %s" % keyword)
         query = QtSql.QSqlQuery()
+        if not "translations" in QtSql.QSqlDatabase().tables():
+            debugger.critical("translations table not found in database")
         query.prepare(
             "SELECT home, word, text FROM translations WHERE word = :keyword")
         query.bindValue(":keyword", QtCore.QVariant(keyword))
