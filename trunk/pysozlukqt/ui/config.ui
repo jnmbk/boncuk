@@ -1,6 +1,9 @@
 <ui version="4.0" >
- <class>configWindow</class>
- <widget class="QDialog" name="configWindow" >
+ <class>ConfigWindow</class>
+ <widget class="QDialog" name="ConfigWindow" >
+  <property name="windowModality" >
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -176,7 +179,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>configWindow</receiver>
+   <receiver>ConfigWindow</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -192,7 +195,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>configWindow</receiver>
+   <receiver>ConfigWindow</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
