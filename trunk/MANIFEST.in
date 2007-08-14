@@ -1,5 +1,6 @@
 include AUTHORS COPYING INSTALL README
 recursive-include po *.po*
 recursive-include pysozlukqt/data *
+recursive-include pysozlukqt/translations *.ts
 recursive-include pysozlukqt/ui *.ui
 
