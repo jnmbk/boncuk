@@ -45,7 +45,7 @@ def main():
 
     translator = QtCore.QTranslator()
     currentLocale = QtCore.QLocale.system().name()
-    translator.load("data/translations/pysozluk-qt_%s.qm" % currentLocale)
+    translator.load("translations/pysozluk-qt_%s.qm" % currentLocale)
     app.installTranslator(translator)
 
     settings = QtCore.QSettings()
