@@ -15,14 +15,12 @@ import sys
 import locale
 from PyQt4 import QtCore, QtGui
 from core import pysozlukCore
-from gettext import translation
 
 from mainWindow import Ui_MainWindow
 import pysozlukglobals
 import trayicon
 
 locale.setlocale(locale.LC_ALL, "")
-_ = translation('pysozluk-qt', fallback=True).ugettext
 
 def makeConnections(ui, core, app):
     QtCore.QObject.connect(
@@ -40,23 +38,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
 
-    def retranslateUi(self, MainWindow=None):
-        self.label.setText(_("Keyword:"))
-        self.pushButton.setText(_("&Search"))
-        self.menuFile.setTitle(_("&File"))
-        self.menuHelp.setTitle(_("&Help"))
-        self.actionAbout_Pysozluk_Qt.setText(_("About &PySozluk-Qt"))
-        self.actionAbout_Qt.setText(_("About &Qt"))
-        self.actionConfigure.setText(_("&Configure PySozluk-Qt"))
-        self.actionOffline.setText(_("&Offline"))
-        self.actionSave.setText(_("&Save"))
-        self.actionQuit.setText(_("&Quit"))
-        self.setWindowTitle(_("Pysozluk-Qt"))
-
 def main():
     app = QtGui.QApplication(sys.argv)
     app.setOrganizationName("pysozluk-qt")
     app.setApplicationName("pysozluk-qt")
+
+    translator = QtCore.QTranslator()
+    currentLocale = QtCore.QLocale.system().name()
+    translator.load("data/translations/pysozluk-qt_%s.qm" % currentLocale)
+    app.installTranslator(translator)
+
     settings = QtCore.QSettings()
     ui = MainWindow()
     ui.textBrowser.clearHistory() #this decreases memory usage

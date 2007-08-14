@@ -21,7 +21,6 @@ dataDirectory = "data"
 
 #absolute paths
 database = os.path.join(dataDirectory, "pysozluk-qt.db")
-mainWindow = os.path.join(dataDirectory, "ui", "mainWindow.ui")
 
 #icons
 iconDir = os.path.join(dataDirectory, "icons")
