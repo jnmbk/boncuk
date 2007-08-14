@@ -39,7 +39,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox" >
+          <widget class="QComboBox" name="translation_method" >
            <item>
             <property name="text" >
              <string>Always Online</string>
@@ -80,21 +80,21 @@
       </attribute>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
-        <widget class="QCheckBox" name="checkBox" >
+        <widget class="QCheckBox" name="trayIcon_enable" >
          <property name="text" >
           <string>Enable Tray Icon</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0" colspan="2" >
-        <widget class="QCheckBox" name="checkBox_2" >
+        <widget class="QCheckBox" name="trayIcon_minimizeOnClose" >
          <property name="text" >
           <string>Minimize to Tray on Close</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0" colspan="2" >
-        <widget class="QCheckBox" name="checkBox_3" >
+        <widget class="QCheckBox" name="trayIcon_rememberLast" >
          <property name="text" >
           <string>Remember Last State</string>
          </property>
@@ -130,7 +130,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox" >
+          <widget class="QSpinBox" name="advanced_debugLevel" >
            <property name="maximum" >
             <number>4</number>
            </property>
@@ -170,9 +170,9 @@
  <tabstops>
   <tabstop>buttonBox</tabstop>
   <tabstop>tabWidget</tabstop>
-  <tabstop>checkBox</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>checkBox_3</tabstop>
+  <tabstop>trayIcon_enable</tabstop>
+  <tabstop>trayIcon_minimizeOnClose</tabstop>
+  <tabstop>trayIcon_rememberLast</tabstop>
  </tabstops>
  <resources/>
  <connections>
