@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pysozlukqt/ui/config.ui'
+# Form implementation generated from reading ui file 'ui/config.ui'
 #
-# Created: Tue Aug 14 20:53:42 2007
+# Created: Tue Aug 14 22:49:57 2007
 #      by: PyQt4 UI code generator 4.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
-class Ui_configWindow(object):
-    def setupUi(self, configWindow):
-        configWindow.setObjectName("configWindow")
-        configWindow.resize(QtCore.QSize(QtCore.QRect(0,0,315,203).size()).expandedTo(configWindow.minimumSizeHint()))
-        configWindow.setWindowIcon(QtGui.QIcon("../icons/16x16/configure.png"))
+class Ui_ConfigWindow(object):
+    def setupUi(self, ConfigWindow):
+        ConfigWindow.setObjectName("ConfigWindow")
+        ConfigWindow.setWindowModality(QtCore.Qt.WindowModal)
+        ConfigWindow.resize(QtCore.QSize(QtCore.QRect(0,0,315,203).size()).expandedTo(ConfigWindow.minimumSizeHint()))
+        ConfigWindow.setWindowIcon(QtGui.QIcon("../icons/16x16/configure.png"))
 
-        self.gridlayout = QtGui.QGridLayout(configWindow)
+        self.gridlayout = QtGui.QGridLayout(ConfigWindow)
         self.gridlayout.setObjectName("gridlayout")
 
-        self.tabWidget = QtGui.QTabWidget(configWindow)
+        self.tabWidget = QtGui.QTabWidget(ConfigWindow)
         self.tabWidget.setObjectName("tabWidget")
 
         self.translation = QtGui.QWidget()
@@ -89,33 +90,33 @@ class Ui_configWindow(object):
         self.tabWidget.addTab(self.advanced,"")
         self.gridlayout.addWidget(self.tabWidget,0,0,1,1)
 
-        self.buttonBox = QtGui.QDialogButtonBox(configWindow)
+        self.buttonBox = QtGui.QDialogButtonBox(ConfigWindow)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.NoButton|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.gridlayout.addWidget(self.buttonBox,1,0,1,1)
 
-        self.retranslateUi(configWindow)
+        self.retranslateUi(ConfigWindow)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("accepted()"),configWindow.accept)
-        QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("rejected()"),configWindow.reject)
-        QtCore.QMetaObject.connectSlotsByName(configWindow)
-        configWindow.setTabOrder(self.buttonBox,self.tabWidget)
-        configWindow.setTabOrder(self.tabWidget,self.checkBox)
-        configWindow.setTabOrder(self.checkBox,self.checkBox_2)
-        configWindow.setTabOrder(self.checkBox_2,self.checkBox_3)
+        QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("accepted()"),ConfigWindow.accept)
+        QtCore.QObject.connect(self.buttonBox,QtCore.SIGNAL("rejected()"),ConfigWindow.reject)
+        QtCore.QMetaObject.connectSlotsByName(ConfigWindow)
+        ConfigWindow.setTabOrder(self.buttonBox,self.tabWidget)
+        ConfigWindow.setTabOrder(self.tabWidget,self.checkBox)
+        ConfigWindow.setTabOrder(self.checkBox,self.checkBox_2)
+        ConfigWindow.setTabOrder(self.checkBox_2,self.checkBox_3)
 
-    def retranslateUi(self, configWindow):
-        configWindow.setWindowTitle(QtGui.QApplication.translate("configWindow", "Configuration", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("configWindow", "Method:", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.addItem(QtGui.QApplication.translate("configWindow", "Always Online", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.addItem(QtGui.QApplication.translate("configWindow", "Always Offline", None, QtGui.QApplication.UnicodeUTF8))
-        self.comboBox.addItem(QtGui.QApplication.translate("configWindow", "Try Offline First", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.translation), QtGui.QApplication.translate("configWindow", "Translation", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkBox.setText(QtGui.QApplication.translate("configWindow", "Enable Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkBox_2.setText(QtGui.QApplication.translate("configWindow", "Minimize to Tray on Close", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkBox_3.setText(QtGui.QApplication.translate("configWindow", "Remember Last State", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.trayIcon), QtGui.QApplication.translate("configWindow", "Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("configWindow", "Debug Level:", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.advanced), QtGui.QApplication.translate("configWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, ConfigWindow):
+        ConfigWindow.setWindowTitle(QtGui.QApplication.translate("ConfigWindow", "Configuration", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("ConfigWindow", "Method:", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Online", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Offline", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.addItem(QtGui.QApplication.translate("ConfigWindow", "Try Offline First", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.translation), QtGui.QApplication.translate("ConfigWindow", "Translation", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox.setText(QtGui.QApplication.translate("ConfigWindow", "Enable Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_2.setText(QtGui.QApplication.translate("ConfigWindow", "Minimize to Tray on Close", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_3.setText(QtGui.QApplication.translate("ConfigWindow", "Remember Last State", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.trayIcon), QtGui.QApplication.translate("ConfigWindow", "Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("ConfigWindow", "Debug Level:", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.advanced), QtGui.QApplication.translate("ConfigWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))
 

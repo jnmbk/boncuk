@@ -14,6 +14,69 @@
     </message>
 </context>
 <context>
+    <name>ConfigWindow</name>
+    <message>
+        <location filename="configWindow.py" line="110"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="111"/>
+        <source>Method:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="112"/>
+        <source>Always Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="113"/>
+        <source>Always Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="114"/>
+        <source>Try Offline First</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="115"/>
+        <source>Translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="116"/>
+        <source>Enable Tray Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="117"/>
+        <source>Minimize to Tray on Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="118"/>
+        <source>Remember Last State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="119"/>
+        <source>Tray Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="120"/>
+        <source>Debug Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configWindow.py" line="121"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="core.py" line="40"/>
@@ -136,65 +199,5 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>configWindow</name>
-    <message>
-        <location filename="configWindow.py" line="109"/>
-        <source>Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="110"/>
-        <source>Method:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="111"/>
-        <source>Always Online</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="112"/>
-        <source>Always Offline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="113"/>
-        <source>Try Offline First</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="114"/>
-        <source>Translation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="115"/>
-        <source>Enable Tray Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="116"/>
-        <source>Minimize to Tray on Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="117"/>
-        <source>Remember Last State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="118"/>
-        <source>Tray Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="119"/>
-        <source>Debug Level:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configWindow.py" line="120"/>
-        <source>Advanced</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>
