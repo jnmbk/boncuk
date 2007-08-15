@@ -42,7 +42,7 @@
           <widget class="QComboBox" name="translation_method" >
            <item>
             <property name="text" >
-             <string>Always Online</string>
+             <string>Try Offline First</string>
             </property>
            </item>
            <item>
@@ -52,7 +52,7 @@
            </item>
            <item>
             <property name="text" >
-             <string>Try Offline First</string>
+             <string>Always Online</string>
             </property>
            </item>
           </widget>

@@ -11,13 +11,12 @@
 #
 # Please read the COPYING file.
 
-from PyQt4 import QtGui, QtCore
-import gettext
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 import pysozlukglobals
 
 from debugger import Debugger
 
-_ = gettext.translation('pysozluk-qt', fallback=True).ugettext
 debugger = Debugger()
 
 class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
@@ -31,10 +30,11 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         #    _("Translate Clipboard"), self)
         action_configure = QtGui.QAction(
             QtGui.QIcon(pysozlukglobals.getIcon("configure")),
-            _("Configure PySozluk-Qt"), self)
+            QtGui.QApplication.translate("Tray", "Configure PySozluk-Qt"),
+            self)
         action_exit = QtGui.QAction(
             QtGui.QIcon(pysozlukglobals.getIcon("exit")),
-            _("Exit"), self)
+            QtGui.QApplication.translate("Tray", "Exit"), self)
 
         self.menu = QtGui.QMenu()
         #self.menu.addAction(action_translate)
