@@ -25,6 +25,7 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         QtGui.QSystemTrayIcon.__init__(
             self, QtGui.QIcon(pysozlukglobals.getIcon("pysozluk-qt")))
         self.ui = ui
+        self.app = app
         self.settings = settings
         #action_translate = QtGui.QAction(
         #    QtGui.QIcon(pysozlukglobals.getIcon("locale")),
@@ -64,13 +65,13 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         #TODO: get result
 
     def configure(self):
-        configUi = config.ConfigWindow(self.ui)
+        configUi = config.ConfigWindow(self.app, self.ui)
         configUi.show()
 
     def showOrHideUi(self, activationReason):
-        if activationReason == self.Trigger:
-            self.settings.setValue("tray/startHidden",
-                QtCore.QVariant(self.ui.isVisible()))
+        if activationReason == self.Trigger and\
+            self.settings.value("tray/minimizeOnClose",
+            QtCore.QVariant(True)).toBool():
             self.ui.setVisible(not self.ui.isVisible())
             debugger.debug(
                 "Clicked tray icon, visible = %s" % str(self.ui.isVisible()))

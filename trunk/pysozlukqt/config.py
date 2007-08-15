@@ -17,7 +17,8 @@ from PyQt4 import QtCore
 import configWindow
 
 class ConfigWindow(QtGui.QDialog, configWindow.Ui_ConfigWindow):
-    def __init__(self, parent=None):
+    def __init__(self, app, parent=None):
+        self.app = app
         QtGui.QDialog.__init__(self, parent)
         self.setupUi(self)
 
@@ -31,16 +32,16 @@ class ConfigWindow(QtGui.QDialog, configWindow.Ui_ConfigWindow):
             self.trayIcon_enable.setCheckState(QtCore.Qt.Checked)
         else:
             self.trayIcon_enable.setCheckState(QtCore.Qt.Unchecked)
-        if settings.value("tray/minimizeonclose",
+        if settings.value("tray/minimizeOnClose",
                 QtCore.QVariant(True)).toBool():
             self.trayIcon_minimizeOnClose.setCheckState(QtCore.Qt.Checked)
         else:
             self.trayIcon_minimizeOnClose.setCheckState(QtCore.Qt.Unchecked)
-        if settings.value("tray/rememberlaststate",
+        if settings.value("tray/startMinimized",
             QtCore.QVariant(True)).toBool():
-            self.trayIcon_rememberLast.setCheckState(QtCore.Qt.Checked)
+            self.trayIcon_startMinimized.setCheckState(QtCore.Qt.Checked)
         else:
-            self.trayIcon_rememberLast.setCheckState(QtCore.Qt.Unchecked)
+            self.trayIcon_startMinimized.setCheckState(QtCore.Qt.Unchecked)
         self.advanced_debugLevel.setValue(settings.value(
             "debuglevel", QtCore.QVariant(2)).toInt()[0])
 
@@ -50,9 +51,16 @@ class ConfigWindow(QtGui.QDialog, configWindow.Ui_ConfigWindow):
             QtCore.QVariant(self.translation_method.currentIndex()))
         settings.setValue("tray/enabled",
             QtCore.QVariant(bool(self.trayIcon_enable.checkState())))
-        settings.setValue("tray/minimizeonclose",
+        settings.setValue("tray/minimizeOnClose",
             QtCore.QVariant(bool(self.trayIcon_minimizeOnClose.checkState())))
-        settings.setValue("tray/rememberlaststate",
-            QtCore.QVariant(bool(self.trayIcon_rememberLast.checkState())))
-        settings.setValue("debuglevel",
+        settings.setValue("tray/startMinimized",
+            QtCore.QVariant(bool(self.trayIcon_startMinimized.checkState())))
+        settings.setValue("debugLevel",
             QtCore.QVariant(self.advanced_debugLevel.value()))
+        self.applySettings()
+
+    def applySettings(self):
+        settings = QtCore.QSettings()
+        self.app.setQuitOnLastWindowClosed(not settings.value(
+            "tray/minimizeOnClose", QtCore.QVariant(True)).toBool())
+        #TODO: enable/disable tray

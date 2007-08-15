@@ -94,9 +94,9 @@
         </widget>
        </item>
        <item row="2" column="0" colspan="2" >
-        <widget class="QCheckBox" name="trayIcon_rememberLast" >
+        <widget class="QCheckBox" name="trayIcon_startMinimized" >
          <property name="text" >
-          <string>Remember Last State</string>
+          <string>Start Minimized</string>
          </property>
         </widget>
        </item>
@@ -172,7 +172,7 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>trayIcon_enable</tabstop>
   <tabstop>trayIcon_minimizeOnClose</tabstop>
-  <tabstop>trayIcon_rememberLast</tabstop>
+  <tabstop>trayIcon_startMinimized</tabstop>
  </tabstops>
  <resources/>
  <connections>
