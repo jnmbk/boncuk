@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/config.ui'
 #
-# Created: Wed Aug 15 00:21:38 2007
+# Created: Wed Aug 15 11:38:55 2007
 #      by: PyQt4 UI code generator 4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -58,9 +58,9 @@ class Ui_ConfigWindow(object):
         self.trayIcon_minimizeOnClose.setObjectName("trayIcon_minimizeOnClose")
         self.gridlayout2.addWidget(self.trayIcon_minimizeOnClose,1,0,1,2)
 
-        self.trayIcon_rememberLast = QtGui.QCheckBox(self.trayIcon)
-        self.trayIcon_rememberLast.setObjectName("trayIcon_rememberLast")
-        self.gridlayout2.addWidget(self.trayIcon_rememberLast,2,0,1,2)
+        self.trayIcon_startMinimized = QtGui.QCheckBox(self.trayIcon)
+        self.trayIcon_startMinimized.setObjectName("trayIcon_startMinimized")
+        self.gridlayout2.addWidget(self.trayIcon_startMinimized,2,0,1,2)
 
         spacerItem1 = QtGui.QSpacerItem(20,40,QtGui.QSizePolicy.Minimum,QtGui.QSizePolicy.Expanding)
         self.gridlayout2.addItem(spacerItem1,3,1,1,1)
@@ -104,7 +104,7 @@ class Ui_ConfigWindow(object):
         ConfigWindow.setTabOrder(self.buttonBox,self.tabWidget)
         ConfigWindow.setTabOrder(self.tabWidget,self.trayIcon_enable)
         ConfigWindow.setTabOrder(self.trayIcon_enable,self.trayIcon_minimizeOnClose)
-        ConfigWindow.setTabOrder(self.trayIcon_minimizeOnClose,self.trayIcon_rememberLast)
+        ConfigWindow.setTabOrder(self.trayIcon_minimizeOnClose,self.trayIcon_startMinimized)
 
     def retranslateUi(self, ConfigWindow):
         ConfigWindow.setWindowTitle(QtGui.QApplication.translate("ConfigWindow", "Configuration", None, QtGui.QApplication.UnicodeUTF8))
@@ -115,7 +115,7 @@ class Ui_ConfigWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.translation), QtGui.QApplication.translate("ConfigWindow", "Translation", None, QtGui.QApplication.UnicodeUTF8))
         self.trayIcon_enable.setText(QtGui.QApplication.translate("ConfigWindow", "Enable Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
         self.trayIcon_minimizeOnClose.setText(QtGui.QApplication.translate("ConfigWindow", "Minimize to Tray on Close", None, QtGui.QApplication.UnicodeUTF8))
-        self.trayIcon_rememberLast.setText(QtGui.QApplication.translate("ConfigWindow", "Remember Last State", None, QtGui.QApplication.UnicodeUTF8))
+        self.trayIcon_startMinimized.setText(QtGui.QApplication.translate("ConfigWindow", "Start Minimized", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.trayIcon), QtGui.QApplication.translate("ConfigWindow", "Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("ConfigWindow", "Debug Level:", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.advanced), QtGui.QApplication.translate("ConfigWindow", "Advanced", None, QtGui.QApplication.UnicodeUTF8))

@@ -72,8 +72,9 @@ class searcherThread(QtCore.QThread):
 
 
 class pysozlukCore:
-    def __init__(self, ui):
+    def __init__(self, ui, app):
         self.ui = ui
+        self.app = app
         self.settings = QtCore.QSettings()
         self.ui.actionOffline.setChecked(
             self.settings.value("offline", QtCore.QVariant(False)).toBool())
@@ -134,5 +135,5 @@ class pysozlukCore:
                 file.close()
 
     def configure(self):
-        configUi = config.ConfigWindow(self.ui)
+        configUi = config.ConfigWindow(self.app, self.ui)
         configUi.show()

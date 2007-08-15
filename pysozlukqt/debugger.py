@@ -63,28 +63,33 @@ class Debugger:
     "Debug level can be changed via settings: General/debuglevel"
     def __init__(self):
         self.settings = QtCore.QSettings("pysozluk-qt", "pysozluk-qt")
-        self.debugLevel = self.settings.value("debuglevel",
-            QtCore.QVariant(2)).toInt()[0]
 
     def debug(self, message):
         "for writing custom debug output"
-        if self.debugLevel > 3:
+        if self.settings.value("debugLevel",
+            QtCore.QVariant(2)).toInt()[0] > 3:
             print message
 
     def warning(self, message):
         "to report warnings and recoverable errors in application"
-        if self.debugLevel > 2:
+        if self.settings.value("debugLevel",
+            QtCore.QVariant(2)).toInt()[0] > 2:
+            print message
             print "%sWARNING: %s%s" % (colors['cyan'],
                 message, colors['default'])
 
     def critical(self, message):
         "for writing critical error mesages and reporting system errors"
-        if self.debugLevel > 1:
+        if self.settings.value("debugLevel",
+            QtCore.QVariant(2)).toInt()[0] > 1:
+            print message
             print "%sERROR: %s%s" % (colors['red'],
                 message, colors['default'])
 
     def fatal(self, message):
         "for writing fatal error messages shortly before exiting"
-        if self.debugLevel > 0:
+        if self.settings.value("debugLevel",
+            QtCore.QVariant(2)).toInt()[0] > 0:
+            print message
             print "%sFATAL ERROR: %s%s" % (colors['underlinered'],
                 message, colors['default'])
