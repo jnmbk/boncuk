@@ -88,7 +88,7 @@ class pysozlukCore:
         self.searcherThread = searcherThread(keyword, self.settings)
         self.ui.textBrowser.clearHistory()
         self.ui.textBrowser.setHtml(
-            "<b>%s</b>" % QtGui.QApplication.translate(
+            "<b>%s</b>" % QtGui.QApplication.translate("MainWindow",
                 "searching \"%s\"") % keyword)
         QtCore.QObject.connect(self.searcherThread,
             QtCore.SIGNAL("finishedSearching"),
