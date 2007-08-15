@@ -11,11 +11,14 @@
 #
 # Please read the COPYING file.
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+import os
+
 from database import pysozlukDatabase
 from online import onlineDatabase
+import config
 import pysozlukglobals
-import os
 
 class searcherThread(QtCore.QThread):
     def __init__(self, keyword, settings):
@@ -129,3 +132,7 @@ class pysozlukCore:
                 file = open(str(file_path), "w")
                 file.write(unicode(description) + "\n")
                 file.close()
+
+    def configure(self):
+        configUi = config.ConfigWindow(self.ui)
+        configUi.show()
