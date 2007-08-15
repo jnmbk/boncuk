@@ -26,7 +26,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configWindow.py" line="112"/>
+        <location filename="configWindow.py" line="114"/>
         <source>Always Online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36,7 +36,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="configWindow.py" line="114"/>
+        <location filename="configWindow.py" line="112"/>
         <source>Try Offline First</source>
         <translation type="unfinished"></translation>
     </message>
@@ -198,6 +198,16 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>configWindow</name>
+    <name>Tray</name>
+    <message>
+        <location filename="trayicon.py" line="33"/>
+        <source>Configure PySozluk-Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="trayicon.py" line="37"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

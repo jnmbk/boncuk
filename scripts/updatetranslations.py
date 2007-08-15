@@ -8,7 +8,8 @@ directory = "pysozlukqt"
 translateables = ("__init__.py",
         "core.py",
         "mainWindow.py",
-        "configWindow.py")
+        "configWindow.py",
+        "trayicon.py")
 
 command = "pylupdate4 "
 for file in translateables:

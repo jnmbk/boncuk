@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/config.ui'
 #
-# Created: Tue Aug 14 23:36:58 2007
+# Created: Wed Aug 15 00:21:38 2007
 #      by: PyQt4 UI code generator 4.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -109,9 +109,9 @@ class Ui_ConfigWindow(object):
     def retranslateUi(self, ConfigWindow):
         ConfigWindow.setWindowTitle(QtGui.QApplication.translate("ConfigWindow", "Configuration", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("ConfigWindow", "Method:", None, QtGui.QApplication.UnicodeUTF8))
-        self.translation_method.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Online", None, QtGui.QApplication.UnicodeUTF8))
-        self.translation_method.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Offline", None, QtGui.QApplication.UnicodeUTF8))
         self.translation_method.addItem(QtGui.QApplication.translate("ConfigWindow", "Try Offline First", None, QtGui.QApplication.UnicodeUTF8))
+        self.translation_method.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Offline", None, QtGui.QApplication.UnicodeUTF8))
+        self.translation_method.addItem(QtGui.QApplication.translate("ConfigWindow", "Always Online", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.translation), QtGui.QApplication.translate("ConfigWindow", "Translation", None, QtGui.QApplication.UnicodeUTF8))
         self.trayIcon_enable.setText(QtGui.QApplication.translate("ConfigWindow", "Enable Tray Icon", None, QtGui.QApplication.UnicodeUTF8))
         self.trayIcon_minimizeOnClose.setText(QtGui.QApplication.translate("ConfigWindow", "Minimize to Tray on Close", None, QtGui.QApplication.UnicodeUTF8))
