@@ -13,9 +13,10 @@
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-import pysozlukglobals
 
 from debugger import Debugger
+import config
+import pysozlukglobals
 
 debugger = Debugger()
 
@@ -48,9 +49,9 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         #QtCore.QObject.connect(
         #    action_translate, QtCore.SIGNAL("triggered()"),
         #    self.translateClipboard)
-        #QtCore.QObject.connect(
-        #    action_configure, QtCore.SIGNAL("triggered()"),
-        #    self.configure)
+        QtCore.QObject.connect(
+            action_configure, QtCore.SIGNAL("triggered()"),
+            self.configure)
         QtCore.QObject.connect(self,
             QtCore.SIGNAL("activated(QSystemTrayIcon::ActivationReason)"),
             self.showOrHideUi)
@@ -63,8 +64,8 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         #TODO: get result
 
     def configure(self):
-        #TODO: Configuration window
-        pass
+        configUi = config.ConfigWindow(self.ui)
+        configUi.show()
 
     def showOrHideUi(self, activationReason):
         if activationReason == self.Trigger:

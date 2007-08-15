@@ -28,7 +28,10 @@ def makeConnections(ui, core, app):
     QtCore.QObject.connect(
         ui.actionAbout_Qt,QtCore.SIGNAL("activated()"),core.aboutQt)
     QtCore.QObject.connect(ui.actionQuit,QtCore.SIGNAL("activated()"),app.quit)
-    QtCore.QObject.connect(ui.actionSave,QtCore.SIGNAL("activated()"),core.save)
+    QtCore.QObject.connect(ui.actionSave,QtCore.SIGNAL("activated()"),
+        core.save)
+    QtCore.QObject.connect(ui.actionConfigure,QtCore.SIGNAL("activated()"),
+        core.configure)
     QtCore.QObject.connect(ui.pushButton,QtCore.SIGNAL("clicked()"),core.search)
     QtCore.QObject.connect(
         ui.lineEdit,QtCore.SIGNAL("returnPressed()"),core.search)
