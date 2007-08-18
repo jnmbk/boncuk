@@ -13,7 +13,7 @@
    <string>Pysozluk-Qt</string>
   </property>
   <property name="windowIcon" >
-   <iconset>/usr/share/icons/hicolor/scalable/apps/pysozluk-qt.svg</iconset>
+   <iconset>data/pysozluk-qt.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" >

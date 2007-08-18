@@ -33,9 +33,6 @@ class myClean(clean):
         clean.run(self)
         os.remove("pysozlukqt/translations/pysozluk-qt_tr_TR.qm")
 
-datas = [("share/applications",                ["pysozlukqt/data/pysozluk-qt.desktop"]),
-         ("share/icons/hicolor/scalable/apps", ["pysozlukqt/data/pysozluk-qt.svg"])]
-
 setup(name = "pysozluk-qt",
       version = getVersion(),
       description = "Online/offline dictionary",
@@ -55,8 +52,12 @@ setup(name = "pysozluk-qt",
           "data/icons/32x32/*",
           "data/icons/64x64/*",
           "data/icons/128x128/*",
+          "data/pysozluk-qt.svg",
           "translations/*.qm"]},
-      data_files = datas,
+      data_files = [
+          ("share/applications", ["pysozlukqt/data/pysozluk-qt.desktop"]),
+          ("share/icons/hicolor/scalable/apps",
+          ["pysozlukqt/data/pysozluk-qt.svg"])],
       scripts = ["scripts/pysozluk-qt"],
       platforms = ["all"],
       cmdclass = {"build" : myBuild,
