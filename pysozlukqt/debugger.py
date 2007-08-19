@@ -74,7 +74,6 @@ class Debugger:
         "to report warnings and recoverable errors in application"
         if self.settings.value("debugLevel",
             QtCore.QVariant(2)).toInt()[0] > 2:
-            print message
             print "%sWARNING: %s%s" % (colors['cyan'],
                 message, colors['default'])
 
@@ -82,7 +81,6 @@ class Debugger:
         "for writing critical error mesages and reporting system errors"
         if self.settings.value("debugLevel",
             QtCore.QVariant(2)).toInt()[0] > 1:
-            print message
             print "%sERROR: %s%s" % (colors['red'],
                 message, colors['default'])
 
@@ -90,6 +88,5 @@ class Debugger:
         "for writing fatal error messages shortly before exiting"
         if self.settings.value("debugLevel",
             QtCore.QVariant(2)).toInt()[0] > 0:
-            print message
             print "%sFATAL ERROR: %s%s" % (colors['underlinered'],
                 message, colors['default'])
