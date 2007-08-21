@@ -69,9 +69,7 @@ class PySozlukTrayIcon(QtGui.QSystemTrayIcon):
         configUi.show()
 
     def showOrHideUi(self, activationReason):
-        if activationReason == self.Trigger and\
-            self.settings.value("tray/minimizeOnClose",
-            QtCore.QVariant(True)).toBool():
+        if activationReason == self.Trigger:
             self.ui.setVisible(not self.ui.isVisible())
             debugger.debug(
                 "Clicked tray icon, visible = %s" % str(self.ui.isVisible()))
