@@ -27,6 +27,9 @@ class SesliSozluk : public QObject
         SesliSozluk(QObject *parent);
         void search(QString word);
 
+    signals:
+        void found(QList< QList<QVariant> > *);
+
     private:
         QHttp *http;
 
@@ -36,9 +39,6 @@ class SesliSozluk : public QObject
 
     private slots:
         void continueSearch();
-
-    signals:
-        void found(QList< QList<QVariant> > *);
 };
 
 #endif

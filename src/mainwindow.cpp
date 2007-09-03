@@ -174,9 +174,9 @@ void MainWindow::aboutQt4Sozluk()
 
     aboutText = tr("C++ version of  PySozluk-Qt") + "\nv" + QT4SOZLUK_VERSION
         + "\nhttp://pysozluk-qt.wiki.sourceforge.net\n\n" + tr("Developers:")
-        + "\n" + QString::fromUtf8("İlker Kesen <ilker.kde at gmail.com>") + "\n"
-        + QString::fromUtf8("İşbaran Akçayır <isbaran at gmail.com>") + "\n"
-        + QString::fromUtf8("Uğur Çetin <ugur.jnmbk at gmail.com>") + "\n";
+        + QString::fromUtf8("\nİlker Kesen <ilker.kde at gmail.com>\n")
+        + QString::fromUtf8("İşbaran Akçayır <isbaran at gmail.com>\n")
+        + QString::fromUtf8("Uğur Çetin <ugur.jnmbk at gmail.com>\n");
 
     QMessageBox::about(this, tr("About Qt4Sozluk"), aboutText);
 }

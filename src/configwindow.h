@@ -30,13 +30,13 @@ class ConfigWindow : public QDialog, private Ui::ConfigWindow
         QSystemTrayIcon *trayptr;
         QWidget *parentptr;
 
+    public:
+        QSettings settings;
+
     public slots:
         void writeSettings();
         void applySettings();
         void stateSync(int);
-
-    public:
-        QSettings settings;
 };
 
 #endif
