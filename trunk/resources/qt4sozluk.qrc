@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>configure.png</file>
+        <file>exit.png</file>
+        <file>find.png</file>
+        <file>locale.png</file>
+        <file>qt4sozluk.png</file>
+        <file>qt4sozluk_tr_TR.qm</file>
+    </qresource>
+</RCC>
