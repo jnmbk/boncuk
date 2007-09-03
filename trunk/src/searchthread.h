@@ -28,9 +28,6 @@ class SearchThread : public QThread
     signals:
         void found(QList< QList<QVariant>  > *);
 
-    protected:
-        void run();
-
     private:
         QString keyword;
         bool lastSearchWasOffline;
@@ -39,6 +36,9 @@ class SearchThread : public QThread
 
     private slots:
         void returnResult(QList< QList<QVariant> > *);
+
+    protected:
+        void run();
 };
 
 #endif
