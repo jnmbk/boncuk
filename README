@@ -1,18 +1,10 @@
 http://sf.net/projects/pysozluk-qt
-pysozluk-qt is a qt port of tkinter application pysozluk.
+qt4sozluk is the c++ port of pysozluk-qt.
+It aims to provide a fast, simple and useful Turkish-English-German dictionary.
 See INSTALL for installation instructions.
-You should use UTF8 encoding to use cli.
-
-You can get the latest codes by typing:
-
-svn co http://pysozluk-qt.googlecode.com/svn/trunk pysozluk-qt
 
 ------------------------------------------------------------------------------------
 http://sf.net/projects/pysozluk-qt
-pysozluk-qt, pysozluk'un qt arayüz kütüphanesine uyarlanmış halidir.
+qt4sözlük, pysozluk-qt'nin c++ diliyle yazılmış halidir.
+Amacı hızlı, basit ve kullanışlı bir Türkçe-İngilizce-Almanca sözlük oluşturmaktır.
 Kurulum bilgisi için INSTALL dosyasına bakın.
-Konsoldan kullanabilmek için UTF8 kodlama gereklidir.
-
-Son kodlara ulaşmak için şu komutu kullanabilirsiniz:
-
-svn co http://pysozluk-qt.googlecode.com/svn/trunk pysozluk-qt

@@ -1,13 +1,28 @@
-To install pysozluk-qt, type this command:
-sudo python setup.py install
+To build qt4sozluk, type these commands:
+qmake-qt4
+lrelease qt4sozluk.pro
+make
 
-pysozluk-qt depends on PyQt4 with SQLite extension
-So make sure that you have installed those before trying to run pysozluk-qt.
+Then you can use the qt4sozluk binary in bin/ directory
 
---------------------------------------------------------------------------------
+qt4sozluk depends on Qt 4.3 with SQLite extension
+So make sure that you have installed those before compiling and installing
+qt4sozluk.
 
-pysozluk-qt'yi kurmak için bu komutu kullanın:
-sudo python setup.py install
+To use offline database, you need to download it seperately from web site and
+put qt4sozluk.db under /usr/share/qt4sozluk directory.
 
-pysozluk-qt bu SQLite eklentisiyle birlikte PyQt4'e bağımlıdır
-Bu yüzden pysozluk-qt'yi kullanabilmek için öncelikle bunları kurmalısınız.
+-------------------------------------------------------------------------------
+
+qt4sözlük'ü derlemek için bu komutları kullanın:
+qmake-qt4
+lrelease qt4sozluk.pro
+make
+
+Daha sonra bin/ dizini içindeki qt4sozluk ikilisini kullanabilirsiniz.
+
+qt4sözlük SQLite eklentisiyle birlikte Qt 4.3'e bağımlıdır
+Bu yüzden qt4sözlük'ü kullanabilmek için öncelikle bunları kurmalısınız.
+
+Çevrimdışı veritabanını kullanabilmek için internet sitemizden ayrıca indirip
+içindeki qt4sozluk.db dosyasını /usr/share/qt4sozluk dizinine koymalısınız.
