@@ -50,6 +50,11 @@ MainWindow::MainWindow(QWidget *parent)
     resultBrowser->clearHistory();
     statusBar()->showMessage(tr("Type in a keyword to search"));
 
+    QRegExp searchLineRx("[\\w\\s]*");
+    QValidator *validator = new QRegExpValidator(searchLineRx, this);
+    keyword->setValidator(validator);
+    keyword->setMaxLength(64);
+
     connect(
         searchThread, SIGNAL(found(QList< QList<QVariant> > *)),
         this, SLOT(showResults(QList< QList<QVariant> > *)));
