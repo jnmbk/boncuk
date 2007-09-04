@@ -31,6 +31,9 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
     translation_method->setCurrentIndex(
             settings.value("translation/method").toInt());
 
+    if (settings.value("update/enabled", QVariant(true)).toBool() == 1)
+        update_enable->setCheckState(Qt::Checked);
+
     if (settings.value("tray/minimizeOnClose", QVariant(true)).toBool() == 1)
         trayIcon_minimizeOnClose->setCheckState(Qt::Checked);
 
