@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = qt4sozluk
-VERSION = 0.1_beta1
+VERSION = "0.1_beta1"
 DEFINES += \
 #    QT4SOZLUK_VERSION=\\\"$$VERSION\\\"
     QT4SOZLUK_VERSION=\\\"$$VERSION\\\" \
@@ -13,7 +13,8 @@ HEADERS += \
     src/mainwindow.h \
     src/searchthread.h \
     src/seslisozluk.h \
-    src/sqlitedatabase.h
+    src/sqlitedatabase.h \
+    src/updater.h
 FORMS += \
     ui/configwindow.ui \
     ui/mainwindow.ui
@@ -24,7 +25,8 @@ SOURCES += \
     src/mainwindow.cpp \
     src/searchthread.cpp \
     src/seslisozluk.cpp \
-    src/sqlitedatabase.cpp
+    src/sqlitedatabase.cpp \
+    src/updater.cpp
 RESOURCES += \
     resources/qt4sozluk.qrc
 TRANSLATIONS += \
