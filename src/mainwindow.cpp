@@ -32,9 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->move(settings.value("global/windowpos").toPoint());
 
     tray = new QSystemTrayIcon(QIcon(":/qt4sozluk.png"));
-    connectActions();
-    connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     createMenu();
 
     if(settings.value("tray/enabled").toBool()) {
@@ -49,18 +46,23 @@ MainWindow::MainWindow(QWidget *parent)
         this->show();
 
     searchThread = new SearchThread(this);
+    configWindow = new ConfigWindow(this, tray);
+    resultBrowser->clearHistory();
+    statusBar()->showMessage(tr("Type in a keyword to search"));
+
     connect(
         searchThread, SIGNAL(found(QList< QList<QVariant> > *)),
         this, SLOT(showResults(QList< QList<QVariant> > *)));
-    if(!tray)
-        connectActions();
     connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
-
-    resultBrowser->clearHistory();
-    statusBar()->showMessage(tr("Type in a keyword to search"));
-    configWindow = new ConfigWindow(this, tray);
+    connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
+    connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
+            this, SLOT(aboutQt4Sozluk()));
+    connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
+    connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
+    connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
 }
 
 void MainWindow::showOrHideUi(
@@ -77,15 +79,6 @@ void MainWindow::showOrHideUi(
             this->setVisible(1);
         }
     }
-}
-
-void MainWindow::connectActions()
-{
-    connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
-            this, SLOT(aboutQt4Sozluk()));
-    connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
-    connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
-    connect(actionConfigure, SIGNAL(activated()), this, SLOT(configure()));
 }
 
 void MainWindow::createMenu()
@@ -186,11 +179,6 @@ void MainWindow::aboutQt4Sozluk()
 void MainWindow::aboutQt()
 {
     QMessageBox::aboutQt(this);
-}
-
-void MainWindow::configure()
-{
-    configWindow->show();
 }
 
 void MainWindow::pressEnterMessage()
