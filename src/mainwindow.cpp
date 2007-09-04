@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     tray = new QSystemTrayIcon(this->windowIcon());
     createMenu();
 
-    if(settings.value("tray/enabled").toBool()) {
+    if(settings.value("tray/enabled", true).toBool()) {
         tray->show();
         qApp->setQuitOnLastWindowClosed(
             !settings.value("tray/minimizeOnClose", true).toBool());
