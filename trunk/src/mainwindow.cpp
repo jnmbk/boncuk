@@ -60,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     resultBrowser->clearHistory();
     statusBar()->showMessage(tr("Type in a keyword to search"));
+    configWindow = new ConfigWindow(this, tray);
 }
 
 void MainWindow::showOrHideUi(
@@ -189,7 +190,6 @@ void MainWindow::aboutQt()
 
 void MainWindow::configure()
 {
-    configWindow = new ConfigWindow(this, tray);
     configWindow->show();
 }
 
