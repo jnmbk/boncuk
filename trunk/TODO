@@ -2,10 +2,8 @@ This is a TODO listing for upcoming 0.1 release:
 
 * Add the ability to display a borderless popup window with translation of the
 word in clipboard.
-* Make it impossible to enter special characters in search box like ,#$%...
-(also filter those characters before starting search)
 * Make it easy to enter German special characters(we also support German)
-* Prepare sone help text
+* Prepare some help text
 * Ask to download offline database at first run (if it's not in our
 default directory)
 * Make an installer for binary distribution (if legally possible,
