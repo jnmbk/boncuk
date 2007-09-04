@@ -63,6 +63,8 @@ void ConfigWindow::writeSettings() {
             QVariant(trayIcon_minimizeOnClose->checkState()).toBool());
     settings.setValue("tray/startMinimized",
             QVariant(trayIcon_startMinimized->checkState()).toBool());
+    settings.setValue("update/enabled",
+            QVariant(update_enable->checkState()).toBool());
     applySettings();
 }
 
@@ -77,4 +79,3 @@ void ConfigWindow::applySettings() {
             qApp->setQuitOnLastWindowClosed(false);
     }
 }
-

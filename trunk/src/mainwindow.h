@@ -23,6 +23,9 @@
 #include "searchthread.h"
 #include "ui_mainwindow.h"
 #include "configwindow.h"
+#include "updater.h"
+
+class QString;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -33,6 +36,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QSystemTrayIcon *tray;
         QMenu *menu;
         ConfigWindow *configWindow;
+        Updater *update;
 
         void createMenu();
 
@@ -40,6 +44,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showResults(QList< QList<QVariant> > *);
         void search();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
+        void printLatest(QString);
 
     private:
         SearchThread *searchThread;

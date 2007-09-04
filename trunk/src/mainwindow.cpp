@@ -10,6 +10,8 @@
  * please read the copyIng file.
  */
 
+#include <iostream>
+
 #include <QApplication>
 #include <QDebug>
 #include <QIcon>
@@ -45,6 +47,12 @@ MainWindow::MainWindow(QWidget *parent)
     else
         this->show();
 
+
+    if(settings.value("update/enabled", false).toBool()){
+        update = new Updater();
+        connect(update, SIGNAL(latestVersion(QString)), this, SLOT(printLatest(QString)));
+    }
+
     searchThread = new SearchThread(this);
     configWindow = new ConfigWindow(this, tray);
     resultBrowser->clearHistory();
@@ -68,6 +76,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
     connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
     connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
+}
+
+void MainWindow::printLatest(QString latest)
+{
+    QSettings settings;
+    int ret;
+    bool isTray = settings.value("tray/enabled", true).toBool();
+
+    ret = latest.compare(QT4SOZLUK_VERSION);
+
+    if(ret == 0){
+        if(isTray){
+            tray->showMessage(tr("Update Results"), tr("You are up to date !"), QSystemTrayIcon::Information, 4000);
+        }else{
+            QMessageBox::information(this, tr("Update Results"), tr("You are up to date!"));
+        }
+    }else{
+        if(isTray){
+            tray->showMessage(tr("Update Results"), tr("There's a higher version available!\n"), QSystemTrayIcon::Information, 5000);
+        }else{
+            QMessageBox::information(this, tr("Update Results"), tr("There's a higher version available!\n"));
+        }
+    }
 }
 
 void MainWindow::showOrHideUi(
