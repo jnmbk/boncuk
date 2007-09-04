@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     if (app.arguments().size() > 1) {
-        console = new Console;
+        console = new Console();
         console->search();
     } else {
         mainWindow = new MainWindow();

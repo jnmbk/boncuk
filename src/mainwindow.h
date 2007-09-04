@@ -15,12 +15,14 @@
 
 #include <QList>
 #include <QMainWindow>
-#include <QVariant>
+#include <QMenu>
 #include <QSystemTrayIcon>
+#include <QVariant>
+#include <QWidget>
+
 #include "searchthread.h"
 #include "ui_mainwindow.h"
-#include <QWidget>
-#include <QMenu>
+#include "configwindow.h"
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -30,6 +32,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         MainWindow(QWidget *parent = 0);
         QSystemTrayIcon *tray;
         QMenu *menu;
+        ConfigWindow *configWindow;
+
         void createMenu();
         void connectActions();
 

@@ -12,14 +12,15 @@
 
 #include <QApplication>
 #include <QDebug>
-#include <QSettings>
+#include <QIcon>
 #include <QList>
 #include <QListIterator>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <QWidget>
-#include <QIcon>
+#include <QSettings>
 #include <QSystemTrayIcon>
+#include <QWidget>
+
 #include "configwindow.h"
 #include "mainwindow.h"
 
@@ -188,7 +189,7 @@ void MainWindow::aboutQt()
 
 void MainWindow::configure()
 {
-    ConfigWindow *configWindow = new ConfigWindow(this, tray);
+    configWindow = new ConfigWindow(this, tray);
     configWindow->show();
 }
 
