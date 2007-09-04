@@ -35,7 +35,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         ConfigWindow *configWindow;
 
         void createMenu();
-        void connectActions();
 
     public slots:
         void showResults(QList< QList<QVariant> > *);
@@ -48,7 +47,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     private slots:
         void aboutQt4Sozluk();
         void aboutQt();
-        void configure();
         void pressEnterMessage();
         void exitSlot();
 };
