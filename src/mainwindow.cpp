@@ -29,18 +29,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     QSettings settings;
     setupUi(this);
-    this->move(settings.value("global/windowpos").toPoint());
+    this->move(settings.value("mainWindow/pos").toPoint());
 
-    tray = new QSystemTrayIcon(QIcon(":/qt4sozluk.png"));
+    tray = new QSystemTrayIcon(this->windowIcon());
     createMenu();
 
     if(settings.value("tray/enabled").toBool()) {
         tray->show();
         qApp->setQuitOnLastWindowClosed(
-            !settings.value("tray/minimizeOnClose").toBool());
+            !settings.value("tray/minimizeOnClose", true).toBool());
     }
-    if(settings.value("tray/startMinimized").toBool() &&
-        settings.value("tray/enabled").toBool())
+    if(settings.value("tray/startMinimized", true).toBool() &&
+        settings.value("tray/enabled", true).toBool())
         this->hide();
     else
         this->show();
@@ -68,15 +68,14 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::showOrHideUi(
         QSystemTrayIcon::ActivationReason activation_reason)
 {
-    QSettings sets;
-    if(activation_reason == QSystemTrayIcon::Trigger){
-        if(this->isVisible()){
-          sets.setValue("global/windowpos", QVariant(this->pos()));
-          this->setVisible(0);
-        }else{
-            if(sets.contains("global/windowpos"))
-                this->move(sets.value("global/windowpos").toPoint());
-            this->setVisible(1);
+    QSettings settings;
+    if(activation_reason == QSystemTrayIcon::Trigger) {
+        if(this->isVisible()) {
+          settings.setValue("mainWindow/pos", QVariant(this->pos()));
+          this->hide();
+        } else {
+            this->move(settings.value("mainWindow/pos").toPoint());
+            this->show();
         }
     }
 }
