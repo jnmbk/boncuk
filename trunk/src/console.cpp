@@ -44,5 +44,6 @@ void Console::showResults(QList< QList<QVariant> > *results)
     for (int i=0; i < results->size(); i++) {
         std::cout << results->at(i).at(1).toString().toUtf8().constData() << "\n";
     }
+    delete results;
     exit(0);
 }
