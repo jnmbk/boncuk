@@ -15,7 +15,6 @@
 
 #include <QList>
 #include <QMainWindow>
-#include <QMenu>
 #include <QSystemTrayIcon>
 #include <QVariant>
 #include <QWidget>
@@ -26,6 +25,8 @@
 #include "updater.h"
 
 class QString;
+class QProcess;
+class QMenu;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -33,6 +34,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     public:
         MainWindow(QWidget *parent = 0);
+        ~MainWindow();
         QSystemTrayIcon *tray;
         QMenu *menu;
         ConfigWindow *configWindow;
@@ -45,9 +47,11 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void search();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void printLatest(QString);
+        void openProjectHomePage();
 
     private:
         SearchThread *searchThread;
+        QProcess *myProc;
 
     private slots:
         void aboutQt4Sozluk();
