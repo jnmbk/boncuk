@@ -196,6 +196,7 @@ void MainWindow::showResults(QList< QList<QVariant> > *results)
 
         resultBrowser->setHtml(resultText);
     }
+    delete results;
 }
 
 void MainWindow::aboutQt4Sozluk()
