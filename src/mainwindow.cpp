@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QSystemTrayIcon>
+#include <QProcess>
 #include <QWidget>
 
 #include "configwindow.h"
@@ -78,6 +79,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
 }
 
+MainWindow::~MainWindow()
+{
+    if(myProc)
+        delete(myProc);
+}
+
 void MainWindow::printLatest(QString latest)
 {
     QSettings settings;
@@ -86,19 +93,40 @@ void MainWindow::printLatest(QString latest)
 
     ret = latest.compare(QT4SOZLUK_VERSION);
 
+    connect(tray, SIGNAL(messageClicked()), this, SLOT(openProjectHomePage()));
+
     if(ret == 0){
         if(isTray){
-            tray->showMessage(tr("Update Results"), tr("You are up to date !"), QSystemTrayIcon::Information, 4000);
+            tray->showMessage(tr("Update Results"), tr("You are up to date!"),
+                    QSystemTrayIcon::Information, 4000);
         }else{
-            QMessageBox::information(this, tr("Update Results"), tr("You are up to date!"));
+            QMessageBox::information(this, tr("Update Results"),
+                        tr("You are up to date!"));
+        }
+    }else if(ret > 0){
+        if(isTray){
+            tray->showMessage(tr("Update Results"),
+                    tr("There's a higher version available!\n\nClick here to open project web page"),
+                    QSystemTrayIcon::Information, 5000);
+        }else{
+            if( QMessageBox::Open == QMessageBox::question(this, tr("Update Results"),
+                        tr("There's a higher version available!\n\nOpen project web page?"),
+                        QMessageBox::Open, QMessageBox::Cancel)){
+                openProjectHomePage();
+            }
         }
     }else{
-        if(isTray){
-            tray->showMessage(tr("Update Results"), tr("There's a higher version available!\n"), QSystemTrayIcon::Information, 5000);
-        }else{
-            QMessageBox::information(this, tr("Update Results"), tr("There's a higher version available!\n"));
-        }
+        QMessageBox::warning(this, tr("Attention"),
+                tr("There's a problem with the server, please inform us, \
+                    or your updater will not function correctly!"));
     }
+}
+
+void MainWindow::openProjectHomePage()
+{
+    QString homepage = "kfmclient openURL http://sourceforge.net/projects/pysozluk-qt/ 'text/html'";
+    myProc = new QProcess(this);
+    myProc->start(homepage);
 }
 
 void MainWindow::showOrHideUi(
