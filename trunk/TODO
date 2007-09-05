@@ -8,6 +8,3 @@ word in clipboard.
 default directory)
 * Make an installer for binary distribution (if legally possible,
 use static linking here)
-* Add an update checker to check updates from a very reliable site
-(updater should be configurable:
-disable/check at startup/check every x minutes)
