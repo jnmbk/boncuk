@@ -47,3 +47,8 @@ void Console::showResults(QList< QList<QVariant> > *results)
     delete results;
     exit(0);
 }
+
+Console::~Console()
+{
+    delete searchThread;
+}
