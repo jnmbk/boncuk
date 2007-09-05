@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="tr">
-<defaultcodec></defaultcodec>
 <context>
     <name>ConfigWindow</name>
     <message>
@@ -62,6 +61,16 @@
         <location filename="../ui/configwindow.ui" line="128"/>
         <source>Debug Level:</source>
         <translation type="obsolete">Hata Ayıklama Seviyesi:</translation>
+    </message>
+    <message>
+        <location filename="../ui/configwindow.ui" line="130"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/configwindow.ui" line="136"/>
+        <source>Check for updates at startup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -145,62 +154,62 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Programını &amp;Yapılandır</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="56"/>
+        <location filename="../src/mainwindow.cpp" line="168"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="103"/>
+        <location filename="../src/mainwindow.cpp" line="216"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="82"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>English</source>
         <translation>İngilizce</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="93"/>
+        <location filename="../src/mainwindow.cpp" line="206"/>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="120"/>
+        <location filename="../src/mainwindow.cpp" line="234"/>
         <source>C++ version of  PySozluk-Qt</source>
         <translation>PySözlük-Qt&apos;nin C++ sürümü</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="126"/>
+        <location filename="../src/mainwindow.cpp" line="240"/>
         <source>About Qt4Sozluk</source>
         <translation>Qt4Sözlük Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="48"/>
+        <location filename="../src/mainwindow.cpp" line="160"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="55"/>
+        <location filename="../src/mainwindow.cpp" line="167"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="63"/>
+        <location filename="../src/mainwindow.cpp" line="176"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="104"/>
+        <location filename="../src/mainwindow.cpp" line="217"/>
         <source>German</source>
         <translation>Almanca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="142"/>
+        <location filename="../src/mainwindow.cpp" line="250"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="122"/>
+        <location filename="../src/mainwindow.cpp" line="236"/>
         <source>Developers:</source>
         <translation>Geliştiriciler:</translation>
     </message>
@@ -210,9 +219,53 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Yapılandır...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="42"/>
+        <location filename="../src/mainwindow.cpp" line="60"/>
         <source>Type in a keyword to search</source>
         <translation>Aranacak sözcüğü veya sözcük öbeğini yazın</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="112"/>
+        <source>Update Results</source>
+        <translation>Güncelleme Sonuçları</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="104"/>
+        <source>You are up to date!</source>
+        <translation>Henüz güncelleme yok!</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="99"/>
+        <source>There&apos;s a higher version available!
+</source>
+        <translation type="obsolete">Daha yeni bir sürüm var!</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="109"/>
+        <source>There&apos;s a higher version available!
+
+Click here to open project web page</source>
+        <translation>Daha yüksek bir sürüm var!
+
+Proje sayfasını açmak için buraya tıklayın.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="113"/>
+        <source>There&apos;s a higher version available!
+
+Open project web page?</source>
+        <translation>Daha yüksek bir sürüm var!
+
+Proje sayfasını açmak ister misiniz?</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="119"/>
+        <source>Attention</source>
+        <translation>Dikkat</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="121"/>
+        <source>There&apos;s a problem with the server, please inform us,                     or your updater will not function correctly!</source>
+        <translation>Sunucuyla ilgili bir hata var. Lütfen bizi haberdar edin, güncelleme fonksiyonunuz düzgün çalışmayacaktır!</translation>
     </message>
 </context>
 <context>
