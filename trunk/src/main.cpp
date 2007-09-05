@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
     } else {
         mainWindow = new MainWindow();
     }
-    return app.exec();
-}
+    int returnValue = app.exec();
 
+    delete mainWindow;
+    delete console;
+
+    return returnValue;
+}

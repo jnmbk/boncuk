@@ -23,6 +23,9 @@ class Console : public QObject
 {
     Q_OBJECT
 
+    public:
+        ~Console();
+
     public slots:
         void search();
         void showResults(QList< QList<QVariant> > *);
