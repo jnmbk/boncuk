@@ -27,34 +27,32 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
     connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch()));
 }
 
-QString SesliSozluk::convertToTurkishWeb(QString word)
+void SesliSozluk::convertToTurkishWeb(QString *word)
 {
-    word.replace(QString::fromUtf8("ı"), "%FD");
-    word.replace(QString::fromUtf8("İ"), "%DD");
-    word.replace(QString::fromUtf8("ö"), "%F6");
-    word.replace(QString::fromUtf8("Ö"), "%D6");
-    word.replace(QString::fromUtf8("ç"), "%E7");
-    word.replace(QString::fromUtf8("Ç"), "%C7");
-    word.replace(QString::fromUtf8("ş"), "%FE");
-    word.replace(QString::fromUtf8("Ş"), "%DE");
-    word.replace(QString::fromUtf8("ğ"), "%F0");
-    word.replace(QString::fromUtf8("Ğ"), "%D0");
-    word.replace(QString::fromUtf8("ü"), "%FC");
-    word.replace(QString::fromUtf8("Ü"), "%DC");
-    word.replace(" ", "%20");
-    return word;
+    word->replace(QString::fromUtf8("ı"), "%FD");
+    word->replace(QString::fromUtf8("İ"), "%DD");
+    word->replace(QString::fromUtf8("ö"), "%F6");
+    word->replace(QString::fromUtf8("Ö"), "%D6");
+    word->replace(QString::fromUtf8("ç"), "%E7");
+    word->replace(QString::fromUtf8("Ç"), "%C7");
+    word->replace(QString::fromUtf8("ş"), "%FE");
+    word->replace(QString::fromUtf8("Ş"), "%DE");
+    word->replace(QString::fromUtf8("ğ"), "%F0");
+    word->replace(QString::fromUtf8("Ğ"), "%D0");
+    word->replace(QString::fromUtf8("ü"), "%FC");
+    word->replace(QString::fromUtf8("Ü"), "%DC");
+    word->replace(" ", "%20");
 }
 
-void SesliSozluk::search(QString word)
+void SesliSozluk::search(QString keyword)
 {
-    QString keyword = convertToTurkishWeb(word);
+    convertToTurkishWeb(&keyword);
     http->get(QString("/?word=%1").arg(keyword));
-    qDebug() << "converted word:" << keyword;
 }
 
 void SesliSozluk::continueSearch()
 {
-    QList< QList<QVariant> > results;
+    QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
     QTextCodec *codec = QTextCodec::codecForName("ISO 8859-9");
     QString text;
     QStringList data;
@@ -67,7 +65,7 @@ void SesliSozluk::continueSearch()
     text.remove(text.indexOf("</table>"), text.size());
     text.replace("&nbsp;", " ");
     if (text.count('<') != text.count('>')){
-        emit found(&results);
+        emit found(results);
         return; //this will happen when we have a really bad syntax error
     }
     do {
@@ -88,15 +86,18 @@ void SesliSozluk::continueSearch()
     german = data.indexOf("1.", data.indexOf("German Translation"));
 
     if (turkish != -1)
-        results << pick(0, data.mid(turkish, data.indexOf("", turkish) - turkish));
+        *results << pick(0,
+                    data.mid(turkish, data.indexOf("", turkish) - turkish));
     if (english != -1)
-        results << pick(1, data.mid(english, data.indexOf("", english) - english));
+        *results << pick(1,
+                data.mid(english, data.indexOf("", english) - english));
     if (german != -1)
-        results << pick(2, data.mid(german, data.indexOf("", german) - german));
-    //qDebug() << turkish << data.indexOf("", turkish) << english <<
-    //    data.indexOf("", english) << german << data.indexOf("", german);
+        *results << pick(2,
+                    data.mid(german, data.indexOf("", german) - german));
+    qDebug() << turkish << data.indexOf("", turkish) << english <<
+        data.indexOf("", english) << german << data.indexOf("", german);
 
-    emit found(&results);
+    emit found(results);
 }
 
 QList< QList<QVariant> > SesliSozluk::pick(int lang, QList<QString> text)

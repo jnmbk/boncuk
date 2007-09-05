@@ -53,11 +53,11 @@ void SearchThread::search(QString keyword)
     } else {
         sesliSozluk->disconnect();
         sqliteDatabase->disconnect();
-        sesliSozluk->~SesliSozluk();
-        sqliteDatabase->~SqliteDatabase();
+        delete sesliSozluk;
+        delete sqliteDatabase;
         sesliSozluk = new SesliSozluk(this);
         sqliteDatabase = new SqliteDatabase(this,
-            "/usr/share/pysozluk-qt/pysozluk-qt.db");
+            "/usr/share/qt4sozluk/qt4sozluk.db");
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
                 sqliteDatabase, SIGNAL(found(QList< QList<QVariant> > *)),

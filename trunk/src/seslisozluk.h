@@ -33,7 +33,7 @@ class SesliSozluk : public QObject
     private:
         QHttp *http;
 
-        QString convertToTurkishWeb(QString);
+        void convertToTurkishWeb(QString *);
         void parse();
         QList< QList<QVariant> > pick(int, QList<QString>);
 
