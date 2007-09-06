@@ -22,8 +22,8 @@
 
 int main(int argc, char *argv[])
 {
-    MainWindow *mainWindow;
-    Console *console;
+    MainWindow *mainWindow = NULL;
+    Console *console = NULL;
 
 #ifdef Q_WS_X11
     bool useGui = getenv("DISPLAY") != 0;
