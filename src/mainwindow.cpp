@@ -56,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     searchThread = new SearchThread(this);
     configWindow = new ConfigWindow(this, tray);
-    resultBrowser->clearHistory();
     statusBar()->showMessage(tr("Type in a keyword to search"));
 
     QRegExp searchLineRx("[\\w\\s]*");
