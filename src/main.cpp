@@ -49,8 +49,10 @@ int main(int argc, char *argv[])
     }
     int returnValue = app.exec();
 
-    delete mainWindow;
-    delete console;
+    if(mainWindow)
+        delete mainWindow;
+    if(console)
+        delete console;
 
     return returnValue;
 }
