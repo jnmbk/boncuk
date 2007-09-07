@@ -40,9 +40,20 @@ TrayIcon::TrayIcon(MainWindow *ptr)
     this->setIcon(QIcon(":/qt4sozluk.png"));
 }
 
+void TrayIcon::~TrayIcon()
+{
+    if(cw)
+        delete(cw);
+    delete(action_configure);
+    delete(action_exit);
+    delete(trayIconMenu);
+}
+
 void TrayIcon::exitClicked()
 {
+    mainw->exitSlot();
     mainw->deleteLater();
+    emit destroyed();
     qApp->quit();
 }
 
@@ -63,7 +74,7 @@ void TrayIcon::showOrHideUi(QSystemTrayIcon::ActivationReason activation_reason)
 
 void TrayIcon::openConfigure()
 {
-    ConfigWindow *cw = new ConfigWindow();
+    cw = new ConfigWindow();
     cw->show();
 }
 
