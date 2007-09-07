@@ -27,6 +27,7 @@
 class QString;
 class QProcess;
 class QMenu;
+class QValidator;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -52,6 +53,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     private:
         SearchThread *searchThread;
         QProcess *myProc;
+        QValidator *validator;
 
     private slots:
         void aboutQt4Sozluk();
