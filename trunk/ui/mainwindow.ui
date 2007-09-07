@@ -100,7 +100,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuNavigation" >
     <property name="title" >
-     <string>&amp;Navigation</string>
+     <string>&amp;History</string>
     </property>
     <addaction name="actionBack" />
     <addaction name="actionForward" />
