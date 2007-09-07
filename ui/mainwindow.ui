@@ -91,13 +91,29 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionAbout_Qt4Sozluk" />
     <addaction name="actionAbout_Qt" />
    </widget>
+   <widget class="QMenu" name="menu_View" >
+    <property name="title" >
+     <string>&amp;View</string>
+    </property>
+    <addaction name="actionShow_Toolbar" />
+    <addaction name="actionShow_Search_Button" />
+   </widget>
+   <widget class="QMenu" name="menuNavigation" >
+    <property name="title" >
+     <string>&amp;Navigation</string>
+    </property>
+    <addaction name="actionBack" />
+    <addaction name="actionForward" />
+   </widget>
    <addaction name="menuFile" />
+   <addaction name="menuNavigation" />
+   <addaction name="menu_View" />
    <addaction name="menuHelp" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
   <widget class="QToolBar" name="toolBar" >
    <property name="windowTitle" >
-    <string>toolBar</string>
+    <string>Toolbar</string>
    </property>
    <attribute name="toolBarArea" >
     <enum>TopToolBarArea</enum>
@@ -153,7 +169,10 @@ p, li { white-space: pre-wrap; }
     <iconset resource="../resources/qt4sozluk.qrc" >:/back.png</iconset>
    </property>
    <property name="text" >
-    <string>Back</string>
+    <string>&amp;Back</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+Left</string>
    </property>
   </action>
   <action name="actionForward" >
@@ -161,7 +180,29 @@ p, li { white-space: pre-wrap; }
     <iconset resource="../resources/qt4sozluk.qrc" >:/forward.png</iconset>
    </property>
    <property name="text" >
-    <string>Forward</string>
+    <string>&amp;Forward</string>
+   </property>
+   <property name="shortcut" >
+    <string>Alt+Right</string>
+   </property>
+  </action>
+  <action name="actionShow_Toolbar" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show &amp;Toolbar</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionShow_Search_Button" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show &amp;Search Button</string>
    </property>
   </action>
  </widget>
