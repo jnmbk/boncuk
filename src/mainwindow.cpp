@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar()->showMessage(tr("Type in a keyword to search"));
 
     QRegExp searchLineRx("[\\w\\s]*");
-    QValidator *validator = new QRegExpValidator(searchLineRx, this);
+    validator = new QRegExpValidator(searchLineRx, this);
     keyword->setValidator(validator);
     keyword->setMaxLength(64);
 
@@ -82,8 +82,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    if(myProc)
         delete(myProc);
+        delete(update);
+        delete(menu);
+        delete(tray);
+        delete(validator);
 }
 
 void MainWindow::printLatest(QString latest)
@@ -125,6 +128,7 @@ void MainWindow::printLatest(QString latest)
 
 void MainWindow::openProjectHomePage()
 {
+    // kfmclient is a temporary dependency
     QString homepage = "kfmclient openURL http://sourceforge.net/projects/pysozluk-qt/ 'text/html'";
     myProc = new QProcess(this);
     myProc->start(homepage);
