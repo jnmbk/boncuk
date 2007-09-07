@@ -29,6 +29,7 @@ Updater::Updater(QObject *parent)
 
 Updater::~Updater()
 {
+    delete(http);
 }
 
 void Updater::doneRequest(bool error)
@@ -38,7 +39,7 @@ void Updater::doneRequest(bool error)
         std::cout << "There happened an error while getting latest version";
         return;
     }
-    text.chop(1);
+    text.chop(1); // qbytearray has a newline at the end
 
     emit latestVersion(QString(text));
 }
