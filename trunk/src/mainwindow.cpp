@@ -1,5 +1,3 @@
-#ifndef MAINWINDOW.CPP
-#define MAINWINDOW.CPP
 /*
  * qt4sozluk, qt port of pysozluk (online/offline dictionary)
  * copyright (c) 2007, qt4sozluk development team
@@ -263,4 +261,3 @@ void MainWindow::exitSlot()
     qApp->quit();
 }
 
-#endif // MAINWINDOW.CPP
