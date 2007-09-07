@@ -27,6 +27,12 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
     connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch()));
 }
 
+SesliSozluk::~SesliSozluk()
+{
+    http->close();
+    delete(http);
+}
+
 void SesliSozluk::convertToTurkishWeb(QString *word)
 {
     word->replace(QString::fromUtf8("ı"), "%FD");

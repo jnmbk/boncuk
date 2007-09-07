@@ -49,6 +49,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void printLatest(QString);
         void openProjectHomePage();
+        void exitSlot();
 
     private:
         SearchThread *searchThread;
@@ -59,7 +60,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void aboutQt4Sozluk();
         void aboutQt();
         void pressEnterMessage();
-        void exitSlot();
 };
 
 #endif

@@ -25,6 +25,7 @@ class SesliSozluk : public QObject
 
     public:
         SesliSozluk(QObject *parent);
+        ~SesliSozluk();
         void search(QString word);
 
     signals:
