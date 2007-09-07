@@ -1,3 +1,5 @@
+#ifndef MAINWINDOW.CPP
+#define MAINWINDOW.CPP
 /*
  * qt4sozluk, qt port of pysozluk (online/offline dictionary)
  * copyright (c) 2007, qt4sozluk development team
@@ -253,5 +255,8 @@ void MainWindow::exitSlot()
 {
     QSettings sets;
     sets.setValue("global/windowpos", QVariant(this->pos()));
+    emit destroyed();
     qApp->quit();
 }
+
+#endif // MAINWINDOW.CPP
