@@ -22,9 +22,6 @@
 
 int main(int argc, char *argv[])
 {
-    MainWindow *mainWindow = NULL;
-    Console *console = NULL;
-
 #ifdef Q_WS_X11
     bool useGui = getenv("DISPLAY") != 0;
 #else
@@ -42,10 +39,10 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     if (app.arguments().size() > 1) {
-        console = new Console();
+        Console *console = new Console();
         console->search();
     } else {
-        mainWindow = new MainWindow();
+        MainWindow *mainWindow = new MainWindow();
     }
 
     return app.exec();
