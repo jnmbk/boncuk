@@ -25,6 +25,7 @@ class TrayIcon : public QSystemTrayIcon
 
     public:
         TrayIcon(MainWindow *);
+        ~TrayIcon();
 
     public slots:
         void openConfigure();
