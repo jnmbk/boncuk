@@ -29,6 +29,7 @@ Updater::Updater(QObject *parent)
 
 Updater::~Updater()
 {
+    http->close();
     delete(http);
 }
 

@@ -17,6 +17,7 @@
 #include <QObject>
 
 class QHttp;
+class QString;
 
 class Updater : public QObject
 {
