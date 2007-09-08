@@ -80,42 +80,10 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionAbout_Qt4Sozluk" />
     <addaction name="actionAbout_Qt" />
    </widget>
-   <widget class="QMenu" name="menu_View" >
-    <property name="title" >
-     <string>&amp;View</string>
-    </property>
-    <addaction name="actionShow_Toolbar" />
-    <addaction name="actionShow_Search_Button" />
-   </widget>
-   <widget class="QMenu" name="menuNavigation" >
-    <property name="title" >
-     <string>&amp;History</string>
-    </property>
-    <addaction name="actionBack" />
-    <addaction name="actionForward" />
-   </widget>
    <addaction name="menuFile" />
-   <addaction name="menuNavigation" />
-   <addaction name="menu_View" />
    <addaction name="menuHelp" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
-  <widget class="QToolBar" name="toolBar" >
-   <property name="windowTitle" >
-    <string>Toolbar</string>
-   </property>
-   <attribute name="toolBarArea" >
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak" >
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionBack" />
-   <addaction name="actionForward" />
-   <addaction name="separator" />
-   <addaction name="actionConfigure" />
-   <addaction name="actionQuit" />
-  </widget>
   <action name="actionHelp" >
    <property name="text" >
     <string>&amp;Index</string>
@@ -154,28 +122,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text" >
     <string>&amp;Configure Qt4Sozluk...</string>
-   </property>
-  </action>
-  <action name="actionBack" >
-   <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/back.png</iconset>
-   </property>
-   <property name="text" >
-    <string>&amp;Back</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+Left</string>
-   </property>
-  </action>
-  <action name="actionForward" >
-   <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/forward.png</iconset>
-   </property>
-   <property name="text" >
-    <string>&amp;Forward</string>
-   </property>
-   <property name="shortcut" >
-    <string>Alt+Right</string>
    </property>
   </action>
   <action name="actionShow_Toolbar" >
