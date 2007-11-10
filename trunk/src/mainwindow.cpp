@@ -19,9 +19,14 @@
 #include <QListIterator>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QList>
+#include <QCompleter>
 #include <QSettings>
+#include <QStringList>
 #include <QSystemTrayIcon>
+#include <QCloseEvent>
 #include <QProcess>
+#include <QSet>
 #include <QWidget>
 
 #include "configwindow.h"
@@ -30,7 +35,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    QSettings settings;
     setupUi(this);
     this->move(settings.value("mainWindow/pos").toPoint());
 
@@ -48,10 +52,15 @@ MainWindow::MainWindow(QWidget *parent)
     else
         this->show();
 
-
     if(settings.value("update/enabled", false).toBool()){
         update = new Updater();
         connect(update, SIGNAL(latestVersion(QString)), this, SLOT(printLatest(QString)));
+    }
+
+    if(settings.value("history/enabled", true).toBool()){
+        initCompleter();
+    }else{
+        completer = NULL;
     }
 
     searchThread = new SearchThread(this);
@@ -87,9 +96,27 @@ MainWindow::~MainWindow()
         delete(validator);
 }
 
+void MainWindow::initCompleter()
+{
+        if(history.size() <= 0){
+
+            int size = settings.beginReadArray("historydata");
+            for(int i=0; i < size; ++i) {
+               settings.setArrayIndex(i);
+               history.append( settings.value("key").toString() );
+            }
+            settings.endArray();
+
+            completer = new QCompleter( history );
+            completer->setCaseSensitivity( Qt::CaseInsensitive );
+            keyword->setCompleter( completer );
+            // setCompleter( 0 ) removes the completer
+        }
+}
+
+
 void MainWindow::printLatest(QString latest)
 {
-    QSettings settings;
     int ret;
     bool isTray = settings.value("tray/enabled", true).toBool();
 
@@ -132,10 +159,15 @@ void MainWindow::openProjectHomePage()
     myProc->start(homepage);
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    settings.setValue("mainWindow/pos", QVariant(this->pos()));
+    event->accept();
+}
+
 void MainWindow::showOrHideUi(
         QSystemTrayIcon::ActivationReason activation_reason)
 {
-    QSettings settings;
     if(activation_reason == QSystemTrayIcon::Trigger) {
         if(this->isVisible()) {
           settings.setValue("mainWindow/pos", QVariant(this->pos()));
@@ -159,6 +191,12 @@ void MainWindow::createMenu()
 
 void MainWindow::search()
 {
+    if(settings.value("history/enabled").toBool()){
+        if(history.size() >= 40)
+            history.removeLast();
+        history.append( keyword->text() );
+    }
+
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
     statusBar()->showMessage(tr("Searching \"%1\"").arg(keyword->text()));
     searchThread->search(keyword->text());
@@ -255,8 +293,21 @@ void MainWindow::pressEnterMessage()
 
 void MainWindow::exitSlot()
 {
-    QSettings sets;
-    sets.setValue("global/windowpos", QVariant(this->pos()));
+    settings.setValue("mainWindow/pos", QVariant(this->pos()));
+
+    if(settings.value("history/enabled").toBool()){
+        QList<QString> liste = (history.toSet()).toList();
+
+        settings.beginWriteArray("historydata");
+        for (int i=0; i < liste.size(); ++i) {
+            settings.setArrayIndex(i);
+            settings.setValue("key", liste.at(i));
+        }
+        settings.endArray();
+    }
+
+    settings.sync();
+
     emit destroyed();
     qApp->quit();
 }
