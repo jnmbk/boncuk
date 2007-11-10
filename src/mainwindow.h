@@ -17,6 +17,7 @@
 #include <QMainWindow>
 #include <QSystemTrayIcon>
 #include <QVariant>
+#include <QSettings>
 #include <QWidget>
 
 #include "searchthread.h"
@@ -26,6 +27,8 @@
 
 class QString;
 class QProcess;
+class QCompleter;
+class QCloseEvent;
 class QMenu;
 class QValidator;
 
@@ -37,11 +40,16 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
         QSystemTrayIcon *tray;
+        QSettings settings;
         QMenu *menu;
+        QCompleter *completer;
         ConfigWindow *configWindow;
         Updater *update;
+        QList<QString> history;
 
+        void closeEvent(QCloseEvent *);
         void createMenu();
+        void initCompleter();
 
     public slots:
         void showResults(QList< QList<QVariant> > *);
@@ -61,5 +69,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void aboutQt();
         void pressEnterMessage();
 };
+
+
 
 #endif

@@ -62,11 +62,11 @@ void TrayIcon::showOrHideUi(QSystemTrayIcon::ActivationReason activation_reason)
     QSettings sets;
     if(activation_reason == QSystemTrayIcon::Trigger){
         if(mainw->isVisible()){
-            sets.setValue("global/windowpos", QVariant(mainw->pos()));
+            sets.setValue("mainWindow/pos", QVariant(mainw->pos()));
             mainw->setVisible(0);
         }else{
-            if(sets.contains("global/windowpos"))
-                mainw->move(sets.value("global/windowpos").toPoint());
+            if(sets.contains("mainWindow/pos"))
+                mainw->move(sets.value("mainWindow/pos").toPoint());
             mainw->setVisible(1);
         }
     }
