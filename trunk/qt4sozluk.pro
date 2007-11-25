@@ -13,8 +13,7 @@ HEADERS += \
     src/mainwindow.h \
     src/searchthread.h \
     src/seslisozluk.h \
-    src/sqlitedatabase.h \
-    src/updater.h
+    src/sqlitedatabase.h
 FORMS += \
     ui/configwindow.ui \
     ui/mainwindow.ui
@@ -25,8 +24,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/searchthread.cpp \
     src/seslisozluk.cpp \
-    src/sqlitedatabase.cpp \
-    src/updater.cpp
+    src/sqlitedatabase.cpp
 RESOURCES += \
     resources/qt4sozluk.qrc
 TRANSLATIONS += \
