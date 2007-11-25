@@ -31,9 +31,6 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
     translation_method->setCurrentIndex(
             settings.value("translation/method").toInt());
 
-    if (settings.value("update/enabled", QVariant(true)).toBool() == 1)
-        update_enable->setCheckState(Qt::Checked);
-
     if(settings.value("history/enabled", QVariant(true)).toBool() == 1)
         history_enable->setCheckState(Qt::Checked);
 
@@ -69,8 +66,6 @@ void ConfigWindow::writeSettings() {
             QVariant(trayIcon_minimizeOnClose->checkState()).toBool());
     settings.setValue("tray/startMinimized",
             QVariant(trayIcon_startMinimized->checkState()).toBool());
-    settings.setValue("update/enabled",
-            QVariant(update_enable->checkState()).toBool());
     settings.setValue("history/enabled",
             QVariant(history_enable->checkState()).toBool());
     applySettings();

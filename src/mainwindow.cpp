@@ -52,15 +52,11 @@ MainWindow::MainWindow(QWidget *parent)
     else
         this->show();
 
-    if(settings.value("update/enabled", false).toBool()){
-        update = new Updater();
-        connect(update, SIGNAL(latestVersion(QString)), this, SLOT(printLatest(QString)));
-    }
-
     if(settings.value("history/enabled", true).toBool()){
         initCompleter();
     }else{
         completer = NULL;
+        actionHistoryClear->setEnabled(0);
     }
 
     searchThread = new SearchThread(this);
@@ -80,6 +76,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(pressEnterMessage()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
+    connect(actionHistoryClear, SIGNAL(activated()),
+            this, SLOT(clearHistory()));
     connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
             this, SLOT(aboutQt4Sozluk()));
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
@@ -90,7 +88,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
         delete(myProc);
-        delete(update);
         delete(menu);
         delete(tray);
         delete(validator);
@@ -114,49 +111,11 @@ void MainWindow::initCompleter()
         }
 }
 
-
-void MainWindow::printLatest(QString latest)
+void MainWindow::clearHistory()
 {
-    int ret;
-    bool isTray = settings.value("tray/enabled", true).toBool();
-
-    ret = latest.compare(QT4SOZLUK_VERSION);
-
-    connect(tray, SIGNAL(messageClicked()), this, SLOT(openProjectHomePage()));
-
-    if(ret == 0){
-        if(isTray){
-            tray->showMessage(tr("Update Results"), tr("You are up to date!"),
-                    QSystemTrayIcon::Information, 4000);
-        }else{
-            QMessageBox::information(this, tr("Update Results"),
-                        tr("You are up to date!"));
-        }
-    }else if(ret > 0){
-        if(isTray){
-            tray->showMessage(tr("Update Results"),
-                    tr("There's a higher version available!\n\nClick here to open project web page"),
-                    QSystemTrayIcon::Information, 5000);
-        }else{
-            if( QMessageBox::Open == QMessageBox::question(this, tr("Update Results"),
-                        tr("There's a higher version available!\n\nOpen project web page?"),
-                        QMessageBox::Open, QMessageBox::Cancel)){
-                openProjectHomePage();
-            }
-        }
-    }else{
-        QMessageBox::warning(this, tr("Attention"),
-                tr("There's a problem with the server, please inform us, \
-                    or your updater will not function correctly!"));
-    }
-}
-
-void MainWindow::openProjectHomePage()
-{
-    // kfmclient is a temporary dependency
-    QString homepage = "kfmclient openURL http://sourceforge.net/projects/pysozluk-qt/ 'text/html'";
-    myProc = new QProcess(this);
-    myProc->start(homepage);
+    if(completer)
+        history.clear();
+    pressEnterMessage( tr("History deleted"), 2000);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -286,9 +245,15 @@ void MainWindow::aboutQt()
     QMessageBox::aboutQt(this);
 }
 
-void MainWindow::pressEnterMessage()
+void MainWindow::pressEnterMessage(QString str, int timeout)
 {
-    statusBar()->showMessage(tr("Press Enter to begin search"));
+    // Print str to statusbar, timeout milliseconds
+
+    if(!str.compare("")){
+        statusBar()->showMessage(tr("Press Enter to begin search"));
+    }else{
+        statusBar()->showMessage(str, timeout);
+    }
 }
 
 void MainWindow::exitSlot()
@@ -296,7 +261,7 @@ void MainWindow::exitSlot()
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
 
     if(settings.value("history/enabled").toBool()){
-        QList<QString> liste = (history.toSet()).toList();
+        QList<QString> liste = (history.toSet()).toList(); // avoid multiples
 
         settings.beginWriteArray("historydata");
         for (int i=0; i < liste.size(); ++i) {
