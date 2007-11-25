@@ -23,7 +23,6 @@
 #include "searchthread.h"
 #include "ui_mainwindow.h"
 #include "configwindow.h"
-#include "updater.h"
 
 class QString;
 class QProcess;
@@ -44,7 +43,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QMenu *menu;
         QCompleter *completer;
         ConfigWindow *configWindow;
-        Updater *update;
         QList<QString> history;
 
         void closeEvent(QCloseEvent *);
@@ -53,10 +51,9 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     public slots:
         void showResults(QList< QList<QVariant> > *);
+        void clearHistory();
         void search();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
-        void printLatest(QString);
-        void openProjectHomePage();
         void exitSlot();
 
     private:
@@ -67,7 +64,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     private slots:
         void aboutQt4Sozluk();
         void aboutQt();
-        void pressEnterMessage();
+        void pressEnterMessage( QString str="", int timeout = 0 );
 };
 
 
