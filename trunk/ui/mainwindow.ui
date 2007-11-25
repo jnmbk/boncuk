@@ -80,7 +80,14 @@ p, li { white-space: pre-wrap; }
     <addaction name="actionAbout_Qt4Sozluk" />
     <addaction name="actionAbout_Qt" />
    </widget>
+   <widget class="QMenu" name="menuHistory" >
+    <property name="title" >
+     <string>History</string>
+    </property>
+    <addaction name="actionHistoryClear" />
+   </widget>
    <addaction name="menuFile" />
+   <addaction name="menuHistory" />
    <addaction name="menuHelp" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
@@ -141,6 +148,43 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text" >
     <string>Show &amp;Search Button</string>
+   </property>
+  </action>
+  <action name="actionBack" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../resources/qt4sozluk.qrc" >:/back.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Back</string>
+   </property>
+  </action>
+  <action name="actionForward" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="icon" >
+    <iconset resource="../resources/qt4sozluk.qrc" >:/forward.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Forward</string>
+   </property>
+  </action>
+  <action name="actionClear_history" >
+   <property name="text" >
+    <string>Clear</string>
+   </property>
+  </action>
+  <action name="actionClearHistory" >
+   <property name="text" >
+    <string>Clear</string>
+   </property>
+  </action>
+  <action name="actionHistoryClear" >
+   <property name="text" >
+    <string>Clear</string>
    </property>
   </action>
  </widget>
