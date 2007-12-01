@@ -56,6 +56,9 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void exitSlot();
 
+    signals:
+        void historyChanged(bool);
+
     private:
         SearchThread *searchThread;
         QProcess *myProc;
