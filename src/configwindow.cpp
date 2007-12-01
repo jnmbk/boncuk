@@ -80,5 +80,6 @@ void ConfigWindow::applySettings() {
         trayptr->show();
         if (settings.value("tray/minimizeOnClose").toBool())
             qApp->setQuitOnLastWindowClosed(false);
+        else qApp->setQuitOnLastWindowClosed(true);
     }
 }
