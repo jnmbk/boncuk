@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     connect(actionHistoryClear, SIGNAL(activated()),
             this, SLOT(clearHistory()));
+    connect(this, SIGNAL(historyChanged(bool)), actionHistoryClear, SLOT(setEnabled(bool)));
     connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
             this, SLOT(aboutQt4Sozluk()));
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
@@ -108,14 +109,19 @@ void MainWindow::initCompleter()
             completer->setCaseSensitivity( Qt::CaseInsensitive );
             keyword->setCompleter( completer );
             // setCompleter( 0 ) removes the completer
+
+            if(history.size() <= 0)
+                actionHistoryClear->setEnabled(0);
         }
 }
 
 void MainWindow::clearHistory()
 {
-    if(completer)
+    if(completer){
         history.clear();
-    pressEnterMessage( tr("History deleted"), 2000);
+        pressEnterMessage( tr("History deleted"), 2000);
+        emit historyChanged(0);
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -154,6 +160,7 @@ void MainWindow::search()
         if(history.size() >= 40)
             history.removeLast();
         history.append( keyword->text() );
+        emit historyChanged(1);
     }
 
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
