@@ -82,7 +82,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuHistory" >
     <property name="title" >
-     <string>History</string>
+     <string>Hi&amp;story</string>
     </property>
     <addaction name="actionHistoryClear" />
    </widget>
@@ -155,7 +155,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/back.png</iconset>
+    <iconset/>
    </property>
    <property name="text" >
     <string>Back</string>
@@ -166,7 +166,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/forward.png</iconset>
+    <iconset/>
    </property>
    <property name="text" >
     <string>Forward</string>
@@ -184,7 +184,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionHistoryClear" >
    <property name="text" >
-    <string>Clear</string>
+    <string>&amp;Clear</string>
    </property>
   </action>
  </widget>

@@ -67,7 +67,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     private slots:
         void aboutQt4Sozluk();
         void aboutQt();
-        void pressEnterMessage( QString str="", int timeout = 0 );
+        void pressEnterMessage();
 };
 
 

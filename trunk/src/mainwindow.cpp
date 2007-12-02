@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
         initCompleter();
     }else{
         completer = NULL;
-        actionHistoryClear->setEnabled(0);
+        actionHistoryClear->setEnabled(false);
     }
 
     searchThread = new SearchThread(this);
@@ -78,7 +78,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     connect(actionHistoryClear, SIGNAL(activated()),
             this, SLOT(clearHistory()));
-    connect(this, SIGNAL(historyChanged(bool)), actionHistoryClear, SLOT(setEnabled(bool)));
+    connect(this, SIGNAL(historyChanged(bool)),
+            actionHistoryClear, SLOT(setEnabled(bool)));
     connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
             this, SLOT(aboutQt4Sozluk()));
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
@@ -97,7 +98,6 @@ MainWindow::~MainWindow()
 void MainWindow::initCompleter()
 {
         if(history.size() <= 0){
-
             int size = settings.beginReadArray("historydata");
             for(int i=0; i < size; ++i) {
                settings.setArrayIndex(i);
@@ -105,13 +105,13 @@ void MainWindow::initCompleter()
             }
             settings.endArray();
 
-            completer = new QCompleter( history );
-            completer->setCaseSensitivity( Qt::CaseInsensitive );
-            keyword->setCompleter( completer );
-            // setCompleter( 0 ) removes the completer
+            completer = new QCompleter(history);
+            completer->setCaseSensitivity(Qt::CaseInsensitive);
+            keyword->setCompleter(completer);
+            // setCompleter(0) removes the completer
 
             if(history.size() <= 0)
-                actionHistoryClear->setEnabled(0);
+                actionHistoryClear->setEnabled(false);
         }
 }
 
@@ -119,8 +119,8 @@ void MainWindow::clearHistory()
 {
     if(completer){
         history.clear();
-        pressEnterMessage( tr("History deleted"), 2000);
-        emit historyChanged(0);
+        statusBar()->showMessage(tr("History deleted"), 2000);
+        emit historyChanged(false);
     }
 }
 
@@ -159,8 +159,8 @@ void MainWindow::search()
     if(settings.value("history/enabled").toBool()){
         if(history.size() >= 40)
             history.removeLast();
-        history.append( keyword->text() );
-        emit historyChanged(1);
+        history.append(keyword->text());
+        emit historyChanged(true);
     }
 
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
@@ -252,15 +252,9 @@ void MainWindow::aboutQt()
     QMessageBox::aboutQt(this);
 }
 
-void MainWindow::pressEnterMessage(QString str, int timeout)
+void MainWindow::pressEnterMessage()
 {
-    // Print str to statusbar, timeout milliseconds
-
-    if(!str.compare("")){
-        statusBar()->showMessage(tr("Press Enter to begin search"));
-    }else{
-        statusBar()->showMessage(str, timeout);
-    }
+    statusBar()->showMessage(tr("Press Enter to begin search"));
 }
 
 void MainWindow::exitSlot()
