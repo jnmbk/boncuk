@@ -32,7 +32,7 @@
    <item row="0" column="0" >
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="translation" >
       <attribute name="title" >
@@ -40,31 +40,42 @@
       </attribute>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
+        <layout class="QVBoxLayout" >
          <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Method:</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" >
+           <item>
+            <widget class="QLabel" name="label_2" >
+             <property name="text" >
+              <string>Method:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="translation_method" >
+             <item>
+              <property name="text" >
+               <string>Try Offline First</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Always Offline</string>
+              </property>
+             </item>
+             <item>
+              <property name="text" >
+               <string>Always Online</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QComboBox" name="translation_method" >
-           <item>
-            <property name="text" >
-             <string>Try Offline First</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Offline</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Online</string>
-            </property>
-           </item>
+          <widget class="QCheckBox" name="history_enable" >
+           <property name="text" >
+            <string>Enable Search History</string>
+           </property>
           </widget>
          </item>
         </layout>
@@ -76,8 +87,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>361</width>
+           <height>31</height>
           </size>
          </property>
         </spacer>
@@ -119,37 +130,6 @@
           <size>
            <width>20</width>
            <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="historyTab" >
-      <attribute name="title" >
-       <string>History&amp;/Logging</string>
-      </attribute>
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QCheckBox" name="history_enable" >
-           <property name="text" >
-            <string>Enable Search History</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>81</height>
           </size>
          </property>
         </spacer>
