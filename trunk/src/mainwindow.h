@@ -16,6 +16,7 @@
 #include <QList>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
+#include <QStringListModel>
 #include <QVariant>
 #include <QSettings>
 #include <QWidget>
@@ -43,7 +44,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QMenu *menu;
         QCompleter *completer;
         ConfigWindow *configWindow;
-        QList<QString> history;
+        QStringListModel *history;
 
         void closeEvent(QCloseEvent *);
         void createMenu();
@@ -61,8 +62,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     private:
         SearchThread *searchThread;
-        QProcess *myProc;
         QValidator *validator;
+        void writeHistory();
 
     private slots:
         void aboutQt4Sozluk();
