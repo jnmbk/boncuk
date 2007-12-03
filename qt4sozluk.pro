@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = qt4sozluk
-VERSION = "0.1"
+VERSION = "0.2"
 DEFINES += \
 #    QT4SOZLUK_VERSION=\\\"$$VERSION\\\"
     QT4SOZLUK_VERSION=\\\"$$VERSION\\\" \
