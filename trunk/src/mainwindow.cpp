@@ -164,7 +164,7 @@ void MainWindow::search()
             list.removeLast();
             history->setStringList(list);
         list.append(keyword->text());
-        history->setStringList(list);
+        history->setStringList(list.toSet().toList());
         writeHistory();
         emit historyChanged(true);
     }
