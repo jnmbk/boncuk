@@ -13,42 +13,42 @@
         <translation>Çeviri</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="47"/>
+        <location filename="../ui/configwindow.ui" line="49"/>
         <source>Method:</source>
         <translation>Yöntem:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="55"/>
+        <location filename="../ui/configwindow.ui" line="57"/>
         <source>Try Offline First</source>
         <translation>Önce Çevrimdışı Dene</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="60"/>
+        <location filename="../ui/configwindow.ui" line="62"/>
         <source>Always Offline</source>
         <translation>Daima Çevrimdışı</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="65"/>
+        <location filename="../ui/configwindow.ui" line="67"/>
         <source>Always Online</source>
         <translation>Daima Çevrimiçi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="89"/>
+        <location filename="../ui/configwindow.ui" line="100"/>
         <source>Tray Icon</source>
         <translation>Bildiri Simgesi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="95"/>
+        <location filename="../ui/configwindow.ui" line="106"/>
         <source>Enable Tray Icon</source>
         <translation>Bildiri Simgesini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="102"/>
+        <location filename="../ui/configwindow.ui" line="113"/>
         <source>Minimize to Tray on Close</source>
         <translation>Kapatınca Bildirim Alanına Küçült</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="109"/>
+        <location filename="../ui/configwindow.ui" line="120"/>
         <source>Start Minimized</source>
         <translation>Küçültülmüş Olarak Başla</translation>
     </message>
@@ -75,10 +75,10 @@
     <message>
         <location filename="../ui/configwindow.ui" line="130"/>
         <source>History&amp;/Logging</source>
-        <translation>Geçmiş&amp;/Kayıt</translation>
+        <translation type="obsolete">Geçmiş&amp;/Kayıt</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="138"/>
+        <location filename="../ui/configwindow.ui" line="77"/>
         <source>Enable Search History</source>
         <translation>Arama Geçmişini Kaydet</translation>
     </message>
@@ -164,62 +164,62 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Programını &amp;Yapılandır</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
+        <location filename="../src/mainwindow.cpp" line="181"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="216"/>
+        <location filename="../src/mainwindow.cpp" line="229"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="195"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
         <source>English</source>
         <translation>İngilizce</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="206"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="234"/>
+        <location filename="../src/mainwindow.cpp" line="247"/>
         <source>C++ version of  PySozluk-Qt</source>
         <translation>PySözlük-Qt&apos;nin C++ sürümü</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="240"/>
+        <location filename="../src/mainwindow.cpp" line="253"/>
         <source>About Qt4Sozluk</source>
         <translation>Qt4Sözlük Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="160"/>
+        <location filename="../src/mainwindow.cpp" line="173"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="167"/>
+        <location filename="../src/mainwindow.cpp" line="180"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="176"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="217"/>
+        <location filename="../src/mainwindow.cpp" line="230"/>
         <source>German</source>
         <translation>Almanca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="253"/>
+        <location filename="../src/mainwindow.cpp" line="263"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="236"/>
+        <location filename="../src/mainwindow.cpp" line="249"/>
         <source>Developers:</source>
         <translation>Geliştiriciler:</translation>
     </message>
@@ -280,7 +280,7 @@ Proje sayfasını açmak ister misiniz?</translation>
     <message>
         <location filename="../ui/mainwindow.ui" line="85"/>
         <source>History</source>
-        <translation>Geçmiş</translation>
+        <translation type="obsolete">Geçmiş</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="139"/>
@@ -308,14 +308,24 @@ Proje sayfasını açmak ister misiniz?</translation>
         <translation>İleri</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="187"/>
+        <location filename="../ui/mainwindow.ui" line="182"/>
         <source>Clear</source>
         <translation>Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="118"/>
+        <location filename="../src/mainwindow.cpp" line="123"/>
         <source>History deleted</source>
         <translation>Geçmiş silindi</translation>
+    </message>
+    <message>
+        <location filename="../ui/mainwindow.ui" line="85"/>
+        <source>Hi&amp;story</source>
+        <translation>Geç&amp;miş</translation>
+    </message>
+    <message>
+        <location filename="../ui/mainwindow.ui" line="187"/>
+        <source>&amp;Clear</source>
+        <translation>&amp;Temizle</translation>
     </message>
 </context>
 <context>
