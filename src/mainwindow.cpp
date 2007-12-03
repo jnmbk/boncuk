@@ -89,36 +89,38 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-        delete(myProc);
-        delete(menu);
-        delete(tray);
-        delete(validator);
+    delete(history);
+    delete(menu);
+    delete(tray);
+    delete(validator);
 }
 
 void MainWindow::initCompleter()
 {
-        if(history.size() <= 0){
-            int size = settings.beginReadArray("historydata");
-            for(int i=0; i < size; ++i) {
-               settings.setArrayIndex(i);
-               history.append( settings.value("key").toString() );
-            }
-            settings.endArray();
+    QStringList stringList;
+    int size = settings.beginReadArray("historydata");
+    for(int i=0; i < size; ++i) {
+       settings.setArrayIndex(i);
+       stringList.append(settings.value("key").toString());
+    }
+    settings.endArray();
+    history = new QStringListModel(stringList);
 
-            completer = new QCompleter(history);
-            completer->setCaseSensitivity(Qt::CaseInsensitive);
-            keyword->setCompleter(completer);
-            // setCompleter(0) removes the completer
+    completer = new QCompleter(history);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    keyword->setCompleter(completer);
 
-            if(history.size() <= 0)
-                actionHistoryClear->setEnabled(false);
-        }
+    if(history->stringList().size() <= 0)
+        actionHistoryClear->setEnabled(false);
 }
 
 void MainWindow::clearHistory()
 {
     if(completer){
-        history.clear();
+        history->setStringList(QStringList());
+        QSettings settings;
+        settings.remove("historydata");
         statusBar()->showMessage(tr("History deleted"), 2000);
         emit historyChanged(false);
     }
@@ -156,10 +158,15 @@ void MainWindow::createMenu()
 
 void MainWindow::search()
 {
+    QStringList list;
+    list = history->stringList();
     if(settings.value("history/enabled").toBool()){
-        if(history.size() >= 40)
-            history.removeLast();
-        history.append(keyword->text());
+        if(list.size() >= 40)
+            list.removeLast();
+            history->setStringList(list);
+        list.append(keyword->text());
+        history->setStringList(list);
+        writeHistory();
         emit historyChanged(true);
     }
 
@@ -257,24 +264,25 @@ void MainWindow::pressEnterMessage()
     statusBar()->showMessage(tr("Press Enter to begin search"));
 }
 
-void MainWindow::exitSlot()
+void MainWindow::writeHistory()
 {
-    settings.setValue("mainWindow/pos", QVariant(this->pos()));
-
     if(settings.value("history/enabled").toBool()){
-        QList<QString> liste = (history.toSet()).toList(); // avoid multiples
 
+        settings.remove("historydata");
         settings.beginWriteArray("historydata");
-        for (int i=0; i < liste.size(); ++i) {
+        for (int i=0; i < history->stringList().size(); ++i) {
             settings.setArrayIndex(i);
-            settings.setValue("key", liste.at(i));
+            settings.setValue("key", history->stringList().at(i));
         }
         settings.endArray();
     }
+}
 
+void MainWindow::exitSlot()
+{
+    settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.sync();
 
     emit destroyed();
     qApp->quit();
 }
-
