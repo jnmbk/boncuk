@@ -10,13 +10,12 @@
  * please read the copyIng file.
  */
 
-#include <iostream>
-
 #include <QApplication>
 #include <QDebug>
 #include <QIcon>
 #include <QList>
 #include <QListIterator>
+#include <QKeyEvent>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QList>
@@ -122,6 +121,19 @@ void MainWindow::clearHistory()
         settings.remove("historydata");
         statusBar()->showMessage(tr("History deleted"), 2000);
         emit historyChanged(false);
+    }
+}
+
+void MainWindow::keyPressEvent( QKeyEvent *event )
+{
+    if( event->key() == Qt::Key_Escape ){
+        if( settings.value("tray/enabled").toBool() ){
+            this->close();
+        }else{
+            QWidget::keyPressEvent(event);
+        }
+    }else{
+        QWidget::keyPressEvent(event);
     }
 }
 

@@ -31,6 +31,7 @@ class QCompleter;
 class QCloseEvent;
 class QMenu;
 class QValidator;
+class QKeyEvent;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -46,7 +47,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         ConfigWindow *configWindow;
         QStringListModel *history;
 
-        void closeEvent(QCloseEvent *);
         void createMenu();
         void initCompleter();
 
@@ -59,6 +59,10 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     signals:
         void historyChanged(bool);
+
+    protected:
+        void keyPressEvent( QKeyEvent * );
+        void closeEvent(QCloseEvent *);
 
     private:
         SearchThread *searchThread;
