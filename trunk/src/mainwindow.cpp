@@ -108,7 +108,6 @@ void MainWindow::initCompleter()
 
     completer = new QCompleter(history);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
-    completer->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
     keyword->setCompleter(completer);
 
     if(history->stringList().size() <= 0)
