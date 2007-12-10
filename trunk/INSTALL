@@ -1,6 +1,6 @@
 To build qt4sozluk, type these commands:
 qmake-qt4
-lrelease qt4sozluk.pro
+lrelease-qt4 qt4sozluk.pro
 make
 
 Then you can use the qt4sozluk binary in bin/ directory
@@ -16,7 +16,7 @@ put qt4sozluk.db under /usr/share/qt4sozluk directory.
 
 qt4sözlük'ü derlemek için bu komutları kullanın:
 qmake-qt4
-lrelease qt4sozluk.pro
+lrelease-qt4 qt4sozluk.pro
 make
 
 Daha sonra bin/ dizini içindeki qt4sozluk ikilisini kullanabilirsiniz.
