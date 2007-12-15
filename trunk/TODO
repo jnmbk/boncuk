@@ -2,3 +2,7 @@
 * Make it easy to enter German special characters(we also support German)
 * Prepare some help text
 * Ask to download offline database at first run (if it's not in our default directory)
+* Create a db editor gui to let people create dictionaries
+* Change db relations so we can add other languages easily
+* Add history navigation to history menu, add history export/save functionality ( html etc. )
+* Maybe add a little update tool
