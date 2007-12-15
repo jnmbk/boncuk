@@ -10,10 +10,10 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Qt4Sozluk</string>
+   <string>Boncuk</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../resources/qt4sozluk.qrc" >:/qt4sozluk.png</iconset>
+   <iconset resource="../resources/boncuk.qrc" >:/boncuk.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" >
@@ -35,7 +35,7 @@
          <string>&amp;Search</string>
         </property>
         <property name="icon" >
-         <iconset resource="../resources/qt4sozluk.qrc" >:/find.png</iconset>
+         <iconset resource="../resources/boncuk.qrc" >:/find.png</iconset>
         </property>
        </widget>
       </item>
@@ -77,7 +77,7 @@ p, li { white-space: pre-wrap; }
     <property name="title" >
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout_Qt4Sozluk" />
+    <addaction name="actionAbout_Boncuk" />
     <addaction name="actionAbout_Qt" />
    </widget>
    <widget class="QMenu" name="menuHistory" >
@@ -99,12 +99,12 @@ p, li { white-space: pre-wrap; }
     <string>F1</string>
    </property>
   </action>
-  <action name="actionAbout_Qt4Sozluk" >
+  <action name="actionAbout_Boncuk" >
    <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/qt4sozluk.png</iconset>
+    <iconset resource="../resources/boncuk.qrc" >:/boncuk.png</iconset>
    </property>
    <property name="text" >
-    <string>&amp;About Qt4Sozluk</string>
+    <string>&amp;About Boncuk</string>
    </property>
   </action>
   <action name="actionAbout_Qt" >
@@ -114,7 +114,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionQuit" >
    <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/exit.png</iconset>
+    <iconset resource="../resources/boncuk.qrc" >:/exit.png</iconset>
    </property>
    <property name="text" >
     <string>&amp;Quit</string>
@@ -125,10 +125,10 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionConfigure" >
    <property name="icon" >
-    <iconset resource="../resources/qt4sozluk.qrc" >:/configure.png</iconset>
+    <iconset resource="../resources/boncuk.qrc" >:/configure.png</iconset>
    </property>
    <property name="text" >
-    <string>&amp;Configure Qt4Sozluk...</string>
+    <string>&amp;Configure Boncuk...</string>
    </property>
   </action>
   <action name="actionShow_Toolbar" >
@@ -193,7 +193,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>searchButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../resources/qt4sozluk.qrc" />
+  <include location="../resources/boncuk.qrc" />
  </resources>
  <connections>
   <connection>

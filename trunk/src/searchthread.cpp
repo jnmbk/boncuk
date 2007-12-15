@@ -1,6 +1,6 @@
 /*
- * qt4sozluk, qt port of pysozluk (online/offline dictionary)
- * copyright (c) 2007, qt4sozluk development team
+ * boncuk, qt port of pysozluk (online/offline dictionary)
+ * copyright (c) 2007, boncuk development team
  *
  * this program is free software; you can redistribute it and/or modify
  * it under the terms of the gnu general public license as published by
@@ -20,7 +20,7 @@ SearchThread::SearchThread(QObject *parent)
 {
     lastSearchWasOffline = true;
     sqliteDatabase = new SqliteDatabase(this,
-        "/usr/share/qt4sozluk/qt4sozluk.db");
+        "/usr/share/boncuk/boncuk.db");
     sesliSozluk = new SesliSozluk(this);
 }
 
@@ -57,7 +57,7 @@ void SearchThread::search(QString keyword)
         delete sqliteDatabase;
         sesliSozluk = new SesliSozluk(this);
         sqliteDatabase = new SqliteDatabase(this,
-            "/usr/share/qt4sozluk/qt4sozluk.db");
+            "/usr/share/boncuk/boncuk.db");
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
                 sqliteDatabase, SIGNAL(found(QList< QList<QVariant> > *)),

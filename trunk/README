@@ -1,5 +1,5 @@
 http://sf.net/projects/pysozluk-qt
-qt4sozluk is the c++ port of pysozluk-qt.
+boncuk is the c++ port of pysozluk-qt.
 It aims to provide a fast, simple and useful Turkish-English-German dictionary.
 See INSTALL for installation instructions.
 

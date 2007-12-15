@@ -1,6 +1,6 @@
 /*
- * qt4sozluk, Qt port of pysozluk (online/offline dictionary)
- * Copyright (C) 2007, qt4sozluk Development Team
+ * boncuk, Qt port of pysozluk (online/offline dictionary)
+ * Copyright (C) 2007, boncuk Development Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,12 +30,12 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv, useGui);
 
-    app.setOrganizationName(QString("qt4sozluk"));
-    app.setApplicationName(QString("qt4sozluk"));
+    app.setOrganizationName(QString("boncuk"));
+    app.setApplicationName(QString("boncuk"));
 
     QString locale = QLocale::system().name();
     QTranslator translator;
-    translator.load(QString(":/qt4sozluk_") + locale);
+    translator.load(QString(":/boncuk_") + locale);
     app.installTranslator(&translator);
 
     if (app.arguments().size() > 1) {

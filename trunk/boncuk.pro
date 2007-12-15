@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = qt4sozluk
+TARGET = boncuk
 VERSION = "0.2"
 DEFINES += \
 #    QT4SOZLUK_VERSION=\\\"$$VERSION\\\"
@@ -26,9 +26,9 @@ SOURCES += \
     src/seslisozluk.cpp \
     src/sqlitedatabase.cpp
 RESOURCES += \
-    resources/qt4sozluk.qrc
+    resources/boncuk.qrc
 TRANSLATIONS += \
-    resources/qt4sozluk_tr_TR.ts
+    resources/boncuk_tr_TR.ts
 
 DESTDIR = bin
 OBJECTS_DIR = build
