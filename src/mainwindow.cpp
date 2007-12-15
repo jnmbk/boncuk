@@ -1,6 +1,6 @@
 /*
- * qt4sozluk, qt port of pysozluk (online/offline dictionary)
- * copyright (c) 2007, qt4sozluk development team
+ * boncuk, qt port of pysozluk (online/offline dictionary)
+ * copyright (c) 2007, boncuk development team
  *
  * this program is free software; you can redistribute it and/or modify
  * it under the terms of the gnu general public license as published by
@@ -79,8 +79,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(clearHistory()));
     connect(this, SIGNAL(historyChanged(bool)),
             actionHistoryClear, SLOT(setEnabled(bool)));
-    connect(actionAbout_Qt4Sozluk, SIGNAL(activated()),
-            this, SLOT(aboutQt4Sozluk()));
+    connect(actionAbout_Boncuk, SIGNAL(activated()),
+            this, SLOT(aboutBoncuk()));
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
     connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
     connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
@@ -160,7 +160,7 @@ void MainWindow::showOrHideUi(
 void MainWindow::createMenu()
 {
     menu = new QMenu();
-    menu->addAction(actionAbout_Qt4Sozluk);
+    menu->addAction(actionAbout_Boncuk);
     menu->addAction(actionConfigure);
     menu->addSeparator();
     menu->addAction(actionQuit);
@@ -252,7 +252,7 @@ void MainWindow::showResults(QList< QList<QVariant> > *results)
     delete results;
 }
 
-void MainWindow::aboutQt4Sozluk()
+void MainWindow::aboutBoncuk()
 {
     QString aboutText;
 
@@ -262,7 +262,7 @@ void MainWindow::aboutQt4Sozluk()
         "İşbaran Akçayır <isbaran at gmail.com>\n"
         "Uğur Çetin <ugur.jnmbk at gmail.com>\n");
 
-    QMessageBox::about(this, tr("About Qt4Sozluk"), aboutText);
+    QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }
 
 void MainWindow::aboutQt()

@@ -1,6 +1,6 @@
 /*
- * qt4sozluk, Qt port of pysozluk (online/offline dictionary)
- * Copyright (C) 2007, qt4sozluk Development Team
+ * boncuk, Qt port of pysozluk (online/offline dictionary)
+ * Copyright (C) 2007, boncuk Development Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void writeHistory();
 
     private slots:
-        void aboutQt4Sozluk();
+        void aboutBoncuk();
         void aboutQt();
         void pressEnterMessage();
 };
