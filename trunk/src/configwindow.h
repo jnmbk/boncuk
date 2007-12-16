@@ -19,6 +19,7 @@
 
 class QDialog;
 class QWidget;
+class QKeyEvent;
 class QSystemTrayIcon;
 
 class ConfigWindow : public QDialog, private Ui::ConfigWindow
@@ -32,6 +33,9 @@ class ConfigWindow : public QDialog, private Ui::ConfigWindow
 
     public:
         QSettings settings;
+
+    protected:
+        void keyPressEvent( QKeyEvent * );
 
     public slots:
         void writeSettings();
