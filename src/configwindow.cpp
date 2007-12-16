@@ -16,6 +16,7 @@
 #include <QApplication>
 #include <QSettings>
 #include <QVariant>
+#include <QKeyEvent>
 #include <QSystemTrayIcon>
 #include "configwindow.h"
 
@@ -49,6 +50,11 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
 
     connect(trayIcon_enable, SIGNAL(stateChanged(int)),
         this, SLOT(stateSync(int)));
+}
+
+void ConfigWindow::keyPressEvent( QKeyEvent *event )
+{
+    QWidget::keyPressEvent(event);
 }
 
 void ConfigWindow::stateSync(int state)
