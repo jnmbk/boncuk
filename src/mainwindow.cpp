@@ -127,7 +127,8 @@ void MainWindow::clearHistory()
 void MainWindow::keyPressEvent( QKeyEvent *event )
 {
     if( event->key() == Qt::Key_Escape ){
-        if( settings.value("tray/enabled").toBool() ){
+        if( settings.value("tray/enabled").toBool() &&
+            settings.value("tray/minimizeOnClose").toBool() ){
             this->close();
         }else{
             QWidget::keyPressEvent(event);
