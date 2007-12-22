@@ -1,10 +1,11 @@
 TEMPLATE = app
 TARGET = boncuk
 VERSION = "0.2"
+DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
-#    QT4SOZLUK_VERSION=\\\"$$VERSION\\\"
-    QT4SOZLUK_VERSION=\\\"$$VERSION\\\" \
-    QT_NO_DEBUG_OUTPUT
+    QT_NO_DEBUG_OUTPUT \
+    BONCUK_VERSION=\\\"$$VERSION\\\" \
+    DATABASE_LOCATION=\\\"$$DATABASE\\\"
 
 # Input
 HEADERS += \

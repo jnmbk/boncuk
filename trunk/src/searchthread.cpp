@@ -20,7 +20,7 @@ SearchThread::SearchThread(QObject *parent)
 {
     lastSearchWasOffline = true;
     sqliteDatabase = new SqliteDatabase(this,
-        "/usr/share/boncuk/boncuk.db");
+        DATABASE_LOCATION);
     sesliSozluk = new SesliSozluk(this);
 }
 
@@ -57,7 +57,7 @@ void SearchThread::search(QString keyword)
         delete sqliteDatabase;
         sesliSozluk = new SesliSozluk(this);
         sqliteDatabase = new SqliteDatabase(this,
-            "/usr/share/boncuk/boncuk.db");
+            DATABASE_LOCATION);
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
                 sqliteDatabase, SIGNAL(found(QList< QList<QVariant> > *)),
