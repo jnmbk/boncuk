@@ -257,8 +257,9 @@ void MainWindow::aboutBoncuk()
 {
     QString aboutText;
 
-    aboutText = tr("C++ version of  PySozluk-Qt") + "\nv" BONCUK_VERSION
-        "\nhttp://pysozluk-qt.wiki.sourceforge.net\n\n" + tr("Developers:")
+    aboutText = tr("Boncuk %1 - online/offline dictionary\n").arg(BONCUK_VERSION)
+        + tr("This software is released under the terms of GPL v2.\n")
+        + "http://pysozluk-qt.wiki.sourceforge.net\n\n" + tr("Developers:")
         + QString::fromUtf8("\nİlker Kesen <ilker.kde at gmail.com>\n"
         "İşbaran Akçayır <isbaran at gmail.com>\n"
         "Uğur Çetin <ugur.jnmbk at gmail.com>\n");

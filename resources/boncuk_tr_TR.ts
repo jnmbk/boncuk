@@ -168,29 +168,29 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Programını &amp;Yapılandır</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="193"/>
+        <location filename="../src/mainwindow.cpp" line="194"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="241"/>
+        <location filename="../src/mainwindow.cpp" line="242"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="220"/>
+        <location filename="../src/mainwindow.cpp" line="221"/>
         <source>English</source>
         <translation>İngilizce</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="231"/>
+        <location filename="../src/mainwindow.cpp" line="232"/>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="259"/>
         <source>C++ version of  PySozluk-Qt</source>
-        <translation>PySözlük-Qt&apos;nin C++ sürümü</translation>
+        <translation type="obsolete">PySözlük-Qt&apos;nin C++ sürümü</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="253"/>
@@ -198,32 +198,32 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="186"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="192"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="201"/>
+        <location filename="../src/mainwindow.cpp" line="202"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="242"/>
+        <location filename="../src/mainwindow.cpp" line="243"/>
         <source>German</source>
         <translation>Almanca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="275"/>
+        <location filename="../src/mainwindow.cpp" line="277"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="261"/>
+        <location filename="../src/mainwindow.cpp" line="263"/>
         <source>Developers:</source>
         <translation>Geliştiriciler:</translation>
     </message>
@@ -332,7 +332,7 @@ Proje sayfasını açmak ister misiniz?</translation>
         <translation>&amp;Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="265"/>
+        <location filename="../src/mainwindow.cpp" line="267"/>
         <source>About Boncuk</source>
         <translation>Boncuk Hakkında</translation>
     </message>
@@ -350,6 +350,20 @@ Proje sayfasını açmak ister misiniz?</translation>
         <location filename="../ui/mainwindow.ui" line="131"/>
         <source>&amp;Configure Boncuk...</source>
         <translation>Boncuk Programını &amp;Yapılandır...</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="260"/>
+        <source>Boncuk %1 - online/offline dictionary
+</source>
+        <translation>Boncuk %1 - çevrimiçi/çevrimdışı sözlük
+</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="262"/>
+        <source>This software is released under the terms of GPL v2.
+</source>
+        <translation>Bu program GPL v2 lisansı altında dağıtılmaktadır.
+</translation>
     </message>
 </context>
 <context>

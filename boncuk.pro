@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = boncuk
-VERSION = "0.2"
+VERSION = "0.2.1"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     QT_NO_DEBUG_OUTPUT \
