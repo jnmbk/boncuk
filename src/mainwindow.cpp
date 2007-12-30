@@ -27,7 +27,6 @@
 #include <QProcess>
 #include <QSet>
 #include <QWidget>
-#include <iostream>
 
 #include "configwindow.h"
 #include "mainwindow.h"
