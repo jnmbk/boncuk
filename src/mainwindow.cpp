@@ -27,6 +27,7 @@
 #include <QProcess>
 #include <QSet>
 #include <QWidget>
+#include <iostream>
 
 #include "configwindow.h"
 #include "mainwindow.h"
@@ -51,10 +52,11 @@ MainWindow::MainWindow(QWidget *parent)
     else
         this->show();
 
-    if(settings.value("history/enabled", true).toBool()){
+    if(settings.value("history/enabled").toBool()){
         initCompleter();
     }else{
         completer = NULL;
+        history = NULL;
         actionHistoryClear->setEnabled(false);
     }
 
@@ -103,13 +105,13 @@ void MainWindow::initCompleter()
        stringList.append(settings.value("key").toString());
     }
     settings.endArray();
-    history = new QStringListModel(stringList);
+    history = new QStringListModel( stringList );
 
     completer = new QCompleter(history);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     keyword->setCompleter(completer);
 
-    if(history->stringList().size() <= 0)
+    if( size <= 0 )
         actionHistoryClear->setEnabled(false);
 }
 
@@ -170,14 +172,22 @@ void MainWindow::createMenu()
 
 void MainWindow::search()
 {
-    QStringList list;
-    list = history->stringList();
+    /*! Searches for the word in keyword box */
+
     if(settings.value("history/enabled").toBool()){
-        if(list.size() >= 40)
+        if( !history ){
+            initCompleter();
+        }
+
+        QStringList list( history->stringList() );
+
+        if(list.size() >= 40){
             list.removeLast();
-            history->setStringList(list);
+        }
+
         list.append(keyword->text());
-        history->setStringList(list.toSet().toList());
+
+        history->setStringList( list.toSet().toList() );
         writeHistory();
         emit historyChanged(true);
     }
@@ -288,6 +298,7 @@ void MainWindow::writeHistory()
             settings.setValue("key", history->stringList().at(i));
         }
         settings.endArray();
+        settings.sync();
     }
 }
 
