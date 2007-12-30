@@ -16,9 +16,15 @@
 #include <QMainWindow>
 #include <QTranslator>
 #include <QSettings>
+#include <QProcess>
+#include <QByteArray>
+
+#include <iostream>
 
 #include "mainwindow.h"
 #include "console.h"
+
+bool check_instance( char ** );
 
 int main(int argc, char *argv[])
 {
@@ -42,8 +48,43 @@ int main(int argc, char *argv[])
         Console *console = new Console();
         console->search();
     } else {
-        MainWindow *mainWindow = new MainWindow();
+        // check instance for only gui startups
+        if(!check_instance(argv)){
+            MainWindow *mainWindow = new MainWindow();
+        }else{
+            //FIXME Exit message is hardcoded in english
+            std::cout << "There's an instance of program running\n";
+            exit(1);
+        }
     }
 
     return app.exec();
 }
+
+bool check_instance(char **argv)
+{
+    /*! Checks if any instances are running
+    @return Returns true if theres an instance of program,\
+    or there's been an error while reading process list
+    @return Returns 0 otherwise
+    */
+
+    QProcess instancecheck;
+    instancecheck.start("ps", QStringList() << "au");
+    if(!instancecheck.waitForStarted())
+        return 1;
+
+    QByteArray result;
+
+    while( instancecheck.waitForReadyRead() )
+        result += instancecheck.readAll();
+
+    if( result.count(argv[0]) <= 1 ){
+        return 0;
+    }else{
+        return 1;
+    }
+
+    return 0;
+}
+
