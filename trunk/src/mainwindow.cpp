@@ -63,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     searchThread = new SearchThread(this);
     configWindow = new ConfigWindow(this, tray);
     statusBar()->showMessage(tr("Type in a keyword to search"));
+    searchButton->setEnabled(0);
 
     QRegExp searchLineRx("[\\w\\s]*");
     validator = new QRegExpValidator(searchLineRx, this);
@@ -285,6 +286,10 @@ void MainWindow::aboutQt()
 void MainWindow::pressEnterMessage()
 {
     statusBar()->showMessage(tr("Press Enter to begin search"));
+    if( keyword->text() == "" )
+        searchButton->setEnabled(0);
+    else
+        searchButton->setEnabled(1);
 }
 
 void MainWindow::writeHistory()
