@@ -52,8 +52,7 @@ int main(int argc, char *argv[])
         if(!check_instance(argv)){
             MainWindow *mainWindow = new MainWindow();
         }else{
-            //FIXME Exit message is hardcoded in english
-            std::cout << "There's an instance of program running\n";
+            std::cout << app.translate("main", "There's an instance of program running").toUtf8().constData() << '\n';
             exit(1);
         }
     }
@@ -66,13 +65,13 @@ bool check_instance(char **argv)
     /*! Checks if any instances are running
     @return Returns true if theres an instance of program,\
     or there's been an error while reading process list
-    @return Returns 0 otherwise
+    @return Returns false otherwise
     */
 
     QProcess instancecheck;
-    instancecheck.start("ps", QStringList() << "au");
+    instancecheck.start("ps", QStringList() << "aux");
     if(!instancecheck.waitForStarted())
-        return 1;
+        return true;
 
     QByteArray result;
 
@@ -80,11 +79,10 @@ bool check_instance(char **argv)
         result += instancecheck.readAll();
 
     if( result.count(argv[0]) <= 1 ){
-        return 0;
+        return false;
     }else{
-        return 1;
+        return true;
     }
 
     return 0;
 }
-
