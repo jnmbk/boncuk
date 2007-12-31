@@ -24,42 +24,7 @@
 #include "mainwindow.h"
 #include "console.h"
 
-bool check_instance( char ** );
-
-int main(int argc, char *argv[])
-{
-#ifdef Q_WS_X11
-    bool useGui = getenv("DISPLAY") != 0;
-#else
-    bool useGui = true;
-#endif
-
-    QApplication app(argc, argv, useGui);
-
-    app.setOrganizationName(QString("boncuk"));
-    app.setApplicationName(QString("boncuk"));
-
-    QString locale = QLocale::system().name();
-    QTranslator translator;
-    translator.load(QString(":/boncuk_") + locale);
-    app.installTranslator(&translator);
-
-    if (app.arguments().size() > 1) {
-        Console *console = new Console();
-        console->search();
-    } else {
-        // check instance for only gui startups
-        if(!check_instance(argv)){
-            MainWindow *mainWindow = new MainWindow();
-        }else{
-            std::cout << app.translate("main", "There's an instance of program running").toUtf8().constData() << '\n';
-            exit(1);
-        }
-    }
-
-    return app.exec();
-}
-
+#ifdef Q_OS_UNIX
 bool check_instance(char **argv)
 {
     /*! Checks if any instances are running
@@ -85,4 +50,43 @@ bool check_instance(char **argv)
     }
 
     return 0;
+}
+#endif
+
+int main(int argc, char *argv[])
+{
+#ifdef Q_WS_X11
+    bool useGui = getenv("DISPLAY") != 0;
+#else
+    bool useGui = true;
+#endif
+
+    QApplication app(argc, argv, useGui);
+
+    app.setOrganizationName(QString("boncuk"));
+    app.setApplicationName(QString("boncuk"));
+
+    QString locale = QLocale::system().name();
+    QTranslator translator;
+    translator.load(QString(":/boncuk_") + locale);
+    app.installTranslator(&translator);
+
+    if (app.arguments().size() > 1) {
+        Console *console = new Console();
+        console->search();
+    } else {
+#ifdef Q_OS_UNIX
+        // check instance for only gui startups
+        if(!check_instance(argv)){
+            MainWindow *mainWindow = new MainWindow();
+        }else{
+            std::cout << app.translate("main", "There's an instance of program running").toUtf8().constData() << '\n';
+            exit(1);
+        }
+#else
+        MainWindow *mainWindow = new MainWindow();
+#endif
+    }
+
+    return app.exec();
 }
