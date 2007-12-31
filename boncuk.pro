@@ -4,6 +4,7 @@ VERSION = "0.3"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     QT_NO_DEBUG_OUTPUT \
+    Q_OS_UNIX \
     BONCUK_VERSION=\\\"$$VERSION\\\" \
     DATABASE_LOCATION=\\\"$$DATABASE\\\"
 
