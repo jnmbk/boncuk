@@ -5,7 +5,7 @@
 * Maybe add a little update tool
 
 * Ask to download offline database at first run (if it's not in our default directory)
-* Ask to send missing words to us, so we can add them to database
+* Ask to send missing words to us, so we can add them to database, xmlrpc support in short
 * Add DBUS support (so we can actually see if an instance is running and send message to show itself)
 
 -- DB --
