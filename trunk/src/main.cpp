@@ -19,7 +19,6 @@
 #include <QProcess>
 #include <QStringList>
 #include <QByteArray>
-#include <QMessageBox>
 
 #include <iostream>
 
