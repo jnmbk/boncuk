@@ -17,7 +17,9 @@
 #include <QTranslator>
 #include <QSettings>
 #include <QProcess>
+#include <QStringList>
 #include <QByteArray>
+#include <QMessageBox>
 
 #include <iostream>
 
@@ -33,17 +35,18 @@ bool check_instance(char **argv)
     @return Returns false otherwise
     */
 
-    QProcess instancecheck;
-    instancecheck.start("ps", QStringList() << "aux");
-    if(!instancecheck.waitForStarted())
+    QProcess *instancecheck = new QProcess;
+    QStringList env = instancecheck->systemEnvironment().filter("USER");
+    instancecheck->setReadChannelMode(QProcess::SeparateChannels);
+    instancecheck->start("ps", QStringList() << "-U" << env.first().split("=").last() << "-x");
+
+    if(!instancecheck->waitForFinished()){
         return true;
+    }
 
-    QByteArray result;
+    QByteArray result = instancecheck->readAllStandardOutput();
 
-    while( instancecheck.waitForReadyRead() )
-        result += instancecheck.readAll();
-
-    if( result.count(argv[0]) <= 1 ){
+    if( result.count( argv[0] ) <= 1 ){
         return false;
     }else{
         return true;
@@ -80,7 +83,8 @@ int main(int argc, char *argv[])
         if(!check_instance(argv)){
             MainWindow *mainWindow = new MainWindow();
         }else{
-            std::cout << app.translate("main", "There's an instance of program running").toUtf8().constData() << '\n';
+            std::cout << '\n' << app.translate("main", \
+                "There's an instance of program running\n").toUtf8().constData();
             exit(1);
         }
 #else
@@ -90,3 +94,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
