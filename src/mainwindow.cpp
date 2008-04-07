@@ -197,6 +197,7 @@ void MainWindow::search()
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
     statusBar()->showMessage(tr("Searching \"%1\"").arg(keyword->text()));
     searchThread->search(keyword->text());
+    keyword->setSelection(0, (keyword->text()).size());
 }
 
 void MainWindow::showResults(QList< QList<QVariant> > *results)
