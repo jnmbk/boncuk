@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="tr">
-<defaultcodec></defaultcodec>
 <context>
     <name>ConfigWindow</name>
     <message>
@@ -9,79 +8,59 @@
         <translation>Yapılandır</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="39"/>
+        <location filename="../ui/configwindow.ui" line="29"/>
         <source>Translation</source>
         <translation>Çeviri</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="49"/>
+        <location filename="../ui/configwindow.ui" line="37"/>
         <source>Method:</source>
         <translation>Yöntem:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="57"/>
+        <location filename="../ui/configwindow.ui" line="45"/>
         <source>Try Offline First</source>
         <translation>Önce Çevrimdışı Dene</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="62"/>
+        <location filename="../ui/configwindow.ui" line="50"/>
         <source>Always Offline</source>
         <translation>Daima Çevrimdışı</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="67"/>
+        <location filename="../ui/configwindow.ui" line="55"/>
         <source>Always Online</source>
         <translation>Daima Çevrimiçi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="100"/>
+        <location filename="../ui/configwindow.ui" line="126"/>
         <source>Tray Icon</source>
         <translation>Bildiri Simgesi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="106"/>
+        <location filename="../ui/configwindow.ui" line="132"/>
         <source>Enable Tray Icon</source>
         <translation>Bildiri Simgesini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="113"/>
+        <location filename="../ui/configwindow.ui" line="139"/>
         <source>Minimize to Tray on Close</source>
         <translation>Kapatınca Bildirim Alanına Küçült</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="120"/>
+        <location filename="../ui/configwindow.ui" line="146"/>
         <source>Start Minimized</source>
         <translation>Küçültülmüş Olarak Başla</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="120"/>
-        <source>Advanced</source>
-        <translation type="obsolete">Gelişmiş</translation>
+        <location filename="../ui/configwindow.ui" line="67"/>
+        <source>Search History</source>
+        <translation>Arama Geçmişi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="128"/>
-        <source>Debug Level:</source>
-        <translation type="obsolete">Hata Ayıklama Seviyesi:</translation>
-    </message>
-    <message>
-        <location filename="../ui/configwindow.ui" line="130"/>
-        <source>Update</source>
-        <translation type="obsolete">Güncelleme</translation>
-    </message>
-    <message>
-        <location filename="../ui/configwindow.ui" line="136"/>
-        <source>Check for updates at startup</source>
-        <translation type="obsolete">Açılışta güncellemeleri kontrol et</translation>
-    </message>
-    <message>
-        <location filename="../ui/configwindow.ui" line="130"/>
-        <source>History&amp;/Logging</source>
-        <translation type="obsolete">Geçmiş&amp;/Kayıt</translation>
-    </message>
-    <message>
-        <location filename="../ui/configwindow.ui" line="77"/>
-        <source>Enable Search History</source>
-        <translation>Arama Geçmişini Kaydet</translation>
+        <location filename="../ui/configwindow.ui" line="103"/>
+        <source>words</source>
+        <translation>kelime</translation>
     </message>
 </context>
 <context>
@@ -168,22 +147,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Programını &amp;Yapılandır</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="204"/>
+        <location filename="../src/mainwindow.cpp" line="207"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="252"/>
+        <location filename="../src/mainwindow.cpp" line="255"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="231"/>
+        <location filename="../src/mainwindow.cpp" line="234"/>
         <source>English</source>
         <translation>İngilizce</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="242"/>
+        <location filename="../src/mainwindow.cpp" line="245"/>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
@@ -198,88 +177,39 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Qt4Sözlük Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="196"/>
+        <location filename="../src/mainwindow.cpp" line="198"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="203"/>
+        <location filename="../src/mainwindow.cpp" line="206"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="215"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="253"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>German</source>
         <translation>Almanca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="287"/>
+        <location filename="../src/mainwindow.cpp" line="290"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="273"/>
+        <location filename="../src/mainwindow.cpp" line="276"/>
         <source>Developers:</source>
         <translation>Geliştiriciler:</translation>
-    </message>
-    <message>
-        <location filename="../ui/mainwindow.ui" line="131"/>
-        <source>&amp;Configure Qt4Sozluk...</source>
-        <translation type="obsolete">&amp;Yapılandır...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="64"/>
         <source>Type in a keyword to search</source>
         <translation>Aranacak sözcüğü veya sözcük öbeğini yazın</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="141"/>
-        <source>Update Results</source>
-        <translation type="obsolete">Güncelleme Sonuçları</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="133"/>
-        <source>You are up to date!</source>
-        <translation type="obsolete">Henüz güncelleme yok!</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="99"/>
-        <source>There&apos;s a higher version available!
-</source>
-        <translation type="obsolete">Daha yeni bir sürüm var!</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="138"/>
-        <source>There&apos;s a higher version available!
-
-Click here to open project web page</source>
-        <translation type="obsolete">Daha yüksek bir sürüm var!
-
-Proje sayfasını açmak için buraya tıklayın.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="142"/>
-        <source>There&apos;s a higher version available!
-
-Open project web page?</source>
-        <translation type="obsolete">Daha yüksek bir sürüm var!
-
-Proje sayfasını açmak ister misiniz?</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="148"/>
-        <source>Attention</source>
-        <translation type="obsolete">Dikkat</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="150"/>
-        <source>There&apos;s a problem with the server, please inform us,                     or your updater will not function correctly!</source>
-        <translation type="obsolete">Sunucuyla ilgili bir hata var. Lütfen bizi haberdar edin, güncelleme fonksiyonunuz düzgün çalışmayacaktır!</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="85"/>
@@ -332,7 +262,7 @@ Proje sayfasını açmak ister misiniz?</translation>
         <translation>&amp;Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="277"/>
+        <location filename="../src/mainwindow.cpp" line="280"/>
         <source>About Boncuk</source>
         <translation>Boncuk Hakkında</translation>
     </message>
@@ -352,14 +282,14 @@ Proje sayfasını açmak ister misiniz?</translation>
         <translation>Boncuk Programını &amp;Yapılandır...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="273"/>
         <source>Boncuk %1 - online/offline dictionary
 </source>
         <translation>Boncuk %1 - çevrimiçi/çevrimdışı sözlük
 </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="275"/>
         <source>This software is released under the terms of GPL v2.
 </source>
         <translation>Bu program GPL v2 lisansı altında dağıtılmaktadır.
@@ -367,24 +297,11 @@ Proje sayfasını açmak ister misiniz?</translation>
     </message>
 </context>
 <context>
-    <name>TrayIcon</name>
-    <message>
-        <location filename="../src/trayicon.cpp" line="28"/>
-        <source>Configure</source>
-        <translation type="obsolete">Qt4Sözlük Programını Yapılandır</translation>
-    </message>
-    <message>
-        <location filename="../src/trayicon.cpp" line="30"/>
-        <source>Exit</source>
-        <translation type="obsolete">Çıkış</translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="56"/>
+        <location filename="../src/main.cpp" line="86"/>
         <source>There&apos;s an instance of program running</source>
-        <translation>Program bir yerlerde zaten çalışıyor</translation>
+        <translation type="obsolete">Program bir yerlerde zaten çalışıyor</translation>
     </message>
 </context>
 </TS>
