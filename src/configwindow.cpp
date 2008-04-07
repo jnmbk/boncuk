@@ -32,8 +32,15 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
     translation_method->setCurrentIndex(
             settings.value("translation/method").toInt());
 
-    if(settings.value("history/enabled", QVariant(true)).toBool() == 1)
+    if(settings.value("history/enabled", QVariant(true)).toBool() == 1){
         history_enable->setCheckState(Qt::Checked);
+        wordcountSpinBox->setMaximum(1000);
+        wordcountSpinBox->setMinimum(0);
+        wordcountSpinBox->setValue(settings.value("history/count").toInt());
+    }else{
+        wordcountSpinBox->setValue(settings.value("history/count").toInt());
+        wordcountSpinBox->setEnabled(false);
+    }
 
     if (settings.value("tray/minimizeOnClose", QVariant(true)).toBool() == 1)
         trayIcon_minimizeOnClose->setCheckState(Qt::Checked);
@@ -50,6 +57,8 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
 
     connect(trayIcon_enable, SIGNAL(stateChanged(int)),
         this, SLOT(stateSync(int)));
+    connect(history_enable, SIGNAL(stateChanged(int)),
+        this, SLOT(slotHistorySync(int)));
 }
 
 void ConfigWindow::keyPressEvent( QKeyEvent *event )
@@ -63,6 +72,14 @@ void ConfigWindow::stateSync(int state)
     trayIcon_startMinimized->setEnabled(state);
 }
 
+void ConfigWindow::slotHistorySync(int state)
+{
+    if(state == 0)
+        this->wordcountSpinBox->setEnabled(false);
+    else
+        this->wordcountSpinBox->setEnabled(true);
+}
+
 void ConfigWindow::writeSettings() {
     settings.setValue("translation/method",
             QVariant(translation_method->currentIndex()));
@@ -72,8 +89,15 @@ void ConfigWindow::writeSettings() {
             QVariant(trayIcon_minimizeOnClose->checkState()).toBool());
     settings.setValue("tray/startMinimized",
             QVariant(trayIcon_startMinimized->checkState()).toBool());
-    settings.setValue("history/enabled",
-            QVariant(history_enable->checkState()).toBool());
+    if(wordcountSpinBox->value() == 0){
+        settings.setValue("history/enabled", QVariant(0));
+        history_enable->setCheckState(Qt::Unchecked);
+    }else{
+        settings.setValue("history/enabled",
+                QVariant(history_enable->checkState()).toBool());
+    }
+    settings.setValue("history/count",
+            QVariant(wordcountSpinBox->value()));
     applySettings();
 }
 
@@ -88,4 +112,5 @@ void ConfigWindow::applySettings() {
             qApp->setQuitOnLastWindowClosed(false);
         else qApp->setQuitOnLastWindowClosed(true);
     }
+    settings.sync();
 }
