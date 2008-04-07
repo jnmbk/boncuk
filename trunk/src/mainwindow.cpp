@@ -181,8 +181,10 @@ void MainWindow::search()
 
         QStringList list( history->stringList() );
 
-        if(list.size() >= 40){
-            list.removeLast();
+        if(list.size() >= settings.value("history/count").toInt()){
+            while(list.size() >= settings.value("history/count").toInt()){
+                list.removeLast();
+            }
         }
 
         list.append(keyword->text());

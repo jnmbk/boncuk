@@ -19,16 +19,6 @@
    <iconset>../icons/16x16/configure.png</iconset>
   </property>
   <layout class="QGridLayout" >
-   <item row="1" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="0" >
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
@@ -40,55 +30,91 @@
       </attribute>
       <layout class="QGridLayout" >
        <item row="0" column="0" >
-        <layout class="QVBoxLayout" >
+        <layout class="QHBoxLayout" >
          <item>
-          <layout class="QHBoxLayout" >
-           <item>
-            <widget class="QLabel" name="label_2" >
-             <property name="text" >
-              <string>Method:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="translation_method" >
-             <item>
-              <property name="text" >
-               <string>Try Offline First</string>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>Always Offline</string>
-              </property>
-             </item>
-             <item>
-              <property name="text" >
-               <string>Always Online</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_2" >
+           <property name="text" >
+            <string>Method:</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="history_enable" >
-           <property name="text" >
-            <string>Enable Search History</string>
-           </property>
+          <widget class="QComboBox" name="translation_method" >
+           <item>
+            <property name="text" >
+             <string>Try Offline First</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Always Offline</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Always Online</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
        </item>
        <item row="1" column="0" >
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QCheckBox" name="history_enable" >
+           <property name="text" >
+            <string>Search History</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>31</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="wordcountSpinBox" >
+           <property name="maximumSize" >
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="maximum" >
+            <number>1000</number>
+           </property>
+           <property name="value" >
+            <number>100</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="wordcount_label" >
+           <property name="text" >
+            <string>words</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" >
           <size>
-           <width>361</width>
-           <height>31</height>
+           <width>373</width>
+           <height>16</height>
           </size>
          </property>
         </spacer>
@@ -136,6 +162,16 @@
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     </property>
     </widget>
    </item>
   </layout>

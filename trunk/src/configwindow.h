@@ -41,6 +41,7 @@ class ConfigWindow : public QDialog, private Ui::ConfigWindow
         void writeSettings();
         void applySettings();
         void stateSync(int);
+        void slotHistorySync(int);
 };
 
 #endif
