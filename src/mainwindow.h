@@ -46,6 +46,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QCompleter *completer;
         ConfigWindow *configWindow;
         QStringListModel *history;
+        QString guiLanguage;
 
         void createMenu();
         void initCompleter();
@@ -68,6 +69,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         SearchThread *searchThread;
         QValidator *validator;
         void writeHistory();
+        QString prettyResult(QList<QString>, QString);
 
     private slots:
         void aboutBoncuk();
