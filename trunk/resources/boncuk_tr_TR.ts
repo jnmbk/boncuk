@@ -114,12 +114,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../ui/mainwindow.ui" line="125"/>
         <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Kaydet</translation>
+        <translation>&amp;Kaydet</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="128"/>
         <source>Ctrl+S</source>
-        <translation type="obsolete">Ctrl+S</translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="120"/>
@@ -132,27 +132,12 @@ p, li { white-space: pre-wrap; }
         <translation>Alt+F4</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="13"/>
-        <source>Qt4Sozluk</source>
-        <translation type="obsolete">Qt4Sözlük</translation>
-    </message>
-    <message>
-        <location filename="../ui/mainwindow.ui" line="107"/>
-        <source>&amp;About Qt4Sozluk</source>
-        <translation type="obsolete">Qt4&amp;Sözlük Hakkında</translation>
-    </message>
-    <message>
-        <location filename="../ui/mainwindow.ui" line="135"/>
-        <source>&amp;Configure Qt4Sozluk</source>
-        <translation type="obsolete">Qt4Sözlük Programını &amp;Yapılandır</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="207"/>
+        <location filename="../src/mainwindow.cpp" line="213"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="255"/>
+        <location filename="../src/mainwindow.cpp" line="258"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
@@ -169,25 +154,20 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/mainwindow.cpp" line="259"/>
         <source>C++ version of  PySozluk-Qt</source>
-        <translation type="obsolete">PySözlük-Qt&apos;nin C++ sürümü</translation>
+        <translation>PySözlük-Qt&apos;nin C++ sürümü</translation>
     </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="253"/>
-        <source>About Qt4Sozluk</source>
-        <translation type="obsolete">Qt4Sözlük Hakkında</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+       <message>
+        <location filename="../src/mainwindow.cpp" line="204"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="206"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="215"/>
+        <location filename="../src/mainwindow.cpp" line="221"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
@@ -207,14 +187,14 @@ p, li { white-space: pre-wrap; }
         <translation>Geliştiriciler:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="64"/>
+        <location filename="../src/mainwindow.cpp" line="70"/>
         <source>Type in a keyword to search</source>
         <translation>Aranacak sözcüğü veya sözcük öbeğini yazın</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="85"/>
         <source>History</source>
-        <translation type="obsolete">Geçmiş</translation>
+        <translation>Geçmiş</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="139"/>
@@ -247,7 +227,7 @@ p, li { white-space: pre-wrap; }
         <translation>Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="124"/>
+        <location filename="../src/mainwindow.cpp" line="130"/>
         <source>History deleted</source>
         <translation>Geçmiş silindi</translation>
     </message>
@@ -301,7 +281,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/main.cpp" line="86"/>
         <source>There&apos;s an instance of program running</source>
-        <translation type="obsolete">Program bir yerlerde zaten çalışıyor</translation>
+        <translation>Program bir yerlerde zaten çalışıyor</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="86"/>
+        <source>There&apos;s an instance of program running
+</source>
+        <translation>Program bir yerlerde zaten çalışıyor</translation>
     </message>
 </context>
 </TS>

@@ -29,7 +29,7 @@
 bool check_instance(char **argv)
 {
     /*! Checks if any instances are running
-    @return Returns true if theres an instance of program,\
+    @return Returns true if theres an instance of program,
     or there's been an error while reading process list
     @return Returns false otherwise
     */

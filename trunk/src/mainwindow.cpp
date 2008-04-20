@@ -59,6 +59,9 @@ MainWindow::MainWindow(QWidget *parent)
         actionHistoryClear->setEnabled(false);
     }
 
+    guiLanguage = QLocale::system().name();
+    guiLanguage.truncate(2);
+
     searchThread = new SearchThread(this);
     configWindow = new ConfigWindow(this, tray);
     statusBar()->showMessage(tr("Type in a keyword to search"));
@@ -227,44 +230,38 @@ void MainWindow::showResults(QList< QList<QVariant> > *results)
                     break;
             }
         }
-        if (!en.isEmpty()) {
-            resultText.append(
-                QString("<b>%1</b><br />").arg(
-                    this->tr("%1 translation of %2").arg(
-                        this->tr("English"), keyword->text())));
 
-            for(int i=0; i<en.size();i++) {
-                resultText.append(QString("%1. %2<br />").arg(i+1).arg(en[i]));
-            }
-            resultText.append("<br />");
-        }
-        if (!tr.isEmpty()) {
-            resultText.append(
-                QString("<b>%1</b><br />").arg(
-                    this->tr("%1 translation of %2").arg(
-                        this->tr("Turkish"), keyword->text())));
-
-            for(int i=0; i<tr.size();i++) {
-                resultText.append(QString("%1. %2<br />").arg(i+1).arg(tr[i]));
-            }
-            resultText.append("<br />");
-        }
-        if (!ge.isEmpty()) {
-            resultText.append(
-                QString("<b>%1</b><br />").arg(
-                    this->tr("%1 translation of %2").arg(
-                        this->tr("German"), keyword->text())));
-
-            for(int i=0; i<ge.size();i++) {
-                resultText.append(QString("%1. %2<br />").arg(i+1).arg(ge[i]));
-            }
-            resultText.append("<br />");
+        if (guiLanguage == QString("tr")){
+            resultText.append(prettyResult( en, QString("English")));
+            resultText.append(prettyResult( ge, QString("German")));
+            resultText.append(prettyResult( tr, QString("Turkish")));
+        }else{
+            resultText.append(prettyResult( tr, QString("Turkish")));
+            resultText.append(prettyResult( en, QString("English")));
+            resultText.append(prettyResult( ge, QString("German")));
         }
 
         resultBrowser->setHtml(resultText);
     }
     delete results;
 }
+
+QString MainWindow::prettyResult( QList<QString> lang, QString text )
+{
+    QString resultText("");
+    if(!lang.isEmpty()){
+        resultText.append(
+            QString("<b>%1</b><br />").arg(
+                this->tr("%1 translation of %2").arg(
+                    this->tr(text.toUtf8().constData()), keyword->text())));
+        for(int i=0; i<lang.size(); i++){
+            resultText.append(QString("%1. %2<br />").arg(i+1).arg(lang[i]));
+        }
+        resultText.append("<br />");
+    }
+    return resultText;
+}
+
 
 void MainWindow::aboutBoncuk()
 {
