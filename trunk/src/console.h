@@ -28,7 +28,7 @@ class Console : public QObject
 
     public slots:
         void search();
-        void showResults(QList< QList<QVariant> > *);
+        void showResults(QString, QList< QList<QVariant> > *);
 
     private:
         SearchThread *searchThread;

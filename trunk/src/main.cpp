@@ -18,6 +18,7 @@
 #include <QSettings>
 #include <QProcess>
 #include <QStringList>
+#include <QDir>
 #include <QByteArray>
 
 #include <iostream>

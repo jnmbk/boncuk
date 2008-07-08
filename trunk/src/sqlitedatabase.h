@@ -15,6 +15,7 @@
 
 #include <QList>
 #include <QObject>
+#include <QVariant>
 
 class QString;
 
@@ -27,7 +28,11 @@ class SqliteDatabase : public QObject
         void search(QString word);
 
     signals:
-        void found(QList< QList<QVariant> > *);
+        void found(QString, QList< QList<QVariant> > *);
+
+    public slots:
+        void add(QString, QList<QList<QVariant> > *);
+
 };
 
 #endif

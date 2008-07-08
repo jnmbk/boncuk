@@ -16,7 +16,8 @@
    <string>Configuration</string>
   </property>
   <property name="windowIcon" >
-   <iconset>../icons/16x16/configure.png</iconset>
+   <iconset>
+    <normaloff>../icons/16x16/configure.png</normaloff>../icons/16x16/configure.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
@@ -25,10 +26,18 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="translation" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>385</width>
+        <height>141</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Translation</string>
       </attribute>
-      <layout class="QGridLayout" >
+      <layout class="QGridLayout" name="gridLayout" >
        <item row="0" column="0" >
         <layout class="QHBoxLayout" >
          <item>
@@ -73,7 +82,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>31</width>
              <height>20</height>
@@ -106,12 +115,19 @@
          </item>
         </layout>
        </item>
+       <item row="2" column="0" >
+        <widget class="QCheckBox" name="add_enable" >
+         <property name="text" >
+          <string>Add fetched words to database</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>373</width>
            <height>16</height>
@@ -122,6 +138,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="trayIcon" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>385</width>
+        <height>141</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Tray Icon</string>
       </attribute>
@@ -152,7 +176,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>40</height>
@@ -170,7 +194,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
