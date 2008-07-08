@@ -42,6 +42,9 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
         wordcountSpinBox->setEnabled(false);
     }
 
+    if (settings.value("add/enabled", QVariant(true)).toBool() == 1)
+        add_enable->setCheckState(Qt::Checked);
+
     if (settings.value("tray/minimizeOnClose", QVariant(true)).toBool() == 1)
         trayIcon_minimizeOnClose->setCheckState(Qt::Checked);
 
@@ -63,6 +66,8 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
 
 void ConfigWindow::keyPressEvent( QKeyEvent *event )
 {
+    if( event->key() == Qt::Key_Escape )
+        this->close();
     QWidget::keyPressEvent(event);
 }
 
@@ -98,6 +103,8 @@ void ConfigWindow::writeSettings() {
     }
     settings.setValue("history/count",
             QVariant(wordcountSpinBox->value()));
+    settings.setValue("add/enabled",
+            QVariant(add_enable->checkState()).toBool());
     applySettings();
 }
 

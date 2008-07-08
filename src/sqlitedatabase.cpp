@@ -17,6 +17,8 @@
 #include <QSqlQuery>
 #include <QString>
 #include <QVariant>
+#include <QStringList>
+#include <QSettings>
 #include "sqlitedatabase.h"
 
 SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
@@ -47,5 +49,58 @@ void SqliteDatabase::search(QString word)
         results->append(list);
     }
     qDebug() << "Returning" << results->size() << "result(s)";
-    emit found(results);
+    emit found(word, results);
 }
+
+void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
+{
+    if(results->isEmpty()){
+        qDebug() << "Resultset is empty, not adding to database: " << word << "\n";
+        return;
+    }
+
+    QString resultText;
+    QList<QString> en, tr, ge;
+    QListIterator< QList<QVariant> > i(*results);
+
+    while (i.hasNext()) {
+        QList<QVariant> translation = i.next();
+        switch (translation[0].toInt()) {
+            case 0:
+                tr.append(translation[1].toString());
+                break;
+            case 1:
+                en.append(translation[1].toString());
+                break;
+            case 2:
+                ge.append(translation[1].toString());
+                break;
+        }
+    }
+
+    qDebug() << "Number of TR translations fetched : " << tr.count() << "\n";
+    qDebug() << "Number of EN translations fetched : " << en.count() << "\n";
+    qDebug() << "Number of DU translations fetched : " << ge.count() << "\n";
+
+    QSqlQuery query;
+
+    if (!tr.isEmpty()){
+        query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+        query.bindValue(QString(":home"), QVariant(0));
+        query.bindValue(QString(":away"), QVariant(1));
+        query.bindValue(QString(":word"), QVariant(word));
+        query.bindValue(QString(":text"), QVariant(QStringList(tr).join(" , ")));
+        query.exec();
+    }
+    if (!en.isEmpty()){
+        query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+        query.bindValue(QString(":home"), QVariant(1));
+        query.bindValue(QString(":away"), QVariant(0));
+        query.bindValue(QString(":word"), QVariant(word));
+        query.bindValue(QString(":text"), QVariant(QStringList(en).join(" , ")));
+        query.exec();
+    }
+
+    qDebug() << "Added to database" << results->size() << "result(s)";
+}
+

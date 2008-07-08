@@ -34,12 +34,12 @@ void Console::search()
     qDebug() << keyword;
 
     connect(
-        searchThread, SIGNAL(found(QList< QList<QVariant> > *)),
-        this, SLOT(showResults(QList< QList<QVariant> > *)));
+        searchThread, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+        this, SLOT(showResults(QString, QList< QList<QVariant> > *)));
     searchThread->search(keyword);
 }
 
-void Console::showResults(QList< QList<QVariant> > *results)
+void Console::showResults(QString word, QList< QList<QVariant> > *results)
 {
     for (int i=0; i < results->size(); i++) {
         std::cout << results->at(i).at(1).toString().toUtf8().constData() << '\n';

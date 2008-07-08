@@ -14,6 +14,7 @@
 #include <QSettings>
 
 #include "searchthread.h"
+#include <iostream>
 
 SearchThread::SearchThread(QObject *parent)
     : QThread(parent)
@@ -21,7 +22,14 @@ SearchThread::SearchThread(QObject *parent)
     lastSearchWasOffline = true;
     sqliteDatabase = new SqliteDatabase(this,
         DATABASE_LOCATION);
+
     sesliSozluk = new SesliSozluk(this);
+
+    QSettings settings;
+    if(settings.value("add/enabled", true).toBool()){
+        connect(sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+        sqliteDatabase, SLOT(add(QString, QList< QList<QVariant> > *)));
+    }
 }
 
 void SearchThread::run()
@@ -37,14 +45,14 @@ void SearchThread::search(QString keyword)
     if (!isRunning()) {
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
-                sqliteDatabase, SIGNAL(found(QList< QList<QVariant> > *)),
-                this, SLOT(returnResult(QList< QList<QVariant> > *)));
+                sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+                this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sqliteDatabase->search(keyword);
             qDebug() << "offline";
         } else {
             connect(
-                sesliSozluk, SIGNAL(found(QList< QList<QVariant> > *)),
-                this, SLOT(returnResult(QList< QList<QVariant> > *)));
+                sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+                this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sesliSozluk->search(keyword);
             lastSearchWasOffline = false;
             qDebug() << "online";
@@ -60,14 +68,18 @@ void SearchThread::search(QString keyword)
             DATABASE_LOCATION);
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
-                sqliteDatabase, SIGNAL(found(QList< QList<QVariant> > *)),
-                this, SLOT(returnResult(QList< QList<QVariant> > *)));
+                sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+                this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sqliteDatabase->search(keyword);
             qDebug() << "offline";
         } else {
             connect(
-                sesliSozluk, SIGNAL(found(QList< QList<QVariant> > *)),
-                this, SLOT(returnResult(QList< QList<QVariant> > *)));
+                sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+                this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
+            if(settings.value("add/enabled", true).toBool()){
+                connect(sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+                sqliteDatabase, SLOT(add(QString, QList< QList<QVariant> > *)));
+            }
             lastSearchWasOffline = false;
             sesliSozluk->search(keyword);
             qDebug() << "online";
@@ -75,21 +87,23 @@ void SearchThread::search(QString keyword)
     }
 }
 
-void SearchThread::returnResult(QList< QList<QVariant> > *results)
+void SearchThread::returnResult(QString word, QList< QList<QVariant> > *results)
 {
     QSettings settings;
-    qDebug() << results->isEmpty() << settings.value("translation/method", 0).toInt() << lastSearchWasOffline;
-    if (results->isEmpty() &&
-        settings.value("translation/method", 0).toInt() == 0 &&
-        lastSearchWasOffline) {
+    if (results->isEmpty() && settings.value("translation/method", 0).toInt() == 0 && lastSearchWasOffline) {
+        qDebug() << "word not found in database, searching net : searchthread.cpp - returnResult\n";
         lastSearchWasOffline = false;
-        sqliteDatabase->disconnect();
+        if(!sqliteDatabase->disconnect(this)){
+            qDebug() << "sqlitedatabase disconnect failed: searchthread.cpp - returnResult \n";
+        }
         connect(
-            sesliSozluk, SIGNAL(found(QList< QList<QVariant> > *)),
-            this, SLOT(returnResult(QList< QList<QVariant> > *)));
+            sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+            this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
         sesliSozluk->search(keyword);
     } else {
-        emit found(results);
+        if(!lastSearchWasOffline)
+            sqliteDatabase->add(word, results);
+        emit found(word, results);
         lastSearchWasOffline = true;
     }
 }

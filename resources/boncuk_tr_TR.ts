@@ -8,59 +8,64 @@
         <translation>Yapılandır</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="29"/>
+        <location filename="../ui/configwindow.ui" line="38"/>
         <source>Translation</source>
         <translation>Çeviri</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="37"/>
+        <location filename="../ui/configwindow.ui" line="46"/>
         <source>Method:</source>
         <translation>Yöntem:</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="45"/>
+        <location filename="../ui/configwindow.ui" line="54"/>
         <source>Try Offline First</source>
         <translation>Önce Çevrimdışı Dene</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="50"/>
+        <location filename="../ui/configwindow.ui" line="59"/>
         <source>Always Offline</source>
         <translation>Daima Çevrimdışı</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="55"/>
+        <location filename="../ui/configwindow.ui" line="64"/>
         <source>Always Online</source>
         <translation>Daima Çevrimiçi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="126"/>
+        <location filename="../ui/configwindow.ui" line="150"/>
         <source>Tray Icon</source>
         <translation>Bildiri Simgesi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="132"/>
+        <location filename="../ui/configwindow.ui" line="156"/>
         <source>Enable Tray Icon</source>
         <translation>Bildiri Simgesini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="139"/>
+        <location filename="../ui/configwindow.ui" line="163"/>
         <source>Minimize to Tray on Close</source>
         <translation>Kapatınca Bildirim Alanına Küçült</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="146"/>
+        <location filename="../ui/configwindow.ui" line="170"/>
         <source>Start Minimized</source>
         <translation>Küçültülmüş Olarak Başla</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="67"/>
+        <location filename="../ui/configwindow.ui" line="76"/>
         <source>Search History</source>
         <translation>Arama Geçmişi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="103"/>
+        <location filename="../ui/configwindow.ui" line="112"/>
         <source>words</source>
         <translation>kelime</translation>
+    </message>
+    <message>
+        <location filename="../ui/configwindow.ui" line="121"/>
+        <source>Add fetched words to database</source>
+        <translation>İndirilen çevirileri veritabanına ekle</translation>
     </message>
 </context>
 <context>
@@ -144,12 +149,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../src/mainwindow.cpp" line="234"/>
         <source>English</source>
-        <translation type="obsolete">İngilizce</translation>
+        <translation>İngilizce</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="245"/>
         <source>Turkish</source>
-        <translation type="obsolete">Türkçe</translation>
+        <translation>Türkçe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="259"/>

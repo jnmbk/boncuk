@@ -73,8 +73,8 @@ MainWindow::MainWindow(QWidget *parent)
     keyword->setMaxLength(64);
 
     connect(
-        searchThread, SIGNAL(found(QList< QList<QVariant> > *)),
-        this, SLOT(showResults(QList< QList<QVariant> > *)));
+        searchThread, SIGNAL(found(QString, QList< QList<QVariant> > *)),
+        this, SLOT(showResults(QString, QList< QList<QVariant> > *)));
     connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
@@ -203,7 +203,7 @@ void MainWindow::search()
     keyword->setSelection(0, (keyword->text()).size());
 }
 
-void MainWindow::showResults(QList< QList<QVariant> > *results)
+void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
 {
     if (results->isEmpty()) {
         resultBrowser->setHtml(tr("<b>No results found</b>"));

@@ -29,7 +29,7 @@ class SesliSozluk : public QObject
         void search(QString word);
 
     signals:
-        void found(QList< QList<QVariant> > *);
+        void found(QString, QList< QList<QVariant> > *);
 
     private:
         QHttp *http;
@@ -37,6 +37,7 @@ class SesliSozluk : public QObject
         void convertToTurkishWeb(QString *);
         void parse();
         QList< QList<QVariant> > pick(int, QList<QString>);
+        QString word;
 
     private slots:
         void continueSearch();

@@ -52,7 +52,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void initCompleter();
 
     public slots:
-        void showResults(QList< QList<QVariant> > *);
+        void showResults(QString, QList< QList<QVariant> > *);
         void clearHistory();
         void search();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);

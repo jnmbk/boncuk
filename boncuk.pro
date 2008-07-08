@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = boncuk
-VERSION = "0.4"
-DATABASE = "/usr/share/boncuk/boncuk.db"
+VERSION = "0.5"
+DATABASE = "$$(HOME)/.boncuk/boncuk.db"
 DEFINES += \
     QT_NO_DEBUG_OUTPUT \
     Q_OS_UNIX \

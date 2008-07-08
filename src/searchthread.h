@@ -17,6 +17,8 @@
 #include "sqlitedatabase.h"
 #include "seslisozluk.h"
 
+class QString;
+
 class SearchThread : public QThread
 {
     Q_OBJECT
@@ -26,7 +28,7 @@ class SearchThread : public QThread
         void search(QString);
 
     signals:
-        void found(QList< QList<QVariant>  > *);
+        void found(QString, QList< QList<QVariant>  > *);
 
     private:
         QString keyword;
@@ -35,7 +37,7 @@ class SearchThread : public QThread
         SqliteDatabase *sqliteDatabase;
 
     private slots:
-        void returnResult(QList< QList<QVariant> > *);
+        void returnResult(QString, QList< QList<QVariant> > *);
 
     protected:
         void run();

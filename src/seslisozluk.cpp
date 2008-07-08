@@ -17,6 +17,7 @@
 #include <QTextCodec>
 #include <QVariant>
 #include <QVariant>
+#include <QSettings>
 #include "seslisozluk.h"
 
 SesliSozluk::SesliSozluk(QObject *parent = 0)
@@ -52,6 +53,7 @@ void SesliSozluk::convertToTurkishWeb(QString *word)
 
 void SesliSozluk::search(QString keyword)
 {
+    word = keyword;
     convertToTurkishWeb(&keyword);
     http->get(QString("/?word=%1").arg(keyword));
 }
@@ -71,7 +73,7 @@ void SesliSozluk::continueSearch()
     text.remove(text.indexOf("</table>"), text.size());
     text.replace("&nbsp;", " ");
     if (text.count('<') != text.count('>')){
-        emit found(results);
+        emit found(word, results);
         return; //this will happen when we have a really bad syntax error
     }
     do {
@@ -103,7 +105,7 @@ void SesliSozluk::continueSearch()
     qDebug() << turkish << data.indexOf("", turkish) << english <<
         data.indexOf("", english) << german << data.indexOf("", german);
 
-    emit found(results);
+    emit found(word, results);
 }
 
 QList< QList<QVariant> > SesliSozluk::pick(int lang, QList<QString> text)
