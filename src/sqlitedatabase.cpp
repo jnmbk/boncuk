@@ -85,19 +85,30 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
     QSqlQuery query;
 
     if (!tr.isEmpty()){
+        for(int i=0; i<tr.count(); i++){
+            QString item = QVariant(i).toString() + QString(". ") + tr.takeAt(i);
+            tr.insert(i, item);
+        }
+
         query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
         query.bindValue(QString(":home"), QVariant(0));
         query.bindValue(QString(":away"), QVariant(1));
         query.bindValue(QString(":word"), QVariant(word));
-        query.bindValue(QString(":text"), QVariant(QStringList(tr).join(" , ")));
+        query.bindValue(QString(":text"), QVariant(QStringList(tr).join("\n")));
         query.exec();
     }
+
     if (!en.isEmpty()){
+        for(int i=0; i<en.count(); i++){
+            QString item = QVariant(i).toString() + QString(". ") + en.takeAt(i);
+            en.insert(i, item);
+        }
+
         query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
         query.bindValue(QString(":home"), QVariant(1));
         query.bindValue(QString(":away"), QVariant(0));
         query.bindValue(QString(":word"), QVariant(word));
-        query.bindValue(QString(":text"), QVariant(QStringList(en).join(" , ")));
+        query.bindValue(QString(":text"), QVariant(QStringList(en).join("\n")));
         query.exec();
     }
 
