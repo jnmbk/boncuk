@@ -24,12 +24,6 @@ SearchThread::SearchThread(QObject *parent)
         DATABASE_LOCATION);
 
     sesliSozluk = new SesliSozluk(this);
-
-    QSettings settings;
-    if(settings.value("add/enabled", true).toBool()){
-        connect(sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
-        sqliteDatabase, SLOT(add(QString, QList< QList<QVariant> > *)));
-    }
 }
 
 void SearchThread::run()
@@ -76,10 +70,6 @@ void SearchThread::search(QString keyword)
             connect(
                 sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
-            if(settings.value("add/enabled", true).toBool()){
-                connect(sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
-                sqliteDatabase, SLOT(add(QString, QList< QList<QVariant> > *)));
-            }
             lastSearchWasOffline = false;
             sesliSozluk->search(keyword);
             qDebug() << "online";
@@ -101,7 +91,7 @@ void SearchThread::returnResult(QString word, QList< QList<QVariant> > *results)
             this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
         sesliSozluk->search(keyword);
     } else {
-        if(!lastSearchWasOffline)
+        if(!lastSearchWasOffline && settings.value("add/enabled", true).toBool())
             sqliteDatabase->add(word, results);
         emit found(word, results);
         lastSearchWasOffline = true;
