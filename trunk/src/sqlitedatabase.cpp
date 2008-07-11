@@ -59,57 +59,31 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
         return;
     }
 
-    QString resultText;
-    QList<QString> en, tr, ge;
     QListIterator< QList<QVariant> > i(*results);
 
     while (i.hasNext()) {
+        QSqlQuery query;
+        query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+
         QList<QVariant> translation = i.next();
         switch (translation[0].toInt()) {
             case 0:
-                tr.append(translation[1].toString());
+                query.bindValue(QString(":home"), QVariant(0));
+                query.bindValue(QString(":away"), QVariant(1));
+                query.bindValue(QString(":word"), QVariant(word));
+                query.bindValue(QString(":text"), translation[1].toString());
+                query.exec();
                 break;
             case 1:
-                en.append(translation[1].toString());
+                query.bindValue(QString(":home"), QVariant(1));
+                query.bindValue(QString(":away"), QVariant(0));
+                query.bindValue(QString(":word"), QVariant(word));
+                query.bindValue(QString(":text"), translation[1].toString());
+                query.exec();
                 break;
             case 2:
-                ge.append(translation[1].toString());
                 break;
         }
-    }
-
-    qDebug() << "Number of TR translations fetched : " << tr.count() << "\n";
-    qDebug() << "Number of EN translations fetched : " << en.count() << "\n";
-    qDebug() << "Number of DU translations fetched : " << ge.count() << "\n";
-
-    QSqlQuery query;
-
-    if (!tr.isEmpty()){
-        for(int i=0; i<tr.count(); i++){
-            QString item = QVariant(i).toString() + QString(". ") + tr.takeAt(i);
-            tr.insert(i, item);
-        }
-
-        query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
-        query.bindValue(QString(":home"), QVariant(0));
-        query.bindValue(QString(":away"), QVariant(1));
-        query.bindValue(QString(":word"), QVariant(word));
-        query.bindValue(QString(":text"), QVariant(QStringList(tr).join("\n")));
-        query.exec();
-    }
-
-    if (!en.isEmpty()){
-        for(int i=0; i<en.count(); i++){
-            QString item = QVariant(i).toString() + QString(". ") + en.takeAt(i);
-            en.insert(i, item);
-        }
-
-        query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
-        query.bindValue(QString(":home"), QVariant(1));
-        query.bindValue(QString(":away"), QVariant(0));
-        query.bindValue(QString(":word"), QVariant(word));
-        query.bindValue(QString(":text"), QVariant(QStringList(en).join("\n")));
-        query.exec();
     }
 
     qDebug() << "Added to database" << results->size() << "result(s)";
