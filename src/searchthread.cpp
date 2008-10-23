@@ -55,11 +55,7 @@ void SearchThread::search(QString keyword)
     } else {
         sesliSozluk->disconnect();
         sqliteDatabase->disconnect();
-        delete sesliSozluk;
-        delete sqliteDatabase;
-        sesliSozluk = new SesliSozluk(this);
-        sqliteDatabase = new SqliteDatabase(this,
-            DATABASE_LOCATION);
+
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
                 sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
@@ -81,11 +77,8 @@ void SearchThread::returnResult(QString word, QList< QList<QVariant> > *results)
 {
     QSettings settings;
     if (results->isEmpty() && settings.value("translation/method", 0).toInt() == 0 && lastSearchWasOffline) {
-        qDebug() << "word not found in database, searching net : searchthread.cpp - returnResult\n";
         lastSearchWasOffline = false;
-        if(!sqliteDatabase->disconnect(this)){
-            qDebug() << "sqlitedatabase disconnect failed: searchthread.cpp - returnResult \n";
-        }
+        sqliteDatabase->disconnect(this);
         connect(
             sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
             this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
@@ -97,3 +90,4 @@ void SearchThread::returnResult(QString word, QList< QList<QVariant> > *results)
         lastSearchWasOffline = true;
     }
 }
+
