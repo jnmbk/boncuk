@@ -23,6 +23,8 @@
 #include <QDir>
 #include "sqlitedatabase.h"
 
+#define HOME_DIR QDir::homePath()+"/.boncuk"
+
 SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
     : QObject(parent)
 {
