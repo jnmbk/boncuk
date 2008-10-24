@@ -34,7 +34,7 @@ class SqliteDatabase : public QObject
 
     private:
         void addDb(QString, QString);
-        void createDb(QString);
+        void createDb(QString, QString);
 
     signals:
         void found(QString, QList< QList<QVariant> > *);

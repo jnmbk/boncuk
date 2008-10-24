@@ -19,6 +19,8 @@
 #include <QVariant>
 #include <QStringList>
 #include <QSettings>
+#include <QFile>
+#include <QDir>
 #include "sqlitedatabase.h"
 
 SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
@@ -36,7 +38,7 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
     }
 
     if(settings.value("add/enabled", true).toBool() && dbs->size()<2){
-        createDb(QString(HOME_DIR)+"/boncuk.db");
+        createDb("userdb", QString(HOME_DIR)+"/boncuk.db");
         addDb("userdb", QString(HOME_DIR)+"/boncuk.db");
     }
 }
@@ -58,9 +60,27 @@ void SqliteDatabase::addDb(QString name, QString uri)
     }
 }
 
-void SqliteDatabase::createDb(QString uri)
+void SqliteDatabase::createDb(QString name, QString uri)
 {
-    // This will create an empty db with our db structure
+    QDir directory(QString(HOME_DIR));
+    if(!directory.exists())
+        directory.mkpath(QString(HOME_DIR));
+
+    QFile file(uri);
+    if(file.exists())
+        return;
+    file.close();
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", name);
+    db.setDatabaseName(uri);
+    if(!db.open())
+        qDebug() << "Couldn't open db file" << name << uri;
+
+    QSqlQuery query(db);
+    query.exec("CREATE TABLE languages (id, englishname, nativename)");
+    query.exec("CREATE TABLE translations(home,away,word,text)");
+    query.finish();
+    db.commit();
 }
 
 void SqliteDatabase::search(QString word)
