@@ -1,14 +1,12 @@
 TEMPLATE = app
 TARGET = boncuk
 VERSION = "0.6"
-HOMEDIR = "$$(HOME)/.boncuk"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     QT_NO_DEBUG_OUTPUT \
     Q_OS_UNIX \
     BONCUK_VERSION=\\\"$$VERSION\\\" \
-    DATABASE_LOCATION=\\\"$$DATABASE\\\" \
-    HOME_DIR=\\\"$$HOMEDIR\\\"
+    DATABASE_LOCATION=\\\"$$DATABASE\\\"
 
 # Input
 HEADERS += \
