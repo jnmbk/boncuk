@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = boncuk
-VERSION = "0.5"
+VERSION = "0.6"
 HOMEDIR = "$$(HOME)/.boncuk"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
