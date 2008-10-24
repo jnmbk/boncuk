@@ -8,8 +8,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>401</width>
-    <height>217</height>
+    <width>393</width>
+    <height>202</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -26,14 +26,6 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="translation" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>385</width>
-        <height>141</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Translation</string>
       </attribute>
@@ -99,7 +91,7 @@
             </size>
            </property>
            <property name="maximum" >
-            <number>1000</number>
+            <number>1500</number>
            </property>
            <property name="value" >
             <number>100</number>
@@ -138,14 +130,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="trayIcon" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>385</width>
-        <height>141</height>
-       </rect>
-      </property>
       <attribute name="title" >
        <string>Tray Icon</string>
       </attribute>
