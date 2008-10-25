@@ -1,3 +1,6 @@
+2008-10-25 İşbaran Akçayır <isbaran@gmail.com>
+* src/mainwindow.cpp remember window size
+
 2008-10-24 İşbaran Akçayır <isbaran@gmail.com>
 * src/sqlitedatabase.cpp Added functionality to add new databases
 * src/searcherthread.cpp Instead of deleting on/off db objects, use the
