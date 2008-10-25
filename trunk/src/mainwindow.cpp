@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setupUi(this);
     this->move(settings.value("mainWindow/pos").toPoint());
+    if(settings.contains("mainWindow/geo"))
+        this->resize(settings.value("mainWindow/geo").toSize());
 
     tray = new QSystemTrayIcon(this->windowIcon());
     createMenu();
@@ -146,6 +148,7 @@ void MainWindow::keyPressEvent( QKeyEvent *event )
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
+    settings.setValue("mainWindow/geo", QVariant(this->size()));
     event->accept();
 }
 
@@ -155,9 +158,11 @@ void MainWindow::showOrHideUi(
     if(activation_reason == QSystemTrayIcon::Trigger) {
         if(this->isVisible()) {
           settings.setValue("mainWindow/pos", QVariant(this->pos()));
+          settings.setValue("mainWindow/geo", QVariant(this->size()));
           this->hide();
         } else {
             this->move(settings.value("mainWindow/pos").toPoint());
+            this->resize(settings.value("mainWindow/geo").toSize());
             this->show();
         }
     }
@@ -309,6 +314,7 @@ void MainWindow::writeHistory()
 void MainWindow::exitSlot()
 {
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
+    settings.setValue("mainWindow/geo", QVariant(this->size()));
     settings.sync();
 
     emit destroyed();
