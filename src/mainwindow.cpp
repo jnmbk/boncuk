@@ -142,7 +142,7 @@ void MainWindow::keyPressEvent( QKeyEvent *event )
         }
     }else{
         QWidget::keyPressEvent(event);
-    }
+        }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -162,7 +162,8 @@ void MainWindow::showOrHideUi(
           this->hide();
         } else {
             this->move(settings.value("mainWindow/pos").toPoint());
-            this->resize(settings.value("mainWindow/geo").toSize());
+            if(settings.contains("mainWindow/pos"))
+                this->resize(settings.value("mainWindow/geo").toSize());
             this->show();
         }
     }
