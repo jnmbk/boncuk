@@ -65,12 +65,16 @@ void SqliteDatabase::addDb(QString name, QString uri)
 void SqliteDatabase::createDb(QString name, QString uri)
 {
     QDir directory(QString(HOME_DIR));
-    if(!directory.exists())
+    if(!directory.exists()){
         directory.mkpath(QString(HOME_DIR));
+        qDebug() << "Creating home dir : " << QString(HOME_DIR);
+    }
 
     QFile file(uri);
-    if(file.exists())
+    if(file.exists()){
+        qDebug() << "db file found, not creating " << QString(uri);
         return;
+    }
     file.close();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", name);
