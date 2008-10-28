@@ -1,3 +1,7 @@
+2008-10-28 İşbaran Akçayır <isbaran@gmail.com>
+* src/sqlitedatabase.cpp added a few debug statements
+* src/mainwindow.cpp check if qsettings settings exists before using them
+
 2008-10-25 İşbaran Akçayır <isbaran@gmail.com>
 * src/mainwindow.cpp remember window size
 
