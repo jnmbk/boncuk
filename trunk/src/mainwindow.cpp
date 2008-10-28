@@ -38,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->move(settings.value("mainWindow/pos").toPoint());
     if(settings.contains("mainWindow/geo"))
         this->resize(settings.value("mainWindow/geo").toSize());
+    if(!settings.contains("history/count"))
+        settings.setValue("history/count", QVariant(0));
+    if(!settings.contains("add/enabled"))
+        settings.setValue("add/enabled", QVariant(false));
 
     tray = new QSystemTrayIcon(this->windowIcon());
     createMenu();
