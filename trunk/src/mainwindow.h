@@ -50,6 +50,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
         void createMenu();
         void initCompleter();
+        void setSettings();
 
     public slots:
         void showResults(QString, QList< QList<QVariant> > *);
