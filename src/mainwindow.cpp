@@ -35,13 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setupUi(this);
-    this->move(settings.value("mainWindow/pos").toPoint());
-    if(settings.contains("mainWindow/geo"))
-        this->resize(settings.value("mainWindow/geo").toSize());
-    if(!settings.contains("history/count"))
-        settings.setValue("history/count", QVariant(0));
-    if(!settings.contains("add/enabled"))
-        settings.setValue("add/enabled", QVariant(false));
+
+    setSettings();
 
     tray = new QSystemTrayIcon(this->windowIcon());
     createMenu();
@@ -122,6 +117,28 @@ void MainWindow::initCompleter()
 
     if( size <= 0 )
         actionHistoryClear->setEnabled(false);
+}
+
+void MainWindow::setSettings()
+{
+     if(settings.contains("mainWindow/pos")){
+        this->move(settings.value("mainWindow/pos").toPoint());
+        qDebug() << "window position : "
+                 << settings.value("mainWindow/pos").toPoint().x()
+                 << ", " << settings.value("mainWindow/pos").toPoint().y();
+     }
+
+    if(settings.contains("mainWindow/geo"))
+        this->resize(settings.value("mainWindow/geo").toSize());
+    else {
+        this->resize(400, 300);
+    }
+    if(!settings.contains("history/count"))
+        settings.setValue("history/count", QVariant(100));
+    if(!settings.contains("add/enabled"))
+        settings.setValue("add/enabled", QVariant(false));
+    if(!settings.contains("history/enabled"))
+        settings.setValue("history/enabled", QVariant(true));
 }
 
 void MainWindow::clearHistory()
