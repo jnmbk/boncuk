@@ -7,7 +7,7 @@
  * the free software foundation; either version 2 of the license, or
  * (at your option) any later version.
  *
- * please read the copyIng file.
+ * please read the copying file.
  */
 
 #include <QApplication>
@@ -38,7 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     setSettings();
 
-    tray = new QSystemTrayIcon(this->windowIcon());
+    tray = new QSystemTrayIcon(this->windowIcon(), this);
+
     createMenu();
 
     if(settings.value("tray/enabled", true).toBool()) {
@@ -94,46 +95,50 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    // Bunlar otomatik siliniyor aslında ..
     delete(history);
     delete(menu);
     delete(tray);
     delete(validator);
+    delete(completer);
 }
 
 void MainWindow::initCompleter()
 {
     QStringList stringList;
     int size = settings.beginReadArray("historydata");
+
     for(int i=0; i < size; ++i) {
        settings.setArrayIndex(i);
        stringList.append(settings.value("key").toString());
     }
+
     settings.endArray();
     history = new QStringListModel( stringList );
 
-    completer = new QCompleter(history);
+    completer = new QCompleter(history, this);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     keyword->setCompleter(completer);
 
     if( size <= 0 )
         actionHistoryClear->setEnabled(false);
+
+    qDebug() << "History initialized for " << size << " words";
 }
 
 void MainWindow::setSettings()
 {
-     if(settings.contains("mainWindow/pos")){
+    if(settings.contains("mainWindow/pos"))
         this->move(settings.value("mainWindow/pos").toPoint());
-        qDebug() << "window position : "
-                 << settings.value("mainWindow/pos").toPoint().x()
-                 << ", " << settings.value("mainWindow/pos").toPoint().y();
-     }
 
     if(settings.contains("mainWindow/geo"))
         this->resize(settings.value("mainWindow/geo").toSize());
     else {
         this->resize(400, 300);
+        settings.setValue("mainWindow/geo", QVariant(QSize(400, 300)));
     }
-    if(!settings.contains("history/count"))
+    // ara sürümdeki count=0 hatası için workaround
+    if(!settings.contains("history/count") || !0 < settings.value("history/count").toInt())
         settings.setValue("history/count", QVariant(100));
     if(!settings.contains("add/enabled"))
         settings.setValue("add/enabled", QVariant(false));
@@ -145,7 +150,6 @@ void MainWindow::clearHistory()
 {
     if(completer){
         history->setStringList(QStringList());
-        QSettings settings;
         settings.remove("historydata");
         statusBar()->showMessage(tr("History deleted"), 2000);
         emit historyChanged(false);
@@ -183,8 +187,7 @@ void MainWindow::showOrHideUi(
           this->hide();
         } else {
             this->move(settings.value("mainWindow/pos").toPoint());
-            if(settings.contains("mainWindow/pos"))
-                this->resize(settings.value("mainWindow/geo").toSize());
+            this->resize(settings.value("mainWindow/geo").toSize());
             this->show();
         }
     }
@@ -202,10 +205,8 @@ void MainWindow::createMenu()
 
 void MainWindow::search()
 {
-    /*! Searches for the word in keyword box */
-
     if(settings.value("history/enabled").toBool()){
-        if( !history ){
+        if( history == NULL ){
             initCompleter();
         }
 
@@ -222,6 +223,8 @@ void MainWindow::search()
         history->setStringList( list.toSet().toList() );
         writeHistory();
         emit historyChanged(true);
+
+        qDebug() << "Added " << keyword->text() << " to history list";
     }
 
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
@@ -321,7 +324,6 @@ void MainWindow::pressEnterMessage()
 void MainWindow::writeHistory()
 {
     if(settings.value("history/enabled").toBool()){
-
         settings.remove("historydata");
         settings.beginWriteArray("historydata");
         for (int i=0; i < history->stringList().size(); ++i) {
@@ -330,6 +332,8 @@ void MainWindow::writeHistory()
         }
         settings.endArray();
         settings.sync();
+    }else {
+        qDebug() << "History not enabled, not saving ..";
     }
 }
 
@@ -339,6 +343,7 @@ void MainWindow::exitSlot()
     settings.setValue("mainWindow/geo", QVariant(this->size()));
     settings.sync();
 
-    emit destroyed();
+    qDebug() << "Bye Bye ..";
     qApp->quit();
 }
+
