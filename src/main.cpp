@@ -40,18 +40,21 @@ bool check_instance(char **argv)
     instancecheck->setReadChannelMode(QProcess::SeparateChannels);
     instancecheck->start("ps", QStringList() << "-U" << env.first().split("=").last() << "-x");
 
-    if(!instancecheck->waitForFinished()){
+    if(!instancecheck->waitForFinished()) {
+        instancecheck->close();
+        delete instancecheck;
         return true;
     }
 
     QByteArray result = instancecheck->readAllStandardOutput();
+    instancecheck->close();
+    delete instancecheck;
 
     if( result.count( argv[0] ) <= 1 ){
         return false;
     }else{
         return true;
     }
-
     return 0;
 }
 #endif
@@ -74,24 +77,32 @@ int main(int argc, char *argv[])
     translator.load(QString(":/boncuk_") + locale);
     app.installTranslator(&translator);
 
+    MainWindow *mainWindow = NULL;
+
     if (app.arguments().size() > 1) {
         Console *console = new Console();
         console->search();
+        delete console;
     } else {
 #ifdef Q_OS_UNIX
         // check instance for only gui startups
         if(!check_instance(argv)){
-            MainWindow *mainWindow = new MainWindow();
+            mainWindow = new MainWindow();
         }else{
             std::cout << '\n' << app.translate("main", \
                 "There's an instance of program running\n").toUtf8().constData();
             exit(1);
         }
 #else
-        MainWindow *mainWindow = new MainWindow();
+        mainWindow = new MainWindow();
 #endif
     }
 
-    return app.exec();
+    int exit_code = app.exec();
+    if (mainWindow != NULL) {
+        delete mainWindow;
+    }
+
+    return exit_code;
 }
 
