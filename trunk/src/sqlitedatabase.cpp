@@ -43,6 +43,8 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
         createDb("userdb", QString(HOME_DIR)+"/boncuk.db");
         addDb("userdb", QString(HOME_DIR)+"/boncuk.db");
     }
+
+    qDebug() << "Boncuk: Using" << dbs->count() << "databases and internet search";
 }
 
 SqliteDatabase::~SqliteDatabase()
@@ -67,25 +69,40 @@ void SqliteDatabase::createDb(QString name, QString uri)
     QDir directory(QString(HOME_DIR));
     if(!directory.exists()){
         directory.mkpath(QString(HOME_DIR));
-        qDebug() << "Creating home dir : " << QString(HOME_DIR);
+        qDebug() << "Creating user database path : " << QString(HOME_DIR);
     }
 
     QFile file(uri);
-    if(file.exists()){
-        qDebug() << "db file found, not creating " << QString(uri);
+    if (file.exists()) {
+        qDebug() << "Database file exists : " << uri;
+        file.close();
         return;
     }
     file.close();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", name);
     db.setDatabaseName(uri);
-    if(!db.open())
-        qDebug() << "Couldn't open db file" << name << uri;
+    if (db.isValid()){
+        if(!db.open()){
+            qDebug() << "Couldn't open database file " << name << "at :" << uri;
+            return;
+        }
+    }else {
+        qDebug() << "Db is not valid : " << name << db.lastError().text();
+        return;
+    }
 
     QSqlQuery query(db);
     query.exec("CREATE TABLE languages (id, englishname, nativename)");
-    query.exec("CREATE TABLE translations(home,away,word,text)");
     query.finish();
+    query.exec("CREATE TABLE translations (home, away, word, text)");
+    query.finish();
+    query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (0, 'English', 'English')");
+    query.finish();
+    query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (1, 'Turkish', 'Turkce')");
+    query.finish();
+
+    qDebug() << "Created Tables for user database, errors : " << query.lastError().text();
     db.commit();
 }
 
@@ -111,19 +128,22 @@ void SqliteDatabase::search(QString word)
         if (query.isActive())
             query.clear();
 
-        if( d==0 && results->isEmpty() ){
+        if( results->isEmpty() ) {
+            qDebug() << word << "not found in database : " << dbs->at(d);
             continue;
+        }else{
+            qDebug() << word << "Found in Database : " << dbs->at(d);
+            break;
         }
     }
-    // FIXME
-    // little buggy, if we have more than 2 db's,
-    // and they both have same word, will add same word twice ..
+
     emit found(word, results);
 }
 
 void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
 {
-    if(results->isEmpty() || dbs->size()<2){
+    if(results->isEmpty() || dbs->size()<2) {
+        qDebug() << "No databases to add new results";
         return;
     }
 
@@ -146,36 +166,44 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
         }
     }
 
-    for(int d=1; d<dbs->size(); d++){
+    QSqlQuery *query = NULL;
+
+    // First db is default db, and its read only
+    for(int d=1; d<dbs->size(); d++) {
 
         QSqlDatabase db = QSqlDatabase::database(dbs->at(d));
-        QSqlQuery query(db);
+        qDebug() << "Adding" << word << "to db : " << dbs->at(d);
 
-        if(!tr.isEmpty()){
-            query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
-            query.bindValue(QString(":home"), QVariant(0));
-            query.bindValue(QString(":away"), QVariant(1));
-            query.bindValue(QString(":word"), QVariant(word));
-            query.bindValue(QString(":text"), QVariant(QStringList(tr).join(" , ")));
-            if(query.exec()){
-                if(query.isActive())
-                    query.finish();
-                db.commit();
-            }
+        if(!tr.isEmpty()) {
+            query = new QSqlQuery(db);
+            query->prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+            query->bindValue(QString(":home"), QVariant(0));
+            query->bindValue(QString(":away"), QVariant(1));
+            query->bindValue(QString(":word"), QVariant(word));
+            query->bindValue(QString(":text"), QVariant(QStringList(tr).join(" , ")));
+            query->exec();
+            query->finish();
+            db.commit();
+            delete query;
+            query = NULL;
         }
 
         if (!en.isEmpty()){
-            query.prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
-            query.bindValue(QString(":home"), QVariant(1));
-            query.bindValue(QString(":away"), QVariant(0));
-            query.bindValue(QString(":word"), QVariant(word));
-            query.bindValue(QString(":text"), QVariant(QStringList(en).join(" , ")));
-            if(query.exec()){
-                if(query.isActive())
-                    query.finish();
-                db.commit();
-            }
+            query = new QSqlQuery(db);
+            query->prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+            query->bindValue(QString(":home"), QVariant(1));
+            query->bindValue(QString(":away"), QVariant(0));
+            query->bindValue(QString(":word"), QVariant(word));
+            query->bindValue(QString(":text"), QVariant(QStringList(en).join(" , ")));
+            query->exec();
+            query->finish();
+            db.commit();
+            delete query;
+            query = NULL;
         }
     }
+
+    if (query != NULL)
+        delete query;
 }
 

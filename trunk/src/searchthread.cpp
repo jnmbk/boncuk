@@ -14,7 +14,6 @@
 #include <QSettings>
 
 #include "searchthread.h"
-#include <iostream>
 
 SearchThread::SearchThread(QObject *parent)
     : QThread(parent)
@@ -35,21 +34,22 @@ void SearchThread::search(QString keyword)
 {
     QSettings settings;
     this->keyword = keyword;
-    qDebug() << isRunning();
+
+    qDebug() << "SearchThread is Running : " << isRunning();
     if (!isRunning()) {
         if (settings.value("translation/method", 0).toInt() < 2) {
             connect(
                 sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sqliteDatabase->search(keyword);
-            qDebug() << "offline";
+            qDebug() << "Performing an Offline search";
         } else {
             connect(
                 sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sesliSozluk->search(keyword);
             lastSearchWasOffline = false;
-            qDebug() << "online";
+            qDebug() << "Searching Online";
         }
         start();
     } else {
@@ -61,14 +61,14 @@ void SearchThread::search(QString keyword)
                 sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             sqliteDatabase->search(keyword);
-            qDebug() << "offline";
+            qDebug() << "Performing an offline search";
         } else {
             connect(
                 sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
             lastSearchWasOffline = false;
             sesliSozluk->search(keyword);
-            qDebug() << "online";
+            qDebug() << "Searching online";
         }
     }
 }

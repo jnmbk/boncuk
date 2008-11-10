@@ -223,8 +223,6 @@ void MainWindow::search()
         history->setStringList( list.toSet().toList() );
         writeHistory();
         emit historyChanged(true);
-
-        qDebug() << "Added " << keyword->text() << " to history list";
     }
 
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
