@@ -41,8 +41,8 @@ void SearchThread::search(QString keyword)
             connect(
                 sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
-            sqliteDatabase->search(keyword);
             qDebug() << "Performing an Offline search";
+            sqliteDatabase->search(keyword);
         } else {
             connect(
                 sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
@@ -60,8 +60,8 @@ void SearchThread::search(QString keyword)
             connect(
                 sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> > *)),
                 this, SLOT(returnResult(QString, QList< QList<QVariant> > *)));
-            sqliteDatabase->search(keyword);
             qDebug() << "Performing an offline search";
+            sqliteDatabase->search(keyword);
         } else {
             connect(
                 sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> > *)),
