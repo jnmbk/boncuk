@@ -3,7 +3,6 @@ TARGET = boncuk
 VERSION = "0.6.2"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
-    QT_NO_DEBUG_OUTPUT \
     Q_OS_UNIX \
     BONCUK_VERSION=\\\"$$VERSION\\\" \
     DATABASE_LOCATION=\\\"$$DATABASE\\\"
@@ -31,6 +30,8 @@ RESOURCES += \
     resources/boncuk.qrc
 TRANSLATIONS += \
     resources/boncuk_tr_TR.ts
+
+CONFIG += debug
 
 DESTDIR = bin
 OBJECTS_DIR = build
