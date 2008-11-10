@@ -10,12 +10,11 @@
  * Please read the COPYING file.
  */
 
-#include <iostream>
-
 #include <QApplication>
 #include <QDebug>
 #include <QSettings>
 #include <QStringList>
+#include <QTextStream>
 #include "console.h"
 #include "searchthread.h"
 
@@ -41,8 +40,10 @@ void Console::search()
 
 void Console::showResults(QString word, QList< QList<QVariant> > *results)
 {
+    QTextStream out(stdout);
+
     for (int i=0; i < results->size(); i++) {
-        std::cout << results->at(i).at(1).toString().toUtf8().constData() << '\n';
+        out << results->at(i).at(1).toString().toUtf8().constData();
     }
 
     delete results;

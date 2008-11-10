@@ -20,8 +20,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QByteArray>
-
-#include <iostream>
+#include <QTextStream>
 
 #include "mainwindow.h"
 #include "console.h"
@@ -88,10 +87,10 @@ int main(int argc, char *argv[])
         // check instance for only gui startups
         if(!check_instance(argv)){
             mainWindow = new MainWindow();
-        }else{
-            std::cout << '\n' << app.translate("main", \
-                "There's an instance of program running\n").toUtf8().constData();
-            exit(1);
+        }else {
+            QTextStream out(stdout);
+            out << app.translate("main", "There's an instance of program running\n").toUtf8().constData();
+            app.quit();
         }
 #else
         mainWindow = new MainWindow();
