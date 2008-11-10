@@ -88,7 +88,7 @@ void SesliSozluk::continueSearch()
 
     // html parsing is done
 
-    qDebug() << data;
+    qDebug() << "RESULTS :" << data << '\n';
     turkish = data.indexOf("1.", data.indexOf(QString::fromUtf8("Türkçe Anlamı")));
     english = data.indexOf("1.", data.indexOf(QString::fromUtf8("İngilizce Anlamı")));
     german = data.indexOf("1.", data.indexOf(QString::fromUtf8("Almanca Anlamı")));
@@ -102,8 +102,7 @@ void SesliSozluk::continueSearch()
     if (german != -1)
         *results << pick(2,
                     data.mid(german, data.indexOf("", german) - german));
-    qDebug() << turkish << data.indexOf("", turkish) << english <<
-        data.indexOf("", english) << german << data.indexOf("", german);
+    // qDebug() << turkish << data.indexOf("", turkish) << english << data.indexOf("", english) << german << data.indexOf("", german);
 
     emit found(word, results);
 }

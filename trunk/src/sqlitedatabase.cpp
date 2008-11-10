@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QString>
 #include <QVariant>
 #include <QStringList>
@@ -143,7 +144,7 @@ void SqliteDatabase::search(QString word)
 void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
 {
     if(results->isEmpty() || dbs->size()<2) {
-        qDebug() << "No databases to add new results";
+        qDebug() << "No new results or No databases to add new results";
         return;
     }
 
