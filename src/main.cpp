@@ -49,7 +49,7 @@ bool check_instance(char **argv)
     instancecheck->close();
     delete instancecheck;
 
-    if( result.count( argv[0] ) <= 1 ){
+    if( result.count( QByteArray(argv[0]).prepend(" ") ) <= 1 ){
         return false;
     }else{
         return true;
@@ -89,8 +89,8 @@ int main(int argc, char *argv[])
             mainWindow = new MainWindow();
         }else {
             QTextStream out(stdout);
-            out << app.translate("main", "There's an instance of program running\n").toUtf8().constData();
-            app.quit();
+            out << app.translate("main", "There's an instance of program running\n");
+            app.exit(1);
         }
 #else
         mainWindow = new MainWindow();
