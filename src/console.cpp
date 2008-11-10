@@ -31,7 +31,7 @@ void Console::search()
         if (i < args.size()-1)
             keyword.append(" ");
     }
-    qDebug() << keyword;
+    qDebug() << "Searching : " << keyword;
 
     connect(
         searchThread, SIGNAL(found(QString, QList< QList<QVariant> > *)),
@@ -44,11 +44,13 @@ void Console::showResults(QString word, QList< QList<QVariant> > *results)
     for (int i=0; i < results->size(); i++) {
         std::cout << results->at(i).at(1).toString().toUtf8().constData() << '\n';
     }
+
     delete results;
-    exit(0);
+    qApp->quit();
 }
 
 Console::~Console()
 {
     delete searchThread;
 }
+
