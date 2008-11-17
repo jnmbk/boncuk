@@ -32,13 +32,15 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
     translation_method->setCurrentIndex(
             settings.value("translation/method").toInt());
 
+    /* Always check values that user can change */
+    if (settings.value("history/count", 100).toInt() < 1)
+        settings.setValue("history/count", QVariant(100));
+
     if(settings.value("history/enabled", QVariant(true)).toBool() == 1){
         history_enable->setCheckState(Qt::Checked);
-        wordcountSpinBox->setMaximum(1000);
-        wordcountSpinBox->setMinimum(0);
-        wordcountSpinBox->setValue(settings.value("history/count").toInt());
+        wordcountSpinBox->setValue(settings.value("history/count", 100).toInt());
     }else{
-        wordcountSpinBox->setValue(settings.value("history/count").toInt());
+        wordcountSpinBox->setValue(settings.value("history/count", 100).toInt());
         wordcountSpinBox->setEnabled(false);
     }
 
@@ -94,13 +96,6 @@ void ConfigWindow::writeSettings() {
             QVariant(trayIcon_minimizeOnClose->checkState()).toBool());
     settings.setValue("tray/startMinimized",
             QVariant(trayIcon_startMinimized->checkState()).toBool());
-    if(wordcountSpinBox->value() == 0){
-        settings.setValue("history/enabled", QVariant(0));
-        history_enable->setCheckState(Qt::Unchecked);
-    }else{
-        settings.setValue("history/enabled",
-                QVariant(history_enable->checkState()).toBool());
-    }
     settings.setValue("history/count",
             QVariant(wordcountSpinBox->value()));
     settings.setValue("add/enabled",
