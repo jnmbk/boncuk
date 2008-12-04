@@ -237,7 +237,8 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
         /* Search again with lowercase characters if search string is composed of uppercase characters */
         if (keyword->text() != keyword->text().toLower()) {
             keyword->setText(keyword->text().toLower());
-            search();
+            qDebug() << "lowering case...";
+            this->search();
         } else {
             resultBrowser->setHtml(tr("<b>No results found</b>"));
             statusBar()->showMessage(tr("No results found"));
