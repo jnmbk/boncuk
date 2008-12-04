@@ -1,3 +1,6 @@
+2008-12-04 Uğur Çetin <jnmbk@users.sourceforge.net>
+* Search again with lowercase characters if search string is composed of uppercase characters
+
 2008-11-17 Uğur Çetin <jnmbk@users.sourceforge.net>
 * Fixed a bug that caused crash when searching while history count is set to 0
 by hand or by a defective update
