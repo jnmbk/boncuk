@@ -138,7 +138,7 @@ void MainWindow::setSettings()
         settings.setValue("mainWindow/geo", QVariant(QSize(400, 300)));
     }
     // ara sürümdeki count=0 hatası için workaround
-    if(!settings.contains("history/count") || !0 < settings.value("history/count").toInt())
+    if(settings.value("history/count", 100).toInt() < 1)
         settings.setValue("history/count", QVariant(100));
     if(!settings.contains("add/enabled"))
         settings.setValue("add/enabled", QVariant(false));
@@ -212,8 +212,8 @@ void MainWindow::search()
 
         QStringList list( history->stringList() );
 
-        if(list.size() >= settings.value("history/count").toInt()){
-            while(list.size() >= settings.value("history/count").toInt()){
+        if(list.size() >= settings.value("history/count", 100).toInt()){
+            while(list.size() >= settings.value("history/count", 100).toInt()){
                 list.removeLast();
             }
         }
@@ -234,8 +234,14 @@ void MainWindow::search()
 void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
 {
     if (results->isEmpty()) {
-        resultBrowser->setHtml(tr("<b>No results found</b>"));
-        statusBar()->showMessage(tr("No results found"));
+        /* Search again with lowercase characters if search string is composed of uppercase characters */
+        if (keyword->text() != keyword->text().toLower()) {
+            keyword->setText(keyword->text().toLower());
+            search();
+        } else {
+            resultBrowser->setHtml(tr("<b>No results found</b>"));
+            statusBar()->showMessage(tr("No results found"));
+        }
     }
     else {
         QString resultText;
