@@ -33,22 +33,22 @@
         <translation>Daima Çevrimiçi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="134"/>
+        <location filename="../ui/configwindow.ui" line="137"/>
         <source>Tray Icon</source>
         <translation>Bildiri Simgesi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="140"/>
+        <location filename="../ui/configwindow.ui" line="143"/>
         <source>Enable Tray Icon</source>
         <translation>Bildiri Simgesini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="147"/>
+        <location filename="../ui/configwindow.ui" line="150"/>
         <source>Minimize to Tray on Close</source>
         <translation>Kapatınca Bildirim Alanına Küçült</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="154"/>
+        <location filename="../ui/configwindow.ui" line="157"/>
         <source>Start Minimized</source>
         <translation>Küçültülmüş Olarak Başla</translation>
     </message>
@@ -58,12 +58,12 @@
         <translation>Arama Geçmişi</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="104"/>
+        <location filename="../ui/configwindow.ui" line="107"/>
         <source>words</source>
         <translation>kelime</translation>
     </message>
     <message>
-        <location filename="../ui/configwindow.ui" line="113"/>
+        <location filename="../ui/configwindow.ui" line="116"/>
         <source>Add fetched words to database</source>
         <translation>İndirilen çevirileri veritabanına ekle</translation>
     </message>
@@ -111,42 +111,42 @@
         <translation>Alt+F4</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="210"/>
+        <location filename="../src/mainwindow.cpp" line="244"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="255"/>
+        <location filename="../src/mainwindow.cpp" line="290"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="201"/>
+        <location filename="../src/mainwindow.cpp" line="229"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="209"/>
+        <location filename="../src/mainwindow.cpp" line="243"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="218"/>
+        <location filename="../src/mainwindow.cpp" line="253"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="287"/>
+        <location filename="../src/mainwindow.cpp" line="322"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="273"/>
+        <location filename="../src/mainwindow.cpp" line="308"/>
         <source>Developers:</source>
         <translation>Geliştiriciler:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="67"/>
+        <location filename="../src/mainwindow.cpp" line="69"/>
         <source>Type in a keyword to search</source>
         <translation>Aranacak sözcüğü veya sözcük öbeğini yazın</translation>
     </message>
@@ -181,7 +181,7 @@
         <translation>Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="127"/>
+        <location filename="../src/mainwindow.cpp" line="154"/>
         <source>History deleted</source>
         <translation>Geçmiş silindi</translation>
     </message>
@@ -196,7 +196,7 @@
         <translation>&amp;Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="277"/>
+        <location filename="../src/mainwindow.cpp" line="312"/>
         <source>About Boncuk</source>
         <translation>Boncuk Hakkında</translation>
     </message>
@@ -216,14 +216,14 @@
         <translation>Boncuk Programını &amp;Yapılandır...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="305"/>
         <source>Boncuk %1 - online/offline dictionary
 </source>
         <translation>Boncuk %1 - çevrimiçi/çevrimdışı sözlük
 </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="307"/>
         <source>This software is released under the terms of GPL v2.
 </source>
         <translation>Bu program GPL v2 lisansı altında dağıtılmaktadır.
@@ -243,11 +243,26 @@ p, li { white-space: pre-wrap; }
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="275"/>
+        <source>English</source>
+        <translation>İngilizce</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="276"/>
+        <source>German</source>
+        <translation>Almanca</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="274"/>
+        <source>Turkish</source>
+        <translation>Türkçe</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="87"/>
+        <location filename="../src/main.cpp" line="92"/>
         <source>There&apos;s an instance of program running
 </source>
         <translation>Program bir yerlerde zaten çalışıyor</translation>
