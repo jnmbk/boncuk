@@ -246,7 +246,7 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
     }
     else {
         QString resultText;
-        QList<QString> en, tr, ge;
+        QList<QString> eng, trq, ger;
         QListIterator< QList<QVariant> > i(*results);
 
         statusBar()->showMessage(
@@ -255,25 +255,25 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
             QList<QVariant> translation = i.next();
             switch (translation[0].toInt()) {
                 case 0:
-                    tr.append(translation[1].toString());
+                    trq.append(translation[1].toString());
                     break;
                 case 1:
-                    en.append(translation[1].toString());
+                    eng.append(translation[1].toString());
                     break;
                 case 2:
-                    ge.append(translation[1].toString());
+                    ger.append(translation[1].toString());
                     break;
             }
         }
 
         if (guiLanguage == QString("tr")){
-            resultText.append(prettyResult( en, QString("English")));
-            resultText.append(prettyResult( ge, QString("German")));
-            resultText.append(prettyResult( tr, QString("Turkish")));
+            resultText.append(prettyResult( eng, tr("English")));
+            resultText.append(prettyResult( ger, tr("German")));
+            resultText.append(prettyResult( trq, tr("Turkish")));
         }else{
-            resultText.append(prettyResult( tr, QString("Turkish")));
-            resultText.append(prettyResult( en, QString("English")));
-            resultText.append(prettyResult( ge, QString("German")));
+            resultText.append(prettyResult( trq, tr("Turkish")));
+            resultText.append(prettyResult( eng, tr("English")));
+            resultText.append(prettyResult( ger, tr("German")));
         }
 
         resultBrowser->setHtml(resultText);
@@ -287,8 +287,7 @@ QString MainWindow::prettyResult( QList<QString> lang, QString text )
     if(!lang.isEmpty()){
         resultText.append(
             QString("<b>%1</b><br />").arg(
-                this->tr("%1 translation of %2").arg(
-                    this->tr(text.toUtf8().constData()), keyword->text())));
+                this->tr("%1 translation of %2").arg(text, keyword->text())));
         for(int i=0; i<lang.size(); i++){
             resultText.append(QString("%1. %2<br />").arg(i+1).arg(lang[i]));
         }
@@ -347,6 +346,9 @@ void MainWindow::exitSlot()
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.setValue("mainWindow/geo", QVariant(this->size()));
     settings.sync();
+
+    if(searchThread->isRunning())
+        searchThread->quit();
 
     qDebug() << "Bye Bye ..";
     qApp->quit();
