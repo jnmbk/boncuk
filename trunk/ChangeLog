@@ -1,3 +1,9 @@
+2008-12-14 İşbaran Akçayır <isbaran@gmail.com>
+* src/seslisozluk.cpp changed seslisozluk address to old.seslisozluk.com
+* src/mainwindow.cpp changed about dialog a little, more qt'ish code
+* src/main.cpp console didn't quit properly, so added a return statement after
+search
+
 2008-12-04 Uğur Çetin <jnmbk@users.sourceforge.net>
 * Search again with lowercase characters if search string is composed of uppercase characters
 
