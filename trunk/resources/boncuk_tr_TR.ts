@@ -136,14 +136,9 @@
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="320"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="308"/>
-        <source>Developers:</source>
-        <translation>Geliştiriciler:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="69"/>
@@ -196,7 +191,7 @@
         <translation>&amp;Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="312"/>
+        <location filename="../src/mainwindow.cpp" line="310"/>
         <source>About Boncuk</source>
         <translation>Boncuk Hakkında</translation>
     </message>
@@ -214,20 +209,6 @@
         <location filename="../ui/mainwindow.ui" line="154"/>
         <source>&amp;Configure Boncuk...</source>
         <translation>Boncuk Programını &amp;Yapılandır...</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="305"/>
-        <source>Boncuk %1 - online/offline dictionary
-</source>
-        <translation>Boncuk %1 - çevrimiçi/çevrimdışı sözlük
-</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="307"/>
-        <source>This software is released under the terms of GPL v2.
-</source>
-        <translation>Bu program GPL v2 lisansı altında dağıtılmaktadır.
-</translation>
     </message>
     <message>
         <location filename="../ui/mainwindow.ui" line="60"/>
@@ -258,11 +239,32 @@ p, li { white-space: pre-wrap; }
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="308"/>
+        <source>Boncuk %1 - online/offline dictionary
+This software is released under the terms of GPL v2.
+http://pysozluk-qt.wiki.sourceforge.net
+
+Developers:
+&#xc4;&#xb0;lker Kesen &lt;ilker.kde at gmail.com&gt;
+&#xc4;&#xb0;&#xc5;&#x9f;baran Ak&#xc3;&#xa7;ay&#xc4;&#xb1;r &lt;isbaran at gmail.com&gt;
+U&#xc4;&#x9f;ur &#xc3;&#x87;etin &lt;ugur.jnmbk at gmail.com&gt;
+</source>
+<translation>Boncuk %1 - &#xc3;&#xa7;evrimi&#xc3;&#xa7;i/&#xc3;&#xa7;evrimd&#xc4;&#xb1;&#xc5;&#x9f;&#xc4;&#xb1; s&#xc3;&#xb6;zl&#xc3;&#xbc;k
+Bu program GPL v2 lisans&#xc4;&#xb1; alt&#xc4;&#xb1;nda da&#xc4;&#x9f;&#xc4;&#xb1;t&#xc4;&#xb1;lmaktad&#xc4;&#xb1;r.
+http://pysozluk-qt.wiki.sourceforge.net
+
+Geli&#xc5;&#x9f;tiriciler:
+&#xc4;&#xb0;lker Kesen &lt;ilker.kde at gmail.com&gt;
+&#xc4;&#xb0;&#xc5;&#x9f;baran Ak&#xc3;&#xa7;ay&#xc4;&#xb1;r &lt;isbaran at gmail.com&gt;
+U&#xc4;&#x9f;ur &#xc3;&#x87;etin &lt;ugur.jnmbk at gmail.com&gt;
+</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <location filename="../src/main.cpp" line="92"/>
+        <location filename="../src/main.cpp" line="93"/>
         <source>There&apos;s an instance of program running
 </source>
         <translation>Program bir yerlerde zaten çalışıyor</translation>
