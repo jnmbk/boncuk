@@ -47,7 +47,6 @@ void Console::showResults(QString word, QList< QList<QVariant> > *results)
     }
 
     delete results;
-    qApp->quit();
 }
 
 Console::~Console()
