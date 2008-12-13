@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
         Console *console = new Console();
         console->search();
         delete console;
+        return 0;
     } else {
 #ifdef Q_OS_UNIX
         // check instance for only gui startups
