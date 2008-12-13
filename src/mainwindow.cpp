@@ -299,15 +299,13 @@ QString MainWindow::prettyResult( QList<QString> lang, QString text )
 
 void MainWindow::aboutBoncuk()
 {
-    QString aboutText = QString::fromUtf8((tr(
-"Boncuk %1 - online/offline dictionary\n\
+    QString aboutText = QString::fromUtf8((tr("Boncuk %1 - online/offline dictionary\n\
 This software is released under the terms of GPL v2.\n\
 http://pysozluk-qt.wiki.sourceforge.net\n\n\
 Developers:\n\
 İlker Kesen <ilker.kde at gmail.com>\n\
 İşbaran Akçayır <isbaran at gmail.com>\n\
-Uğur Çetin <ugur.jnmbk at gmail.com>\n"
-    ).arg(BONCUK_VERSION)).toAscii().constData());
+Uğur Çetin <ugur.jnmbk at gmail.com>\n").arg(BONCUK_VERSION)).toAscii().constData());
 
     QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }
