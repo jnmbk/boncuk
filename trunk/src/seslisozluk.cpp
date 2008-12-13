@@ -24,7 +24,7 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
     : QObject(parent)
 {
     http = new QHttp(this);
-    http->setHost("www.seslisozluk.com");
+    http->setHost("old.seslisozluk.com");
     connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch()));
 }
 
