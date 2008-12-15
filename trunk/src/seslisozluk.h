@@ -40,7 +40,7 @@ class SesliSozluk : public QObject
         QString word;
 
     private slots:
-        void continueSearch();
+        void continueSearch(bool);
 };
 
 #endif
