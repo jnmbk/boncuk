@@ -25,7 +25,7 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
 {
     http = new QHttp(this);
     http->setHost("old.seslisozluk.com");
-    connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch()));
+    connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch(bool)));
 }
 
 SesliSozluk::~SesliSozluk()
@@ -58,8 +58,14 @@ void SesliSozluk::search(QString keyword)
     http->get(QString("/?word=%1").arg(keyword));
 }
 
-void SesliSozluk::continueSearch()
+void SesliSozluk::continueSearch(bool err)
 {
+    if(err){
+        // http://doc.trolltech.com/4.4/qhttp.html#Error-enum
+        qDebug() << "Error getting internet result: " << http->error();
+        return;
+    }
+
     QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
     QTextCodec *codec = QTextCodec::codecForName("ISO 8859-9");
     QString text;

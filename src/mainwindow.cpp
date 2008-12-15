@@ -234,7 +234,8 @@ void MainWindow::search()
 void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
 {
     if (results->isEmpty()) {
-        /* Search again with lowercase characters if search string is composed of uppercase characters */
+        // Search again with lowercase characters if search string is composed of uppercase characters
+        //TODO update db with all lower case, or make insensitive searches in db
         if (keyword->text() != keyword->text().toLower()) {
             keyword->setText(keyword->text().toLower());
             qDebug() << "lowering case...";

@@ -1,3 +1,6 @@
+2008-12-15 İşbaran Akçayır <isbaran@gmail.com>
+* src/seslisozluk.cpp check qhttp errors
+
 2008-12-14 İşbaran Akçayır <isbaran@gmail.com>
 * src/seslisozluk.cpp changed seslisozluk address to old.seslisozluk.com
 * src/mainwindow.cpp changed about dialog a little, more qt'ish code
