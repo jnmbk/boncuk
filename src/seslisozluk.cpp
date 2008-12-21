@@ -58,6 +58,7 @@ void SesliSozluk::search(QString keyword)
     convertToTurkishWeb(&keyword);
     header.setRequest("GET", QString("/?word=%1").arg(keyword));
     header.setValue("Cookie", "compact_view=1");
+    header.setValue("Host", "www.seslisozluk.com");
     qDebug() << "Header:" << header.toString();
     http->request(header);
 }
@@ -65,8 +66,7 @@ void SesliSozluk::search(QString keyword)
 void SesliSozluk::continueSearch(bool err)
 {
     if(err){
-        // http://doc.trolltech.com/4.4/qhttp.html#Error-enum
-        qDebug() << "Error getting internet result: " << http->error();
+        qDebug() << "Error getting internet result: " << http->errorString();
         return;
     }
 
