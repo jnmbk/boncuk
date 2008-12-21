@@ -43,7 +43,7 @@ void Console::showResults(QString word, QList< QList<QVariant> > *results)
     QTextStream out(stdout);
 
     for (int i=0; i < results->size(); i++) {
-        out << results->at(i).at(1).toString();
+        out << results->at(i).at(1).toString() << '\n';
     }
 
     delete results;
@@ -55,4 +55,3 @@ Console::~Console()
         searchThread->quit();
     delete searchThread;
 }
-
