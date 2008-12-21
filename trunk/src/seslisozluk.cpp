@@ -12,9 +12,9 @@
 
 #include <QDebug>
 #include <QHttp>
+#include <QHttpRequestHeader>
 #include <QList>
 #include <QString>
-#include <QTextCodec>
 #include <QVariant>
 #include <QVariant>
 #include <QSettings>
@@ -24,7 +24,7 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
     : QObject(parent)
 {
     http = new QHttp(this);
-    http->setHost("old.seslisozluk.com");
+    http->setHost("www.seslisozluk.com");
     connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch(bool)));
 }
 
@@ -53,9 +53,13 @@ void SesliSozluk::convertToTurkishWeb(QString *word)
 
 void SesliSozluk::search(QString keyword)
 {
+    QHttpRequestHeader header;
     word = keyword;
     convertToTurkishWeb(&keyword);
-    http->get(QString("/?word=%1").arg(keyword));
+    header.setRequest("GET", QString("/?word=%1").arg(keyword));
+    header.setValue("Cookie", "compact_view=1");
+    qDebug() << "Header:" << header.toString();
+    http->request(header);
 }
 
 void SesliSozluk::continueSearch(bool err)
@@ -67,22 +71,22 @@ void SesliSozluk::continueSearch(bool err)
     }
 
     QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
-    QTextCodec *codec = QTextCodec::codecForName("ISO 8859-9");
     QString text;
     QStringList data;
     int i, j, turkish, english, german;
 
-    text = codec->toUnicode(http->readAll());
+    text = http->readAll();
+    qDebug() << "HTML:" << text;
 
     //now we can parse it
-    text.remove(0, text.indexOf('>', text.indexOf("double_click_zone")) + 1);
-    text.remove(text.indexOf("</table>"), text.size());
-    text.replace("&nbsp;", " ");
+    text.remove(0, text.indexOf('>', text.indexOf("tabsResult")) + 1);
+    text.remove(text.indexOf(" <!-- <div id=translations -->"), text.size());
     if (text.count('<') != text.count('>')){
         emit found(word, results);
         return; //this will happen when we have a really bad syntax error
     }
     do {
+        /* remove all html tags like <div>, </div> */
         i = text.indexOf('<');
         text.remove(i, text.indexOf('>') - i + 1);
         j = text.indexOf('<');
@@ -95,9 +99,9 @@ void SesliSozluk::continueSearch(bool err)
     // html parsing is done
 
     qDebug() << "RESULTS :" << data << '\n';
-    turkish = data.indexOf("1.", data.indexOf(QString::fromUtf8("Türkçe Anlamı")));
-    english = data.indexOf("1.", data.indexOf(QString::fromUtf8("İngilizce Anlamı")));
-    german = data.indexOf("1.", data.indexOf(QString::fromUtf8("Almanca Anlamı")));
+    turkish = data.indexOf("1.", data.indexOf(QString::fromUtf8("Türkçe çeviriler")));
+    english = data.indexOf("1.", data.indexOf(QString::fromUtf8("İngilizce çeviriler")));
+    german = data.indexOf("1.", data.indexOf(QString::fromUtf8("Almanca çeviriler")));
 
     if (turkish != -1)
         *results << pick(0,
