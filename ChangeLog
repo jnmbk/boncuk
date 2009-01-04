@@ -1,3 +1,6 @@
+2009-01-04 Uğur Çetin <jnmbk@users.sourceforge.net>
+* src/seslisozluk.cpp adapted to new seslisozluk
+
 2008-12-15 İşbaran Akçayır <isbaran@gmail.com>
 * src/seslisozluk.cpp check qhttp errors
 
