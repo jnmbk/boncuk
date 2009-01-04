@@ -15,6 +15,7 @@
 #include <QHttpRequestHeader>
 #include <QList>
 #include <QString>
+#include <QTextCodec>
 #include <QVariant>
 #include <QVariant>
 #include <QSettings>
@@ -71,11 +72,12 @@ void SesliSozluk::continueSearch(bool err)
     }
 
     QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
+    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QString text;
     QStringList data;
     int i, j, turkish, english, german;
 
-    text = http->readAll();
+    text = codec->toUnicode(http->readAll());
     qDebug() << "HTML:" << text;
 
     //now we can parse it
@@ -99,9 +101,9 @@ void SesliSozluk::continueSearch(bool err)
     // html parsing is done
 
     qDebug() << "RESULTS :" << data << '\n';
-    turkish = data.indexOf("1.", data.indexOf(QString::fromUtf8("Türkçe çeviriler")));
-    english = data.indexOf("1.", data.indexOf(QString::fromUtf8("İngilizce çeviriler")));
-    german = data.indexOf("1.", data.indexOf(QString::fromUtf8("Almanca çeviriler")));
+    turkish = data.indexOf("1.", data.indexOf(QString::fromUtf8("Türkçe")));
+    english = data.indexOf("1.", data.indexOf(QString::fromUtf8("İngilizce")));
+    german = data.indexOf("1.", data.indexOf(QString::fromUtf8("Almanca")));
 
     if (turkish != -1)
         *results << pick(0,
