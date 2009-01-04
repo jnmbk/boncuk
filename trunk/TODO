@@ -12,6 +12,7 @@
 -- DB --
 * Create a db editor gui to let people create dictionaries
 * Change db relations so we can add other languages easily
+* Change db words to lowercase
 
 -- DOC --
 * Prepare some help text
