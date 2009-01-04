@@ -37,19 +37,19 @@ SesliSozluk::~SesliSozluk()
 
 void SesliSozluk::convertToTurkishWeb(QString *word)
 {
-    word->replace(QString::fromUtf8("ı"), "%FD");
-    word->replace(QString::fromUtf8("İ"), "%DD");
-    word->replace(QString::fromUtf8("ö"), "%F6");
-    word->replace(QString::fromUtf8("Ö"), "%D6");
-    word->replace(QString::fromUtf8("ç"), "%E7");
-    word->replace(QString::fromUtf8("Ç"), "%C7");
-    word->replace(QString::fromUtf8("ş"), "%FE");
-    word->replace(QString::fromUtf8("Ş"), "%DE");
-    word->replace(QString::fromUtf8("ğ"), "%F0");
-    word->replace(QString::fromUtf8("Ğ"), "%D0");
-    word->replace(QString::fromUtf8("ü"), "%FC");
-    word->replace(QString::fromUtf8("Ü"), "%DC");
-    word->replace(" ", "%20");
+    word->replace(QString::fromUtf8("ı"), "%C4%B1");
+    word->replace(QString::fromUtf8("İ"), "%C4%B0");
+    word->replace(QString::fromUtf8("ö"), "%C3%B6");
+    word->replace(QString::fromUtf8("Ö"), "%C3%96");
+    word->replace(QString::fromUtf8("ç"), "%C3%A7");
+    word->replace(QString::fromUtf8("Ç"), "%C3%87");
+    word->replace(QString::fromUtf8("ş"), "%C5%9F");
+    word->replace(QString::fromUtf8("Ş"), "%C5%9E");
+    word->replace(QString::fromUtf8("ğ"), "%C4%9F");
+    word->replace(QString::fromUtf8("Ğ"), "%C4%9E");
+    word->replace(QString::fromUtf8("ü"), "%C3%BC");
+    word->replace(QString::fromUtf8("Ü"), "%C3%9C");
+    word->replace(" ", "+");
 }
 
 void SesliSozluk::search(QString keyword)
