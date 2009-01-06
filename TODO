@@ -1,8 +1,10 @@
 -- GUI / APP --
 * Add the ability to display a borderless popup window with translation of the word in clipboard.
-* Make it easy to enter German special characters(we also support German)
+* Make it easy to enter German special characters(we also support German and a lot more coming :) )
 * Add history navigation to history menu, add history export/save functionality ( html etc. )
 * Maybe add a little update tool
+* Make search button clickable (with a down arrow) opening a popup, so user can select to search a 
+    word in internet even if general settings say search offline first
 
 * Ask to download offline database at first run (if it's not in our default directory)
 * Ask to send missing words to us, so we can add them to database, xmlrpc support in short
