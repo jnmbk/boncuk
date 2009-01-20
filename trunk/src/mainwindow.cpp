@@ -167,12 +167,12 @@ void MainWindow::keyPressEvent( QKeyEvent *event )
         if( settings.value("tray/enabled").toBool() &&
             settings.value("tray/minimizeOnClose").toBool() ){
             this->close();
-        }else{
+        }else
             QWidget::keyPressEvent(event);
-        }
-    }else{
+    }else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && searchButton->isEnabled() && keyword->hasFocus()){
+        search();
+    }else
         QWidget::keyPressEvent(event);
-        }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -213,7 +213,6 @@ void MainWindow::createMenu()
     smenu->addAction(actionSearchOn);
     smenu->addSeparator();
     smenu->addAction(actionSearchOff);
-    searchButton->setMenu(smenu);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
