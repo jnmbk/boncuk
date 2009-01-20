@@ -17,14 +17,6 @@
     <normaloff>:/boncuk.png</normaloff>:/boncuk.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>27</y>
-     <width>400</width>
-     <height>249</height>
-    </rect>
-   </property>
    <layout class="QGridLayout" >
     <item row="1" column="0" >
      <layout class="QHBoxLayout" >
@@ -46,6 +38,9 @@
         <property name="icon" >
          <iconset resource="../resources/boncuk.qrc" >
           <normaloff>:/find.png</normaloff>:/find.png</iconset>
+        </property>
+        <property name="flat" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -73,7 +68,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>27</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
@@ -101,16 +96,7 @@ p, li { white-space: pre-wrap; }
    <addaction name="menuHistory" />
    <addaction name="menuHelp" />
   </widget>
-  <widget class="QStatusBar" name="statusbar" >
-   <property name="geometry" >
-    <rect>
-     <x>0</x>
-     <y>276</y>
-     <width>400</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
+  <widget class="QStatusBar" name="statusbar" />
   <action name="actionHelp" >
    <property name="text" >
     <string>&amp;Index</string>
@@ -212,6 +198,24 @@ p, li { white-space: pre-wrap; }
   <action name="actionHistoryClear" >
    <property name="text" >
     <string>&amp;Clear</string>
+   </property>
+  </action>
+  <action name="actionSearchOn" >
+   <property name="icon" >
+    <iconset resource="../resources/boncuk.qrc" >
+     <normaloff>:/online.png</normaloff>:/online.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Search Online</string>
+   </property>
+  </action>
+  <action name="actionSearchOff" >
+   <property name="icon" >
+    <iconset resource="../resources/boncuk.qrc" >
+     <normaloff>:/offline.png</normaloff>:/offline.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Search Offline</string>
    </property>
   </action>
  </widget>
