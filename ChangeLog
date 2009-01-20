@@ -1,3 +1,10 @@
+2009-01-20 Uğur Çetin <jnmbk@users.sourceforge.net>
+* src/seslisozluk.cpp adapted to seslisozluk change
+
+2009-01-20 İşbaran Akçayır <isbaran@gmail.com>
+* src/mainwindow.cpp added popup button to search button, pressing more than a
+second lets you choose translation method
+
 2009-01-04 Uğur Çetin <jnmbk@users.sourceforge.net>
 * src/seslisozluk.cpp adapted to new seslisozluk
 
