@@ -19,6 +19,7 @@
 #include <QStringListModel>
 #include <QVariant>
 #include <QSettings>
+#include <QTime>
 #include <QWidget>
 
 #include "searchthread.h"
@@ -40,12 +41,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     public:
         MainWindow(QWidget *parent = 0);
         ~MainWindow();
-        QSystemTrayIcon *tray;
         QSettings settings;
-        QMenu *menu;
-        QCompleter *completer;
         ConfigWindow *configWindow;
-        QStringListModel *history;
         QString guiLanguage;
 
         void createMenu();
@@ -56,6 +53,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showResults(QString, QList< QList<QVariant> > *);
         void clearHistory();
         void search();
+        void searchOnline();
+        void searchOffline();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void exitSlot();
 
@@ -64,18 +63,25 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     protected:
         void keyPressEvent( QKeyEvent * );
-        void closeEvent(QCloseEvent *);
+        void closeEvent( QCloseEvent * );
+        bool eventFilter(QObject *obj, QEvent *ev);
 
     private:
+        QMenu *menu;
+        QMenu *smenu;
+        QTime time;
+        QCompleter *completer;
+        QSystemTrayIcon *tray;
+        QStringListModel *history;
         SearchThread *searchThread;
         QValidator *validator;
-        void writeHistory();
-        QString prettyResult(QList<QString>, QString);
 
     private slots:
         void aboutBoncuk();
         void aboutQt();
         void pressEnterMessage();
+        void writeHistory();
+        QString prettyResult(QList<QString>, QString);
 };
 
 

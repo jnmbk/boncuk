@@ -25,7 +25,7 @@
 #include <QSystemTrayIcon>
 #include <QCloseEvent>
 #include <QProcess>
-#include <QSet>
+#include <QEvent>
 #include <QWidget>
 
 #include "configwindow.h"
@@ -41,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent)
     tray = new QSystemTrayIcon(this->windowIcon(), this);
 
     createMenu();
+
+    QTime time;
+    searchButton->installEventFilter(this);
 
     if(settings.value("tray/enabled", true).toBool()) {
         tray->show();
@@ -77,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(
         searchThread, SIGNAL(found(QString, QList< QList<QVariant> > *)),
         this, SLOT(showResults(QString, QList< QList<QVariant> > *)));
-    connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
+    //connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -91,6 +94,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
     connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
     connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
+    connect(actionSearchOn, SIGNAL(activated()), this, SLOT(searchOnline()));
+    connect(actionSearchOff, SIGNAL(activated()), this, SLOT(searchOffline()));
 }
 
 MainWindow::~MainWindow()
@@ -195,12 +200,40 @@ void MainWindow::showOrHideUi(
 
 void MainWindow::createMenu()
 {
+    // popup menu for tray
     menu = new QMenu();
     menu->addAction(actionAbout_Boncuk);
     menu->addAction(actionConfigure);
     menu->addSeparator();
     menu->addAction(actionQuit);
     tray->setContextMenu(menu);
+
+    // popup menu for search button
+    smenu = new QMenu();
+    smenu->addAction(actionSearchOn);
+    smenu->addSeparator();
+    smenu->addAction(actionSearchOff);
+    searchButton->setMenu(smenu);
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    if(obj == searchButton && searchButton->isEnabled()){
+        if(event->type() == QEvent::MouseButtonPress){
+            time.restart();
+            return true;
+        }else if(event->type() == QEvent::MouseButtonRelease){
+            if(time.elapsed() < 1000){
+                search();
+                return true;
+            }else{
+                smenu->popup(QWidget::mapToGlobal(QPoint(searchButton->x(), searchButton->y() + searchButton->height())));
+                return true;
+            }
+        }else
+            return false;
+    }else
+        return QMainWindow::eventFilter(obj, event);
 }
 
 void MainWindow::search()
@@ -229,6 +262,22 @@ void MainWindow::search()
     statusBar()->showMessage(tr("Searching \"%1\"").arg(keyword->text()));
     searchThread->search(keyword->text());
     keyword->setSelection(0, (keyword->text()).size());
+}
+
+void MainWindow::searchOnline()
+{
+    int old_ = settings.value("translation/method", 0).toInt();
+    settings.setValue("translation/method", QVariant(2));
+    search();
+    settings.setValue("translation/method", QVariant(old_));
+}
+
+void MainWindow::searchOffline()
+{
+    int old_ = settings.value("translation/method", 0).toInt();
+    settings.setValue("translation/method", QVariant(1));
+    search();
+    settings.setValue("translation/method", QVariant(old_));
 }
 
 void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
