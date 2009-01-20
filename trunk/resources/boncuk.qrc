@@ -5,6 +5,8 @@
         <file>find.png</file>
         <file>locale.png</file>
         <file>boncuk.png</file>
+        <file>online.png</file>
+        <file>offline.png</file>
         <file>boncuk_tr_TR.qm</file>
     </qresource>
 </RCC>
