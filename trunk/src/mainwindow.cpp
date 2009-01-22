@@ -275,7 +275,6 @@ void MainWindow::searchOnline()
     settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
 
     settings.setValue("translation/method", QVariant(2));
-    settings.sync();
     search();
     settings.setValue("translation/method", QVariant(old_method));
 }
@@ -286,7 +285,6 @@ void MainWindow::searchOffline()
     settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
 
     settings.setValue("translation/method", QVariant(1));
-    settings.sync();
     search();
     settings.setValue("translation/method", QVariant(old_));
 }
