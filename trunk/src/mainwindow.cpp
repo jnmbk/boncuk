@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     guiLanguage = QLocale::system().name();
     guiLanguage.truncate(2);
+    qDebug() << "Gui Language : " << guiLanguage;
 
     searchThread = new SearchThread(this);
     configWindow = new ConfigWindow(this, tray);
@@ -264,6 +265,7 @@ void MainWindow::search()
 
     resultBrowser->setHtml(tr("Searching \"%1\"").arg(keyword->text()));
     statusBar()->showMessage(tr("Searching \"%1\"").arg(keyword->text()));
+    searchButton->setEnabled(false);
     searchThread->search(keyword->text());
     keyword->setSelection(0, (keyword->text()).size());
 }
@@ -337,6 +339,7 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
 
         resultBrowser->setHtml(resultText);
     }
+    searchButton->setEnabled(true);
     delete results;
 }
 
