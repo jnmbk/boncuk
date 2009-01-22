@@ -31,7 +31,7 @@
        <widget class="QLineEdit" name="keyword" />
       </item>
       <item>
-       <widget class="QPushButton" name="searchButton" >
+       <widget class="QToolButton" name="searchButton" >
         <property name="text" >
          <string>&amp;Search</string>
         </property>
@@ -39,8 +39,11 @@
          <iconset resource="../resources/boncuk.qrc" >
           <normaloff>:/find.png</normaloff>:/find.png</iconset>
         </property>
-        <property name="flat" >
-         <bool>true</bool>
+        <property name="autoExclusive" >
+         <bool>false</bool>
+        </property>
+        <property name="toolButtonStyle" >
+         <enum>Qt::ToolButtonTextBesideIcon</enum>
         </property>
        </widget>
       </item>
@@ -221,27 +224,9 @@ p, li { white-space: pre-wrap; }
  </widget>
  <tabstops>
   <tabstop>keyword</tabstop>
-  <tabstop>searchButton</tabstop>
  </tabstops>
  <resources>
   <include location="../resources/boncuk.qrc" />
  </resources>
- <connections>
-  <connection>
-   <sender>keyword</sender>
-   <signal>returnPressed()</signal>
-   <receiver>searchButton</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>189</x>
-     <y>255</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>353</x>
-     <y>255</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
