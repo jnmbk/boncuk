@@ -193,6 +193,7 @@ void MainWindow::showOrHideUi(
         } else {
             this->move(settings.value("mainWindow/pos").toPoint());
             this->resize(settings.value("mainWindow/geo").toSize());
+            keyword->setSelection(0, (keyword->text()).size());
             this->show();
         }
     }
@@ -213,22 +214,27 @@ void MainWindow::createMenu()
     smenu->addAction(actionSearchOn);
     smenu->addSeparator();
     smenu->addAction(actionSearchOff);
+    searchButton->setMenu(smenu);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
     if(obj == searchButton && searchButton->isEnabled()){
+        qApp->setDoubleClickInterval(0);
         if(event->type() == QEvent::MouseButtonPress){
             time.restart();
             return true;
         }else if(event->type() == QEvent::MouseButtonRelease){
-            if(time.elapsed() < 1000){
+            if(qApp->doubleClickInterval() < time.elapsed() && time.elapsed() < 800){
                 search();
                 return true;
             }else{
-                smenu->popup(QWidget::mapToGlobal(QPoint(searchButton->x(), searchButton->y() + searchButton->height())));
+                searchButton->showMenu();
                 return true;
             }
+        }else if(event->type() == QEvent::MouseButtonDblClick){
+            searchButton->showMenu();
+            return false;
         }else
             return false;
     }else
