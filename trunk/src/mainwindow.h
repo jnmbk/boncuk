@@ -75,6 +75,9 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QStringListModel *history;
         SearchThread *searchThread;
         QValidator *validator;
+        /* set fatd to 'add/enabled's value to override global settings
+         * and not add a word to user databases */
+        int fatd;
 
     private slots:
         void aboutBoncuk();

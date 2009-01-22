@@ -41,8 +41,6 @@ MainWindow::MainWindow(QWidget *parent)
     tray = new QSystemTrayIcon(this->windowIcon(), this);
 
     createMenu();
-
-    QTime time;
     searchButton->installEventFilter(this);
 
     if(settings.value("tray/enabled", true).toBool()) {
@@ -149,6 +147,7 @@ void MainWindow::setSettings()
         settings.setValue("add/enabled", QVariant(false));
     if(!settings.contains("history/enabled"))
         settings.setValue("history/enabled", QVariant(true));
+    settings.setValue("fatdb", QVariant(-1));
 }
 
 void MainWindow::clearHistory()
@@ -271,16 +270,23 @@ void MainWindow::search()
 
 void MainWindow::searchOnline()
 {
-    int old_ = settings.value("translation/method", 0).toInt();
+    int old_method = settings.value("translation/method", 0).toInt();
+    // set dont add to database value
+    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
+
     settings.setValue("translation/method", QVariant(2));
+    settings.sync();
     search();
-    settings.setValue("translation/method", QVariant(old_));
+    settings.setValue("translation/method", QVariant(old_method));
 }
 
 void MainWindow::searchOffline()
 {
     int old_ = settings.value("translation/method", 0).toInt();
+    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
+
     settings.setValue("translation/method", QVariant(1));
+    settings.sync();
     search();
     settings.setValue("translation/method", QVariant(old_));
 }
