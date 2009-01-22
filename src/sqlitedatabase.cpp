@@ -148,6 +148,13 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
         return;
     }
 
+    QSettings settings;
+    if (settings.value("fatdb").toInt() != -1){
+        settings.setValue("add/enabled", QVariant(settings.value("fatdb").toBool()));
+        settings.setValue("fatdb", QVariant(-1));
+        return;
+    }
+
     QString resultText;
     QList<QString> en, tr, ge;
     QListIterator< QList<QVariant> > i(*results);
