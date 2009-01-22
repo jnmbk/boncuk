@@ -16,6 +16,9 @@
    <iconset resource="../resources/boncuk.qrc" >
     <normaloff>:/boncuk.png</normaloff>:/boncuk.png</iconset>
   </property>
+  <property name="toolButtonStyle" >
+   <enum>Qt::ToolButtonTextOnly</enum>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" >
     <item row="1" column="0" >
@@ -32,6 +35,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="searchButton" >
+        <property name="toolTip" >
+         <string>Click for a second to activate translation options menu</string>
+        </property>
         <property name="text" >
          <string>&amp;Search</string>
         </property>
@@ -51,6 +57,15 @@
     </item>
     <item row="0" column="0" >
      <widget class="QTextEdit" name="resultBrowser" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow" >
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="tabChangesFocus" >
+       <bool>true</bool>
+      </property>
       <property name="readOnly" >
        <bool>true</bool>
       </property>
@@ -59,7 +74,10 @@
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;">&lt;/p>&lt;/body>&lt;/html></string>
+&lt;table style="-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;">
+&lt;tr>
+&lt;td style="border: none;">
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/td>&lt;/tr>&lt;/table>&lt;/body>&lt;/html></string>
       </property>
      </widget>
     </item>
@@ -71,7 +89,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile" >
@@ -224,6 +242,8 @@ p, li { white-space: pre-wrap; }
  </widget>
  <tabstops>
   <tabstop>keyword</tabstop>
+  <tabstop>searchButton</tabstop>
+  <tabstop>resultBrowser</tabstop>
  </tabstops>
  <resources>
   <include location="../resources/boncuk.qrc" />
