@@ -26,7 +26,7 @@
 #include <QCloseEvent>
 #include <QProcess>
 #include <QEvent>
-#include <QWidget>
+#include <QStringListModel>
 
 #include "configwindow.h"
 #include "mainwindow.h"
