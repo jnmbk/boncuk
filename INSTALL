@@ -5,7 +5,7 @@ make
 
 Then you can use the boncuk binary in bin/ directory
 
-boncuk depends on Qt 4.3 with SQLite extension
+Boncuk depends on Qt 4.3 with SQLite extension.
 So make sure that you have installed those before compiling and installing
 boncuk.
 
@@ -14,15 +14,15 @@ put boncuk.db under /usr/share/boncuk directory.
 
 -------------------------------------------------------------------------------
 
-qt4sözlük'ü derlemek için bu komutları kullanın:
+Boncuk'u derlemek için bu komutları kullanın:
 lrelease-qt4 boncuk.pro
 qmake-qt4
 make
 
 Daha sonra bin/ dizini içindeki boncuk ikilisini kullanabilirsiniz.
 
-qt4sözlük SQLite eklentisiyle birlikte Qt 4.3'e bağımlıdır
-Bu yüzden qt4sözlük'ü kullanabilmek için öncelikle bunları kurmalısınız.
+Boncuk, SQLite eklentisiyle birlikte Qt 4.3'e bağımlıdır.
+Bu yüzden Boncuk'u kullanabilmek için öncelikle bunları kurmalısınız.
 
 Çevrimdışı veritabanını kullanabilmek için internet sitemizden ayrıca indirip
 içindeki boncuk.db dosyasını /usr/share/boncuk dizinine koymalısınız.
