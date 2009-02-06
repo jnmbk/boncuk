@@ -16,7 +16,6 @@
 #include <QList>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
-#include <QStringListModel>
 #include <QVariant>
 #include <QSettings>
 #include <QTime>
@@ -33,6 +32,7 @@ class QCloseEvent;
 class QMenu;
 class QValidator;
 class QKeyEvent;
+class QStringListModel;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
