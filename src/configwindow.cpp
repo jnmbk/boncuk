@@ -98,6 +98,8 @@ void ConfigWindow::writeSettings() {
             QVariant(trayIcon_startMinimized->checkState()).toBool());
     settings.setValue("history/count",
             QVariant(wordcountSpinBox->value()));
+    settings.setValue("history/enabled",
+            QVariant(history_enable->checkState()));
     settings.setValue("add/enabled",
             QVariant(add_enable->checkState()).toBool());
     applySettings();
