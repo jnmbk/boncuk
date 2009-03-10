@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,233 +10,234 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Boncuk</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../resources/boncuk.qrc" >
+  <property name="windowIcon">
+   <iconset resource="../resources/boncuk.qrc">
     <normaloff>:/boncuk.png</normaloff>:/boncuk.png</iconset>
   </property>
-  <property name="toolButtonStyle" >
+  <property name="toolButtonStyle">
    <enum>Qt::ToolButtonTextOnly</enum>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <layout class="QGridLayout" >
-    <item row="1" column="0" >
-     <layout class="QHBoxLayout" >
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout">
       <item>
-       <widget class="QLabel" name="label" >
-        <property name="text" >
+       <widget class="QLabel" name="label">
+        <property name="text">
          <string>Keyword:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="keyword" />
+       <widget class="QLineEdit" name="keyword"/>
       </item>
       <item>
-       <widget class="QToolButton" name="searchButton" >
-        <property name="toolTip" >
+       <widget class="QToolButton" name="searchButton">
+        <property name="toolTip">
          <string>Click for a second to activate translation options menu</string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>&amp;Search</string>
         </property>
-        <property name="icon" >
-         <iconset resource="../resources/boncuk.qrc" >
+        <property name="icon">
+         <iconset resource="../resources/boncuk.qrc">
           <normaloff>:/find.png</normaloff>:/find.png</iconset>
         </property>
-        <property name="autoExclusive" >
+        <property name="autoExclusive">
          <bool>false</bool>
         </property>
-        <property name="toolButtonStyle" >
+        <property name="toolButtonStyle">
          <enum>Qt::ToolButtonTextBesideIcon</enum>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="0" column="0" >
-     <widget class="QTextEdit" name="resultBrowser" >
-      <property name="frameShape" >
+    <item row="0" column="0">
+     <widget class="QTextEdit" name="resultBrowser">
+      <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
-      <property name="frameShadow" >
+      <property name="frameShadow">
        <enum>QFrame::Plain</enum>
       </property>
-      <property name="tabChangesFocus" >
+      <property name="tabChangesFocus">
        <bool>true</bool>
       </property>
-      <property name="readOnly" >
+      <property name="readOnly">
        <bool>true</bool>
       </property>
-      <property name="html" >
-       <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
-&lt;table style="-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;">
-&lt;tr>
-&lt;td style="border: none;">
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>&lt;/td>&lt;/tr>&lt;/table>&lt;/body>&lt;/html></string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;table border=&quot;0&quot; style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;border: none;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>26</height>
+     <height>28</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile" >
-    <property name="title" >
-     <string>&amp;File</string>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Boncuk</string>
     </property>
-    <addaction name="actionConfigure" />
-    <addaction name="separator" />
-    <addaction name="actionQuit" />
+    <addaction name="actionConfigure"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuHelp" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout_Boncuk" />
-    <addaction name="actionAbout_Qt" />
+    <addaction name="actionAbout_Boncuk"/>
+    <addaction name="actionAbout_Qt"/>
    </widget>
-   <widget class="QMenu" name="menuHistory" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHistory">
+    <property name="title">
      <string>Hi&amp;story</string>
     </property>
-    <addaction name="actionHistoryClear" />
+    <addaction name="actionHistoryClear"/>
    </widget>
-   <addaction name="menuFile" />
-   <addaction name="menuHistory" />
-   <addaction name="menuHelp" />
+   <addaction name="menuFile"/>
+   <addaction name="menuHistory"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
-  <action name="actionHelp" >
-   <property name="text" >
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionHelp">
+   <property name="text">
     <string>&amp;Index</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>F1</string>
    </property>
   </action>
-  <action name="actionAbout_Boncuk" >
-   <property name="icon" >
-    <iconset resource="../resources/boncuk.qrc" >
+  <action name="actionAbout_Boncuk">
+   <property name="icon">
+    <iconset resource="../resources/boncuk.qrc">
      <normaloff>:/boncuk.png</normaloff>:/boncuk.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;About Boncuk</string>
    </property>
   </action>
-  <action name="actionAbout_Qt" >
-   <property name="text" >
+  <action name="actionAbout_Qt">
+   <property name="text">
     <string>About &amp;Qt</string>
    </property>
   </action>
-  <action name="actionQuit" >
-   <property name="icon" >
-    <iconset resource="../resources/boncuk.qrc" >
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../resources/boncuk.qrc">
      <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Close</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Alt+F4</string>
    </property>
   </action>
-  <action name="actionConfigure" >
-   <property name="icon" >
-    <iconset resource="../resources/boncuk.qrc" >
+  <action name="actionConfigure">
+   <property name="icon">
+    <iconset resource="../resources/boncuk.qrc">
      <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
    </property>
-   <property name="text" >
-    <string>&amp;Configure Boncuk...</string>
+   <property name="text">
+    <string>&amp;Configure</string>
    </property>
   </action>
-  <action name="actionShow_Toolbar" >
-   <property name="checkable" >
+  <action name="actionShow_Toolbar">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Show &amp;Toolbar</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+T</string>
    </property>
   </action>
-  <action name="actionShow_Search_Button" >
-   <property name="checkable" >
+  <action name="actionShow_Search_Button">
+   <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Show &amp;Search Button</string>
    </property>
   </action>
-  <action name="actionBack" >
-   <property name="enabled" >
+  <action name="actionBack">
+   <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon" >
+   <property name="icon">
     <iconset>
      <normaloff/>
     </iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Back</string>
    </property>
   </action>
-  <action name="actionForward" >
-   <property name="enabled" >
+  <action name="actionForward">
+   <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon" >
+   <property name="icon">
     <iconset>
      <normaloff/>
     </iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Forward</string>
    </property>
   </action>
-  <action name="actionClear_history" >
-   <property name="text" >
+  <action name="actionClear_history">
+   <property name="text">
     <string>Clear</string>
    </property>
   </action>
-  <action name="actionClearHistory" >
-   <property name="text" >
+  <action name="actionClearHistory">
+   <property name="text">
     <string>Clear</string>
    </property>
   </action>
-  <action name="actionHistoryClear" >
-   <property name="text" >
+  <action name="actionHistoryClear">
+   <property name="text">
     <string>&amp;Clear</string>
    </property>
   </action>
-  <action name="actionSearchOn" >
-   <property name="icon" >
-    <iconset resource="../resources/boncuk.qrc" >
+  <action name="actionSearchOn">
+   <property name="icon">
+    <iconset resource="../resources/boncuk.qrc">
      <normaloff>:/online.png</normaloff>:/online.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Search Online</string>
    </property>
   </action>
-  <action name="actionSearchOff" >
-   <property name="icon" >
-    <iconset resource="../resources/boncuk.qrc" >
+  <action name="actionSearchOff">
+   <property name="icon">
+    <iconset resource="../resources/boncuk.qrc">
      <normaloff>:/offline.png</normaloff>:/offline.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Search Offline</string>
    </property>
   </action>
@@ -246,7 +248,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>resultBrowser</tabstop>
  </tabstops>
  <resources>
-  <include location="../resources/boncuk.qrc" />
+  <include location="../resources/boncuk.qrc"/>
  </resources>
  <connections/>
 </ui>
