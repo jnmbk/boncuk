@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="tr">
+<!DOCTYPE TS>
+<TS version="2.0" language="tr">
 <context>
     <name>ConfigWindow</name>
     <message>
@@ -71,175 +72,176 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../ui/mainwindow.ui" line="26"/>
+        <location filename="../ui/mainwindow.ui" line="30"/>
         <source>Keyword:</source>
         <translation>Aranacak Sözcük:</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="39"/>
+        <location filename="../ui/mainwindow.ui" line="43"/>
         <source>&amp;Search</source>
         <translation>&amp;Ara</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="95"/>
-        <source>&amp;File</source>
-        <translation>&amp;Dosya</translation>
-    </message>
-    <message>
-        <location filename="../ui/mainwindow.ui" line="103"/>
+        <location filename="../ui/mainwindow.ui" line="107"/>
         <source>&amp;Help</source>
         <translation>&amp;Yardım</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="121"/>
+        <location filename="../ui/mainwindow.ui" line="125"/>
         <source>&amp;Index</source>
         <translation>&amp;İçindekiler</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="124"/>
+        <location filename="../ui/mainwindow.ui" line="128"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="138"/>
+        <location filename="../ui/mainwindow.ui" line="142"/>
         <source>About &amp;Qt</source>
         <translation>&amp;Qt Hakkında</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="150"/>
+        <location filename="../ui/mainwindow.ui" line="154"/>
         <source>Alt+F4</source>
         <translation>Alt+F4</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="303"/>
+        <location filename="../src/mainwindow.cpp" line="305"/>
         <source>No results found</source>
         <translation>Sonuç bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="349"/>
+        <location filename="../src/mainwindow.cpp" line="352"/>
         <source>%1 translation of %2</source>
         <translation>%2 sözcüğünün %1 karşılığı</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="266"/>
+        <location filename="../src/mainwindow.cpp" line="267"/>
         <source>Searching &quot;%1&quot;</source>
         <translation>&quot;%1&quot; aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="302"/>
+        <location filename="../src/mainwindow.cpp" line="304"/>
         <source>&lt;b&gt;No results found&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sonuç bulunamadı&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="312"/>
+        <location filename="../src/mainwindow.cpp" line="314"/>
         <source>Found %1 results</source>
         <translation>%1 tane sonuç bulundu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="379"/>
+        <location filename="../src/mainwindow.cpp" line="382"/>
         <source>Press Enter to begin search</source>
         <translation>Aramaya başlamak için Enter&apos;a basın</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="70"/>
+        <location filename="../src/mainwindow.cpp" line="71"/>
         <source>Type in a keyword to search</source>
         <translation>Aranacak sözcüğü veya sözcük öbeğini yazın</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="167"/>
+        <location filename="../ui/mainwindow.ui" line="171"/>
         <source>Show &amp;Toolbar</source>
         <translation>Araç çubuğunu göster</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="170"/>
+        <location filename="../ui/mainwindow.ui" line="174"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="178"/>
+        <location filename="../ui/mainwindow.ui" line="182"/>
         <source>Show &amp;Search Button</source>
         <translation>Arama Butonunu Göster</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="191"/>
+        <location filename="../ui/mainwindow.ui" line="195"/>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="204"/>
+        <location filename="../ui/mainwindow.ui" line="208"/>
         <source>Forward</source>
         <translation>İleri</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="214"/>
+        <location filename="../ui/mainwindow.ui" line="213"/>
+        <location filename="../ui/mainwindow.ui" line="218"/>
         <source>Clear</source>
         <translation>Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="158"/>
+        <location filename="../src/mainwindow.cpp" line="159"/>
         <source>History deleted</source>
         <translation>Geçmiş silindi</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="110"/>
+        <location filename="../ui/mainwindow.ui" line="114"/>
         <source>Hi&amp;story</source>
         <translation>Geç&amp;miş</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="219"/>
+        <location filename="../ui/mainwindow.ui" line="163"/>
+        <source>&amp;Configure</source>
+        <translation>Yapılandır</translation>
+    </message>
+    <message>
+        <location filename="../ui/mainwindow.ui" line="223"/>
         <source>&amp;Clear</source>
         <translation>&amp;Temizle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="369"/>
+        <location filename="../src/mainwindow.cpp" line="372"/>
         <source>About Boncuk</source>
         <translation>Boncuk Hakkında</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="13"/>
+        <location filename="../ui/mainwindow.ui" line="14"/>
+        <location filename="../ui/mainwindow.ui" line="99"/>
         <source>Boncuk</source>
         <translation>Boncuk</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="133"/>
+        <location filename="../ui/mainwindow.ui" line="137"/>
         <source>&amp;About Boncuk</source>
         <translation>&amp;Boncuk Hakkında</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="159"/>
-        <source>&amp;Configure Boncuk...</source>
-        <translation>Boncuk Programını &amp;Yapılandır...</translation>
-    </message>
-    <message>
-        <location filename="../ui/mainwindow.ui" line="147"/>
+        <location filename="../ui/mainwindow.ui" line="151"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="334"/>
+        <location filename="../src/mainwindow.cpp" line="331"/>
+        <location filename="../src/mainwindow.cpp" line="336"/>
         <source>English</source>
         <translation>İngilizce</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="335"/>
+        <location filename="../src/mainwindow.cpp" line="332"/>
+        <location filename="../src/mainwindow.cpp" line="337"/>
         <source>German</source>
         <translation>Almanca</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="333"/>
+        <location filename="../src/mainwindow.cpp" line="335"/>
         <source>Turkish</source>
         <translation>Türkçe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="367"/>
+        <location filename="../src/mainwindow.cpp" line="364"/>
         <source>Boncuk %1 - online/offline dictionary
 This software is released under the terms of GPL v2.
 http://pysozluk-qt.wiki.sourceforge.net
 
 Developers:
-&#xc4;&#xb0;lker Kesen &lt;ilker.kde at gmail.com&gt;
-&#xc4;&#xb0;&#xc5;&#x9f;baran Ak&#xc3;&#xa7;ay&#xc4;&#xb1;r &lt;isbaran at gmail.com&gt;
-U&#xc4;&#x9f;ur &#xc3;&#x87;etin &lt;ugur.jnmbk at gmail.com&gt;
+Ä°lker Kesen &lt;ilker.kde at gmail.com&gt;
+Ä°Åbaran AkÃ§ayÄ±r &lt;isbaran at gmail.com&gt;
+UÄur Ãetin &lt;ugur.jnmbk at gmail.com&gt;
 </source>
         <translation>Boncuk %1 - Ã§evrimiÃ§i/Ã§evrimdÄ±ÅÄ± sÃ¶zlÃ¼k
 Bu program GPL v2 lisansÄ± altÄ±nda daÄÄ±tÄ±lmaktadÄ±r.
@@ -252,22 +254,22 @@ UÄur Ãetin &lt;ugur.jnmbk at gmail.com&gt;
 </translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="228"/>
+        <location filename="../ui/mainwindow.ui" line="232"/>
         <source>Search Online</source>
         <translation>Çevrimiçi Ara</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="237"/>
+        <location filename="../ui/mainwindow.ui" line="241"/>
         <source>Search Offline</source>
         <translation>Çevrimdışı Ara</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="36"/>
+        <location filename="../ui/mainwindow.ui" line="40"/>
         <source>Click for a second to activate translation options menu</source>
         <translation>Çeviri seçeneklerini görmek için bir saniye süresince tıklayın</translation>
     </message>
     <message>
-        <location filename="../ui/mainwindow.ui" line="70"/>
+        <location filename="../ui/mainwindow.ui" line="74"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
