@@ -127,7 +127,7 @@ void MainWindow::initCompleter()
     if( size <= 0 )
         actionHistoryClear->setEnabled(false);
 
-    qDebug() << "History initialized for" << size << "words";
+    qDebug() << tr("History initialized for %1 words").arg(size);
 }
 
 void MainWindow::setSettings()

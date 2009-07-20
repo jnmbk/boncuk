@@ -4,7 +4,6 @@ VERSION = "0.8"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     Q_OS_UNIX \
-    QT_NO_DEBUG_OUTPUT \
     BONCUK_VERSION=\\\"$$VERSION\\\" \
     DATABASE_LOCATION=\\\"$$DATABASE\\\"
 
@@ -32,7 +31,7 @@ RESOURCES += \
 TRANSLATIONS += \
     resources/boncuk_tr_TR.ts
 
-#CONFIG += debug
+CONFIG += debug
 
 DESTDIR = bin
 OBJECTS_DIR = build
