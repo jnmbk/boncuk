@@ -38,7 +38,7 @@ void Console::search()
     searchThread->search(keyword);
 }
 
-void Console::showResults(QString word, QList< QList<QVariant> > *results)
+void Console::showResults(QString /*word*/, QList< QList<QVariant> > *results)
 {
     QTextStream out(stdout);
 
