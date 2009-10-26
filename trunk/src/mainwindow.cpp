@@ -84,17 +84,9 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(pressEnterMessage()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
-    connect(actionHistoryClear, SIGNAL(activated()),
-            this, SLOT(clearHistory()));
     connect(this, SIGNAL(historyChanged(bool)),
             actionHistoryClear, SLOT(setEnabled(bool)));
-    connect(actionAbout_Boncuk, SIGNAL(activated()),
-            this, SLOT(aboutBoncuk()));
-    connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
-    connect(actionQuit, SIGNAL(activated()), this, SLOT(exitSlot()));
     connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
-    connect(actionSearchOn, SIGNAL(activated()), this, SLOT(searchOnline()));
-    connect(actionSearchOff, SIGNAL(activated()), this, SLOT(searchOffline()));
 }
 
 MainWindow::~MainWindow()
@@ -151,7 +143,7 @@ void MainWindow::setSettings()
     settings.setValue("fatdb", QVariant(-1));
 }
 
-void MainWindow::clearHistory()
+void MainWindow::on_actionHistoryClear_activated()
 {
     if(completer){
         history->setStringList(QStringList());
@@ -270,7 +262,7 @@ void MainWindow::search()
     keyword->setSelection(0, (keyword->text()).size());
 }
 
-void MainWindow::searchOnline()
+void MainWindow::on_actionSearchOn_activated()
 {
     int old_method = settings.value("translation/method", 0).toInt();
     // set dont add to database value
@@ -281,7 +273,7 @@ void MainWindow::searchOnline()
     settings.setValue("translation/method", QVariant(old_method));
 }
 
-void MainWindow::searchOffline()
+void MainWindow::on_actionSearchOff_activated()
 {
     int old_ = settings.value("translation/method", 0).toInt();
     settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
@@ -359,7 +351,7 @@ QString MainWindow::prettyResult( QList<QString> lang, QString text )
 }
 
 
-void MainWindow::aboutBoncuk()
+void MainWindow::on_actionAbout_Boncuk_activated()
 {
     QString aboutText = QString::fromUtf8((tr("Boncuk %1 - online/offline dictionary\n\
 This software is released under the terms of GPL v2.\n\
@@ -373,7 +365,7 @@ Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toAscii().const
     QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }
 
-void MainWindow::aboutQt()
+void MainWindow::on_actionAbout_Qt_activated()
 {
     QMessageBox::aboutQt(this);
 }
@@ -403,7 +395,7 @@ void MainWindow::writeHistory()
     }
 }
 
-void MainWindow::exitSlot()
+void MainWindow::on_actionQuit_activated()
 {
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.setValue("mainWindow/geo", QVariant(this->size()));

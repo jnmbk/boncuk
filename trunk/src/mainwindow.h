@@ -51,12 +51,12 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     public slots:
         void showResults(QString, QList< QList<QVariant> > *);
-        void clearHistory();
+        void on_actionHistoryClear_activated();
         void search();
-        void searchOnline();
-        void searchOffline();
+        void on_actionSearchOn_activated();
+        void on_actionSearchOff_activated();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
-        void exitSlot();
+        void on_actionQuit_activated();
 
     signals:
         void historyChanged(bool);
@@ -80,8 +80,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         int fatd;
 
     private slots:
-        void aboutBoncuk();
-        void aboutQt();
+        void on_actionAbout_Boncuk_activated();
+        void on_actionAbout_Qt_activated();
         void pressEnterMessage();
         void writeHistory();
         QString prettyResult(QList<QString>, QString);
