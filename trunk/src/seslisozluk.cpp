@@ -79,11 +79,11 @@ void SesliSozluk::continueSearch(bool err)
     int i, j, turkish, english, german;
 
     text = codec->toUnicode(http->readAll());
-    // qDebug() << "HTML:" << text;
+    qDebug() << "HTML:" << text;
 
     //now we can parse it
     text.remove(0, text.indexOf('>', text.indexOf("tabsResult")) + 1);
-    text.remove(text.indexOf(" <!-- <div id=translations -->"), text.size());
+    text.remove(text.indexOf("<!-- id=translations -->"), text.size());
     if (text.count('<') != text.count('>')){
         emit found(word, results);
         return; //this will happen when we have a really bad syntax error
