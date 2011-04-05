@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = boncuk
-VERSION = "0.8"
+VERSION = "0.9"
 DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     Q_OS_UNIX \
