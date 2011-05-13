@@ -32,6 +32,7 @@ SesliSozluk::SesliSozluk(QObject *parent = 0)
 
 SesliSozluk::~SesliSozluk()
 {
+    http->abort();
     http->close();
     delete(http);
 }
@@ -72,7 +73,7 @@ void SesliSozluk::continueSearch(bool err)
         return;
     }
 
-    QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
+    QList< QList<QVariant> > results;
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QString text;
     QStringList data;
@@ -107,13 +108,13 @@ void SesliSozluk::continueSearch(bool err)
     german = data.indexOf("1.", data.indexOf(QRegExp(QString::fromUtf8(".*Almanca çevirisi.*"))));
 
     if (turkish != -1)
-        *results << pick(0,
+        results << pick(0,
                     data.mid(turkish, data.indexOf("", turkish) - turkish));
     if (english != -1)
-        *results << pick(1,
+        results << pick(1,
                 data.mid(english, data.indexOf("", english) - english));
     if (german != -1)
-        *results << pick(2,
+        results << pick(2,
                     data.mid(german, data.indexOf("", german) - german));
     // qDebug() << turkish << data.indexOf("", turkish) << english << data.indexOf("", english) << german << data.indexOf("", german);
 

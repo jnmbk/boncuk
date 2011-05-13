@@ -19,25 +19,34 @@
 
 class QString;
 
+enum SearchType {
+    None,
+    SQLITE,
+    SESLI
+};
+
 class SearchThread : public QThread
 {
     Q_OBJECT
 
     public:
         SearchThread(QObject *parent = 0);
+        ~SearchThread();
         void search(QString);
+        SearchType currentSearch();
 
     signals:
-        void found(QString, QList< QList<QVariant>  > *);
+        void found(QString, QList< QList<QVariant>  >);
 
     private:
         QString keyword;
         bool lastSearchWasOffline;
         SesliSozluk *sesliSozluk;
         SqliteDatabase *sqliteDatabase;
+        SearchType searchType;
 
     private slots:
-        void returnResult(QString, QList< QList<QVariant> > *);
+        void returnResult(QString, QList< QList<QVariant> >);
 
     protected:
         void run();

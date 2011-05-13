@@ -31,7 +31,7 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
 {
     QSettings settings;
     // keeps database names
-    dbs = new QStringList("default");
+    dbs << "default";
 
     QSqlDatabase db = QSqlDatabase::database("default");
     if (!db.isValid()) {
@@ -40,22 +40,28 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
         db.open();
     }
 
-    if(settings.value("add/enabled", true).toBool() && dbs->size()<2){
+    if(settings.value("add/enabled", true).toBool() && dbs.size()<2){
         createDb("userdb", QString(HOME_DIR)+"/boncuk.db");
         addDb("userdb", QString(HOME_DIR)+"/boncuk.db");
     }
 
-    qDebug() << "Boncuk: Using" << dbs->count() << "databases and internet search";
+    qDebug() << "Boncuk: Using" << dbs.count() << "databases and internet search";
 }
 
 SqliteDatabase::~SqliteDatabase()
 {
-    delete dbs;
+    for(int i=1; i<(dbs.size()); i++) {
+        QSqlDatabase *db = &QSqlDatabase::database(dbs.at(i));
+
+        if(db->isOpen())
+            db->close();
+        QSqlDatabase::removeDatabase(dbs.at(i));
+    }
 }
 
 void SqliteDatabase::addDb(QString name, QString uri)
 {
-    dbs->append(name);
+    dbs.append(name);
     QSqlDatabase db = QSqlDatabase::database(name);
 
     if(!db.isValid()){
@@ -109,11 +115,11 @@ void SqliteDatabase::createDb(QString name, QString uri)
 
 void SqliteDatabase::search(QString word)
 {
-    QList< QList<QVariant> > *results = new QList< QList<QVariant> >;
+    QList< QList<QVariant> > results;
 
-    for(int d=0; d<dbs->size(); d++)
+    for(int d=0; d<(dbs.size()); d++)
     {
-        QSqlQuery query(QSqlDatabase::database(dbs->at(d)));
+        QSqlQuery query(QSqlDatabase::database(dbs.at(d)));
         query.prepare(
             "SELECT home, text FROM translations WHERE word = :keyword");
         query.bindValue(QString(":keyword"), QVariant(word));
@@ -123,17 +129,17 @@ void SqliteDatabase::search(QString word)
             QList<QVariant> list;
             list.append(query.value(0));
             list.append(query.value(1));
-            results->append(list);
+            results.append(list);
         }
 
         if (query.isActive())
             query.clear();
 
-        if( results->isEmpty() ) {
-            qDebug() << word << "not found in database : " << dbs->at(d);
+        if( results.isEmpty() ) {
+            qDebug() << word << "not found in database : " << dbs.at(d);
             continue;
         }else{
-            qDebug() << word << "Found in Database : " << dbs->at(d);
+            qDebug() << word << "Found in Database : " << dbs.at(d);
             break;
         }
     }
@@ -141,9 +147,9 @@ void SqliteDatabase::search(QString word)
     emit found(word, results);
 }
 
-void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
+void SqliteDatabase::add(QString word, QList<QList<QVariant> > results)
 {
-    if(results->isEmpty() || dbs->size()<2) {
+    if(results.isEmpty() || dbs.size()<2) {
         qDebug() << "No new results or No databases to add new results";
         return;
     }
@@ -157,7 +163,7 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
 
     QString resultText;
     QList<QString> en, tr, ge;
-    QListIterator< QList<QVariant> > i(*results);
+    QListIterator< QList<QVariant> > i(results);
 
     while (i.hasNext()) {
         QList<QVariant> translation = i.next();
@@ -177,10 +183,10 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > *results)
     QSqlQuery *query = NULL;
 
     // First db is default db, and its read only
-    for(int d=1; d<dbs->size(); d++) {
+    for(int d=1; d<(dbs.size()); d++) {
 
-        QSqlDatabase db = QSqlDatabase::database(dbs->at(d));
-        qDebug() << "Adding" << word << "to db : " << dbs->at(d);
+        QSqlDatabase db = QSqlDatabase::database(dbs.at(d));
+        qDebug() << "Adding" << word << "to db : " << dbs.at(d);
 
         if(!tr.isEmpty()) {
             query = new QSqlQuery(db);

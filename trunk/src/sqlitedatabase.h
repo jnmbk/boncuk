@@ -16,9 +16,9 @@
 #include <QList>
 #include <QObject>
 #include <QVariant>
+#include <QStringList>
 
 class QString;
-class QStringList;
 
 class SqliteDatabase : public QObject
 {
@@ -30,17 +30,17 @@ class SqliteDatabase : public QObject
         void search(QString word);
 
         // make more than one db connections
-        QStringList *dbs;
+        QStringList dbs;
 
     private:
         void addDb(QString, QString);
         void createDb(QString, QString);
 
     signals:
-        void found(QString, QList< QList<QVariant> > *);
+        void found(QString, QList< QList<QVariant> >);
 
     public slots:
-        void add(QString, QList<QList<QVariant> > *);
+        void add(QString, QList<QList<QVariant> >);
 
 };
 
