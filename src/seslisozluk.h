@@ -29,7 +29,7 @@ class SesliSozluk : public QObject
         void search(QString word);
 
     signals:
-        void found(QString, QList< QList<QVariant> > *);
+        void found(QString, QList< QList<QVariant> >);
 
     private:
         QHttp *http;

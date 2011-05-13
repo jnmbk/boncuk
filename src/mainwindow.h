@@ -50,7 +50,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void setSettings();
 
     public slots:
-        void showResults(QString, QList< QList<QVariant> > *);
+        void showResults(QString, QList< QList<QVariant> >);
         void on_actionHistoryClear_activated();
         void search();
         void on_actionSearchOn_activated();
@@ -62,8 +62,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void historyChanged(bool);
 
     protected:
-        void keyPressEvent( QKeyEvent * );
-        void closeEvent( QCloseEvent * );
+        void keyPressEvent(QKeyEvent *);
+        void closeEvent(QCloseEvent *);
         bool eventFilter(QObject *obj, QEvent *ev);
 
     private:

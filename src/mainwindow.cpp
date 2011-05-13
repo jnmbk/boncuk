@@ -77,8 +77,8 @@ MainWindow::MainWindow(QWidget *parent)
     keyword->setMaxLength(64);
 
     connect(
-        searchThread, SIGNAL(found(QString, QList< QList<QVariant> > *)),
-        this, SLOT(showResults(QString, QList< QList<QVariant> > *)));
+        searchThread, SIGNAL(found(QString, QList< QList<QVariant> >)),
+        this, SLOT(showResults(QString, QList< QList<QVariant> >)));
     //connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
@@ -283,9 +283,9 @@ void MainWindow::on_actionSearchOff_activated()
     settings.setValue("translation/method", QVariant(old_));
 }
 
-void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
+void MainWindow::showResults(QString, QList< QList<QVariant> > results)
 {
-    if (results->isEmpty()) {
+    if (results.isEmpty()) {
         // Search again with lowercase characters if search string is composed of uppercase characters
         //TODO update db with all lower case, or make insensitive searches in db
         if (keyword->text() != keyword->text().toLower()) {
@@ -300,10 +300,10 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
     else {
         QString resultText;
         QList<QString> eng, trq, ger;
-        QListIterator< QList<QVariant> > i(*results);
+        QListIterator< QList<QVariant> > i(results);
 
         statusBar()->showMessage(
-                this->tr("Found %1 results").arg(results->size()));
+                this->tr("Found %1 results").arg(results.size()));
         while (i.hasNext()) {
             QList<QVariant> translation = i.next();
             switch (translation[0].toInt()) {
@@ -332,7 +332,6 @@ void MainWindow::showResults(QString, QList< QList<QVariant> > *results)
         resultBrowser->setHtml(resultText);
     }
     searchButton->setEnabled(true);
-    delete results;
 }
 
 QString MainWindow::prettyResult( QList<QString> lang, QString text )

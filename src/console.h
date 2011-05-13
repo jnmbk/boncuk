@@ -24,11 +24,12 @@ class Console : public QObject
     Q_OBJECT
 
     public:
+        Console();
         ~Console();
 
     public slots:
         void search();
-        void showResults(QString, QList< QList<QVariant> > *);
+        void showResults(QString, QList< QList<QVariant> >);
 
     private:
         SearchThread *searchThread;
