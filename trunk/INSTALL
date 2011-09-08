@@ -1,6 +1,6 @@
 To build boncuk, type these commands:
-lrelease-qt4 boncuk.pro
-qmake-qt4
+lrelease boncuk.pro
+qmake
 make
 
 Then you can use the boncuk binary in bin/ directory
@@ -15,8 +15,8 @@ put boncuk.db under /usr/share/boncuk directory.
 -------------------------------------------------------------------------------
 
 Boncuk'u derlemek için bu komutları kullanın:
-lrelease-qt4 boncuk.pro
-qmake-qt4
+lrelease boncuk.pro
+qmake
 make
 
 Daha sonra bin/ dizini içindeki boncuk ikilisini kullanabilirsiniz.
