@@ -354,7 +354,7 @@ void MainWindow::on_actionAbout_Boncuk_activated()
 {
     QString aboutText = QString::fromUtf8((tr("Boncuk %1 - online/offline dictionary\n\
 This software is released under the terms of GPL v2.\n\
-http://pysozluk-qt.wiki.sourceforge.net\n\n\
+http://sourceforge.net/projects/pysozluk-qt/\n\n\
 Developers:\n\
 İlker Kesen <ilker.kde at gmail.com>\n\
 İşbaran Akçayır <isbaran at gmail.com>\n\
