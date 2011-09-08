@@ -87,9 +87,7 @@ void SesliSozluk::continueSearch(bool err)
     text.remove(text.indexOf("<!-- id=translations -->"), text.size());
     qDebug() << "Clipped HTML:" << text;
     if (text.count('<') != text.count('>')){
-        qDebug() << "HTML tag closing mismatch. Aborted search.";
-        emit found(word, results);
-        return; //this will happen when we have a really bad syntax error
+        qDebug() << "Ignoring HTML tag closing mismatch.";
     }
     do {
         /* remove all html tags like <div>, </div> */
