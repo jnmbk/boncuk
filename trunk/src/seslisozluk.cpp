@@ -22,11 +22,13 @@
 #include <QSettings>
 #include "seslisozluk.h"
 
+#define SESLISOZLUKHOSTNAME "www.seslisozluk.net"
+
 SesliSozluk::SesliSozluk(QObject *parent = 0)
     : QObject(parent)
 {
     http = new QHttp(this);
-    http->setHost("www.seslisozluk.com");
+    http->setHost(SESLISOZLUKHOSTNAME);
     connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch(bool)));
 }
 
@@ -61,7 +63,7 @@ void SesliSozluk::search(QString keyword)
     convertToTurkishWeb(&keyword);
     header.setRequest("GET", QString("/?word=%1").arg(keyword));
     header.setValue("Cookie", "compact_view=1");
-    header.setValue("Host", "www.seslisozluk.com");
+    header.setValue("Host", SESLISOZLUKHOSTNAME);
     qDebug() << "Header:" << header.toString();
     http->request(header);
 }
