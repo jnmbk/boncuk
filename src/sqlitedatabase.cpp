@@ -51,10 +51,10 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
 SqliteDatabase::~SqliteDatabase()
 {
     for(int i=1; i<(dbs.size()); i++) {
-        QSqlDatabase *db = &QSqlDatabase::database(dbs.at(i));
+        QSqlDatabase db = QSqlDatabase::database(dbs.at(i));
 
-        if(db->isOpen())
-            db->close();
+        if(db.isOpen())
+            db.close();
         QSqlDatabase::removeDatabase(dbs.at(i));
     }
 }
