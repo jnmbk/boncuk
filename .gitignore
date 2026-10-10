@@ -1,15 +1,28 @@
-.DS_Store
-.qmake.stash
-Makefile
-bin/
+# Build artifacts
 build/
-*.o
+bin/
+Makefile
+*.qmake.stash
+.qmake.stash
+
+# Qt specific
+*.qm
+*.pro.user
+*.pro.user.*
+moc_*
 *.moc
-moc_*.cpp
 moc_predefs.h
 qrc_*.cpp
 ui_*.h
-*.qm
+
+# OS specific
+.DS_Store
+*.app/
+
+# Object files
+*.o
+
+# Test artifacts
 tests/seslisozluk/test_seslisozluk
 tests/sqlite/test_sqlite
 tests/**/Makefile
@@ -19,4 +32,7 @@ tests/**/moc_*.cpp
 tests/**/qrc_*.cpp
 tests/**/ui_*.h
 tests/**/moc_predefs.h
-
+test_*
+!test_*.cpp
+!test_*.pro
+!test_*.h

@@ -33,10 +33,28 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
     // keeps database names
     dbs << "default";
 
+    QString defaultDbPath = QString(HOME_DIR) + "/default.db";
+    QDir directory(QString(HOME_DIR));
+    if(!directory.exists()){
+        directory.mkpath(QString(HOME_DIR));
+    }
+
+    QFile resourceFile(":/boncuk.db");
+    QFile localFile(defaultDbPath);
+    if (!localFile.exists() || localFile.size() != resourceFile.size()) {
+        if (localFile.exists()) {
+            localFile.remove();
+        }
+        if (resourceFile.exists()) {
+            resourceFile.copy(defaultDbPath);
+            QFile::setPermissions(defaultDbPath, QFile::ReadOwner | QFile::WriteOwner);
+        }
+    }
+
     QSqlDatabase db = QSqlDatabase::database("default");
     if (!db.isValid()) {
         db = QSqlDatabase::addDatabase("QSQLITE", "default");
-        db.setDatabaseName(databaseFile);
+        db.setDatabaseName(defaultDbPath);
         db.open();
     }
 
@@ -68,6 +86,17 @@ void SqliteDatabase::addDb(QString name, QString uri)
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", name);
         db.setDatabaseName(uri);
         db.open();
+
+        QSqlQuery query(db);
+        query.exec("SELECT id FROM languages WHERE id=2");
+        if (!query.next()) {
+            qDebug() << "Updating database to support German...";
+            query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (2, 'German', 'Deutsch')");
+            query.exec("DELETE FROM translations");
+            // Vacuum to free up space
+            query.exec("VACUUM");
+            db.commit();
+        }
     }
 }
 
@@ -107,6 +136,8 @@ void SqliteDatabase::createDb(QString name, QString uri)
     query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (0, 'English', 'English')");
     query.finish();
     query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (1, 'Turkish', 'Turkce')");
+    query.finish();
+    query.exec("INSERT INTO languages (id, englishname, nativename) VALUES (2, 'German', 'Deutsch')");
     query.finish();
 
     qDebug() << "Created Tables for user database, errors : " << query.lastError().text();
@@ -209,6 +240,20 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > results)
             query->bindValue(QString(":away"), QVariant(0));
             query->bindValue(QString(":word"), QVariant(word));
             query->bindValue(QString(":text"), QVariant(QStringList(en).join(" , ")));
+            query->exec();
+            query->finish();
+            db.commit();
+            delete query;
+            query = NULL;
+        }
+
+        if (!ge.isEmpty()){
+            query = new QSqlQuery(db);
+            query->prepare("INSERT INTO translations (home, away, word, text) VALUES (:home, :away, :word, :text)");
+            query->bindValue(QString(":home"), QVariant(2));
+            query->bindValue(QString(":away"), QVariant(0));
+            query->bindValue(QString(":word"), QVariant(word));
+            query->bindValue(QString(":text"), QVariant(QStringList(ge).join(" , ")));
             query->exec();
             query->finish();
             db.commit();

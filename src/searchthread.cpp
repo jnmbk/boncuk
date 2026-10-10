@@ -18,18 +18,16 @@
 SearchThread::SearchThread(QObject *parent)
     : QThread(parent)
 {
-    lastSearchWasOffline = true;
     searchType = None;
-    sqliteDatabase = new SqliteDatabase(this,
-        DATABASE_LOCATION);
+    sqliteDatabase = new SqliteDatabase(this, "");
 
     sesliSozluk = new SesliSozluk(this);
 }
 
 SearchThread::~SearchThread()
 {
-    wait();
     quit();
+    wait();
 }
 
 void SearchThread::run()
@@ -46,65 +44,71 @@ void SearchThread::search(QString keyword)
 {
     QSettings settings;
     this->keyword = keyword;
+    
+    mergedResults.clear();
+
+    sqliteDatabase->disconnect(this);
+    sesliSozluk->disconnect(this);
+
+    connect(
+        sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> >)),
+        this, SLOT(offlineResultReady(QString, QList< QList<QVariant> >)));
+        
+    connect(
+        sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> >)),
+        this, SLOT(onlineResultReady(QString, QList< QList<QVariant> >)));
 
     qDebug() << "SearchThread is Running : " << isRunning();
     if (!isRunning()) {
-        if (settings.value("translation/method", 0).toInt() < 2) {
-            connect(
-                sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> >)),
-                this, SLOT(returnResult(QString, QList< QList<QVariant> >)));
-            searchType = SQLITE;
-            qDebug() << "Performing an Offline search";
-            sqliteDatabase->search(keyword);
-        } else {
-            connect(
-                sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> >)),
-                this, SLOT(returnResult(QString, QList< QList<QVariant> >)));
-            searchType = SESLI;
-            sesliSozluk->search(keyword);
-            lastSearchWasOffline = false;
-            qDebug() << "Searching Online";
-        }
         start();
-    } else {
-        sesliSozluk->disconnect();
-        sqliteDatabase->disconnect();
-
-        if (settings.value("translation/method", 0).toInt() < 2) {
-            connect(
-                sqliteDatabase, SIGNAL(found(QString, QList< QList<QVariant> >)),
-                this, SLOT(returnResult(QString, QList< QList<QVariant> >)));
-            searchType = SQLITE;
-            qDebug() << "Performing an offline search";
-            sqliteDatabase->search(keyword);
-        } else {
-            connect(
-                sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> >)),
-                this, SLOT(returnResult(QString, QList< QList<QVariant> >)));
-            lastSearchWasOffline = false;
-            searchType = SESLI;
-            qDebug() << "Searching online";
-            sesliSozluk->search(keyword);
-        }
+    }
+    
+    qDebug() << "Performing an Offline search";
+    searchType = SQLITE;
+    sqliteDatabase->search(keyword);
+    
+    // 1 indicates "Offline only" in the legacy settings, 
+    // so we skip online search only if user explicitly forced offline.
+    if (settings.value("translation/method", 0).toInt() != 1) {
+        searchType = SESLI; // Note: technically this type gets overwritten, but we don't strictly rely on it.
+        qDebug() << "Searching Online asynchronously";
+        sesliSozluk->search(keyword);
     }
 }
 
-void SearchThread::returnResult(QString word, QList< QList<QVariant> > results)
+void SearchThread::offlineResultReady(QString word, QList< QList<QVariant> > results)
 {
+    if (word != keyword) return; // Stale check
+    
+    mergedResults = results;
+    emit found(word, mergedResults); 
+}
+
+void SearchThread::onlineResultReady(QString word, QList< QList<QVariant> > results)
+{
+    if (word != keyword) return;
+    
     QSettings settings;
-    if (results.isEmpty() && settings.value("translation/method", 0).toInt() == 0 && lastSearchWasOffline) {
-        lastSearchWasOffline = false;
-        sqliteDatabase->disconnect(this);
-        connect(
-            sesliSozluk, SIGNAL(found(QString, QList< QList<QVariant> >)),
-            this, SLOT(returnResult(QString, QList< QList<QVariant> >)));
-        searchType = SESLI;
-        sesliSozluk->search(keyword);
-    } else {
-        if(!lastSearchWasOffline && settings.value("add/enabled", true).toBool())
-            sqliteDatabase->add(word, results);
-        emit found(word, results);
-        lastSearchWasOffline = true;
+    bool newResultsAdded = false;
+    QList< QList<QVariant> > newTranslations;
+    
+    for (int i = 0; i < results.size(); ++i) {
+        if (!mergedResults.contains(results[i])) {
+            mergedResults.append(results[i]);
+            newTranslations.append(results[i]);
+            newResultsAdded = true;
+        }
+    }
+    
+    if (newResultsAdded) {
+        emit found(word, mergedResults);
+        
+        if (settings.value("add/enabled", true).toBool()) {
+            sqliteDatabase->add(word, newTranslations);
+        }
+    } else if (mergedResults.isEmpty()) {
+        // If offline was also empty, ensure we emit empty again so UI knows online finished empty too
+        emit found(word, mergedResults);
     }
 }
 

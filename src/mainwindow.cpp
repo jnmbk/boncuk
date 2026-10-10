@@ -27,6 +27,7 @@
 #include <QProcess>
 #include <QEvent>
 #include <QStringListModel>
+#include <QRegularExpressionValidator>
 
 #include "configwindow.h"
 #include "mainwindow.h"
@@ -37,22 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi(this);
 
     setSettings();
-
-    tray = new QSystemTrayIcon(this->windowIcon(), this);
-
-    createMenu();
-    searchButton->installEventFilter(this);
-
-    if(settings.value("tray/enabled", true).toBool()) {
-        tray->show();
-        qApp->setQuitOnLastWindowClosed(
-            !settings.value("tray/minimizeOnClose", true).toBool());
-    }
-    if(settings.value("tray/startMinimized", true).toBool() &&
-        settings.value("tray/enabled", true).toBool())
-        this->hide();
-    else
-        this->show();
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
+    this->show();
 
     if(settings.value("history/enabled").toBool()){
         initCompleter();
@@ -67,34 +54,29 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "Gui Language : " << guiLanguage;
 
     searchThread = new SearchThread(this);
-    configWindow = new ConfigWindow(this, tray);
+    configWindow = new ConfigWindow(this);
     statusBar()->showMessage(tr("Type in a keyword to search"));
     searchButton->setEnabled(0);
 
-    QRegExp searchLineRx("[\\w\\s]*");
-    validator = new QRegExpValidator(searchLineRx, this);
+    QRegularExpression searchLineRx("[\\w\\s]*", QRegularExpression::UseUnicodePropertiesOption);
+    validator = new QRegularExpressionValidator(searchLineRx, this);
     keyword->setValidator(validator);
     keyword->setMaxLength(64);
 
     connect(
         searchThread, SIGNAL(found(QString, QList< QList<QVariant> >)),
         this, SLOT(showResults(QString, QList< QList<QVariant> >)));
-    //connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
-    connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     connect(this, SIGNAL(historyChanged(bool)),
             actionHistoryClear, SLOT(setEnabled(bool)));
-    connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
+    connect(actionConfigure, SIGNAL(triggered()), configWindow, SLOT(show()));
 }
 
 MainWindow::~MainWindow()
 {
     // Bunlar otomatik siliniyor aslında ..
     delete(history);
-    delete(menu);
-    delete(tray);
     delete(validator);
     delete(completer);
 }
@@ -143,7 +125,7 @@ void MainWindow::setSettings()
     settings.setValue("fatdb", QVariant(-1));
 }
 
-void MainWindow::on_actionHistoryClear_activated()
+void MainWindow::on_actionHistoryClear_triggered()
 {
     if(completer){
         history->setStringList(QStringList());
@@ -156,11 +138,7 @@ void MainWindow::on_actionHistoryClear_activated()
 void MainWindow::keyPressEvent( QKeyEvent *event )
 {
     if( event->key() == Qt::Key_Escape ){
-        if( settings.value("tray/enabled").toBool() &&
-            settings.value("tray/minimizeOnClose").toBool() ){
-            this->close();
-        }else
-            QWidget::keyPressEvent(event);
+        this->close();
     }else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && searchButton->isEnabled() && keyword->hasFocus()){
         search();
     }else
@@ -174,63 +152,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
-void MainWindow::showOrHideUi(
-        QSystemTrayIcon::ActivationReason activation_reason)
-{
-    if(activation_reason == QSystemTrayIcon::Trigger) {
-        if(this->isVisible()) {
-          settings.setValue("mainWindow/pos", QVariant(this->pos()));
-          settings.setValue("mainWindow/geo", QVariant(this->size()));
-          this->hide();
-        } else {
-            this->move(settings.value("mainWindow/pos").toPoint());
-            this->resize(settings.value("mainWindow/geo").toSize());
-            keyword->setSelection(0, (keyword->text()).size());
-            this->show();
-        }
-    }
-}
-
-void MainWindow::createMenu()
-{
-    // popup menu for tray
-    menu = new QMenu();
-    menu->addAction(actionAbout_Boncuk);
-    menu->addAction(actionConfigure);
-    menu->addSeparator();
-    menu->addAction(actionQuit);
-    tray->setContextMenu(menu);
-
-    // popup menu for search button
-    smenu = new QMenu();
-    smenu->addAction(actionSearchOn);
-    smenu->addSeparator();
-    smenu->addAction(actionSearchOff);
-    searchButton->setMenu(smenu);
-}
-
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-    if(obj == searchButton && searchButton->isEnabled()){
-        qApp->setDoubleClickInterval(0);
-        if(event->type() == QEvent::MouseButtonPress){
-            time.restart();
-            return true;
-        }else if(event->type() == QEvent::MouseButtonRelease){
-            if(qApp->doubleClickInterval() < time.elapsed() && time.elapsed() < 800){
-                search();
-                return true;
-            }else{
-                searchButton->showMenu();
-                return true;
-            }
-        }else if(event->type() == QEvent::MouseButtonDblClick){
-            searchButton->showMenu();
-            return false;
-        }else
-            return false;
-    }else
-        return QMainWindow::eventFilter(obj, event);
+    return QMainWindow::eventFilter(obj, event);
 }
 
 void MainWindow::search()
@@ -250,7 +174,8 @@ void MainWindow::search()
 
         list.append(keyword->text());
 
-        history->setStringList( list.toSet().toList() );
+        list.removeDuplicates();
+        history->setStringList( list );
         writeHistory();
         emit historyChanged(true);
     }
@@ -260,27 +185,6 @@ void MainWindow::search()
     searchButton->setEnabled(false);
     searchThread->search(keyword->text());
     keyword->setSelection(0, (keyword->text()).size());
-}
-
-void MainWindow::on_actionSearchOn_activated()
-{
-    int old_method = settings.value("translation/method", 0).toInt();
-    // set dont add to database value
-    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
-
-    settings.setValue("translation/method", QVariant(2));
-    search();
-    settings.setValue("translation/method", QVariant(old_method));
-}
-
-void MainWindow::on_actionSearchOff_activated()
-{
-    int old_ = settings.value("translation/method", 0).toInt();
-    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
-
-    settings.setValue("translation/method", QVariant(1));
-    search();
-    settings.setValue("translation/method", QVariant(old_));
 }
 
 void MainWindow::showResults(QString, QList< QList<QVariant> > results)
@@ -350,7 +254,7 @@ QString MainWindow::prettyResult( QList<QString> lang, QString text )
 }
 
 
-void MainWindow::on_actionAbout_Boncuk_activated()
+void MainWindow::on_actionAbout_Boncuk_triggered()
 {
     QString aboutText = QString::fromUtf8((tr("Boncuk %1 - online/offline dictionary\n\
 This software is released under the terms of GPL v2.\n\
@@ -359,12 +263,12 @@ Developers:\n\
 İlker Kesen <ilker.kde at gmail.com>\n\
 İşbaran Akçayır <isbaran at gmail.com>\n\
 Uğur Çetin <ugur.jnmbk at gmail.com>\n\
-Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toAscii().constData());
+Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toUtf8().constData());
 
     QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }
 
-void MainWindow::on_actionAbout_Qt_activated()
+void MainWindow::on_actionAbout_Qt_triggered()
 {
     QMessageBox::aboutQt(this);
 }
@@ -394,7 +298,7 @@ void MainWindow::writeHistory()
     }
 }
 
-void MainWindow::on_actionQuit_activated()
+void MainWindow::on_actionQuit_triggered()
 {
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.setValue("mainWindow/geo", QVariant(this->size()));

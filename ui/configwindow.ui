@@ -1,10 +1,11 @@
-<ui version="4.0" >
+<?xml version='1.0' encoding='UTF-8'?>
+<ui version="4.0">
  <class>ConfigWindow</class>
- <widget class="QDialog" name="ConfigWindow" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="ConfigWindow">
+  <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -12,117 +13,82 @@
     <height>202</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Configuration</string>
   </property>
-  <property name="windowIcon" >
+  <property name="windowIcon">
    <iconset>
     <normaloff>../icons/16x16/configure.png</normaloff>../icons/16x16/configure.png</iconset>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" >
-    <widget class="QTabWidget" name="tabWidget" >
-     <property name="currentIndex" >
+  <layout class="QGridLayout">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="translation" >
-      <attribute name="title" >
+     <widget class="QWidget" name="translation">
+      <attribute name="title">
        <string>Translation</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout" >
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Method:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="translation_method" >
-           <item>
-            <property name="text" >
-             <string>Try Offline First</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Offline</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Online</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0" colspan="4">
+        <widget class="QCheckBox" name="online_search_enable">
+         <property name="text">
+          <string>Include online results</string>
+         </property>
+        </widget>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QCheckBox" name="history_enable" >
-           <property name="text" >
+       <item row="1" column="0"><widget class="QCheckBox" name="history_enable">
+           <property name="text">
             <string>Search History</string>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer>
-           <property name="orientation" >
+         </item><item row="1" column="1"><spacer>
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>31</width>
              <height>20</height>
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="wordcountSpinBox" >
-           <property name="maximumSize" >
+         </item><item row="1" column="2"><widget class="QSpinBox" name="wordcountSpinBox">
+           <property name="maximumSize">
             <size>
              <width>60</width>
              <height>16777215</height>
             </size>
            </property>
-           <property name="minimum" >
+           <property name="minimum">
             <number>1</number>
            </property>
-           <property name="maximum" >
+           <property name="maximum">
             <number>1500</number>
            </property>
-           <property name="value" >
+           <property name="value">
             <number>100</number>
            </property>
           </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="wordcount_label" >
-           <property name="text" >
+         </item><item row="1" column="3"><widget class="QLabel" name="wordcount_label">
+           <property name="text">
             <string>words</string>
            </property>
           </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" >
-        <widget class="QCheckBox" name="add_enable" >
-         <property name="text" >
+         </item><item row="2" column="0" colspan="4">
+        <widget class="QCheckBox" name="add_enable">
+         <property name="text">
           <string>Add fetched words to database</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" >
+       <item row="3" column="0" colspan="4">
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>373</width>
            <height>16</height>
@@ -132,55 +98,14 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="trayIcon" >
-      <attribute name="title" >
-       <string>Tray Icon</string>
-      </attribute>
-      <layout class="QGridLayout" >
-       <item row="0" column="0" colspan="2" >
-        <widget class="QCheckBox" name="trayIcon_enable" >
-         <property name="text" >
-          <string>Enable Tray Icon</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2" >
-        <widget class="QCheckBox" name="trayIcon_minimizeOnClose" >
-         <property name="text" >
-          <string>Minimize to Tray on Close</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2" >
-        <widget class="QCheckBox" name="trayIcon_startMinimized" >
-         <property name="text" >
-          <string>Start Minimized</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
      </widget>
-    </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -190,11 +115,8 @@
  <tabstops>
   <tabstop>buttonBox</tabstop>
   <tabstop>tabWidget</tabstop>
-  <tabstop>trayIcon_enable</tabstop>
-  <tabstop>trayIcon_minimizeOnClose</tabstop>
-  <tabstop>trayIcon_startMinimized</tabstop>
- </tabstops>
- <resources/>
+  </tabstops>
+ <resources />
  <connections>
   <connection>
    <sender>buttonBox</sender>
@@ -202,11 +124,11 @@
    <receiver>ConfigWindow</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -218,11 +140,11 @@
    <receiver>ConfigWindow</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

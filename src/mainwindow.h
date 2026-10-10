@@ -15,10 +15,9 @@
 
 #include <QList>
 #include <QMainWindow>
-#include <QSystemTrayIcon>
 #include <QVariant>
 #include <QSettings>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QWidget>
 
 #include "searchthread.h"
@@ -44,19 +43,14 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QSettings settings;
         ConfigWindow *configWindow;
         QString guiLanguage;
-
-        void createMenu();
         void initCompleter();
         void setSettings();
 
     public slots:
         void showResults(QString, QList< QList<QVariant> >);
-        void on_actionHistoryClear_activated();
+        void on_actionHistoryClear_triggered();
         void search();
-        void on_actionSearchOn_activated();
-        void on_actionSearchOff_activated();
-        void showOrHideUi(QSystemTrayIcon::ActivationReason);
-        void on_actionQuit_activated();
+        void on_actionQuit_triggered();
 
     signals:
         void historyChanged(bool);
@@ -67,11 +61,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         bool eventFilter(QObject *obj, QEvent *ev);
 
     private:
-        QMenu *menu;
-        QMenu *smenu;
-        QTime time;
+        QElapsedTimer time;
         QCompleter *completer;
-        QSystemTrayIcon *tray;
         QStringListModel *history;
         SearchThread *searchThread;
         QValidator *validator;
@@ -80,8 +71,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         int fatd;
 
     private slots:
-        void on_actionAbout_Boncuk_activated();
-        void on_actionAbout_Qt_activated();
+        void on_actionAbout_Boncuk_triggered();
+        void on_actionAbout_Qt_triggered();
         void pressEnterMessage();
         void writeHistory();
         QString prettyResult(QList<QString>, QString);
