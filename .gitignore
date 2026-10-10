@@ -1,0 +1,15 @@
+# Build artifacts
+build/
+bin/
+Makefile
+*.qmake.stash
+
+# Qt specific
+*.qm
+*.pro.user
+*.pro.user.*
+
+# OS specific
+.DS_Store
+*.app/
+
