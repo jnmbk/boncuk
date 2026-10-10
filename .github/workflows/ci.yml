@@ -86,21 +86,23 @@ jobs:
       
     - name: Package Linux AppImage
       if: runner.os == 'Linux'
+      env:
+        QMAKE: qmake
+        EXTRA_QT_PLUGINS: sqldrivers
       run: |
-        # Set up AppDir structure
-        mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
-        cp bin/boncuk AppDir/usr/bin/
-        cp linux/boncuk.desktop AppDir/usr/share/applications/
-        cp resources/boncuk.png AppDir/boncuk.png
-        cp resources/boncuk.png AppDir/usr/share/icons/hicolor/256x256/apps/
+        # Download linuxdeploy and plugins
+        wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
+        wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
+        wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage"
+        chmod a+x linuxdeploy*.AppImage
         
-        # Download linuxdeployqt
-        wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-        chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-        
-        # Build AppImage (VERSION is required by linuxdeployqt)
-        export VERSION="2.0"
-        ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/boncuk.desktop -appimage -unsupported-allow-new-glibc
+        # Build AppImage with Qt plugin and AppImage output
+        ./linuxdeploy-x86_64.AppImage \
+          --executable bin/boncuk \
+          --desktop-file linux/boncuk.desktop \
+          --icon-file resources/boncuk.png \
+          --plugin qt \
+          --output appimage
 
     - name: Upload Windows Artifact
       if: matrix.os == 'windows-latest'
@@ -121,4 +123,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Boncuk-Linux-AppImage
-        path: Boncuk-*-x86_64.AppImage
+        path: Boncuk*.AppImage
