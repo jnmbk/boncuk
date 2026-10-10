@@ -56,7 +56,7 @@ void SesliSozluk::search(QString keyword)
 {
     word = keyword;
     convertToTurkishWeb(&keyword);
-    QNetworkRequest request(QUrl(QString("http://") + SESLISOZLUKHOSTNAME + "/?word=" + keyword));
+    QNetworkRequest request(QUrl(QString("http://") + SESLISOZLUKHOSTNAME + "/?word=" + keyword + "&lang=tr-en-de"));
     request.setRawHeader("Cookie", "compact_view=1");
     qDebug() << "Request URL:" << request.url().toString();
     manager->get(request);
