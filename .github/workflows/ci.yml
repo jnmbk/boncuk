@@ -35,10 +35,11 @@ jobs:
         version: ${{ matrix.qt_version }}
         arch: ${{ matrix.os == 'windows-latest' && 'win64_msvc2022_64' || '' }}
 
-    - name: Patch macOS Qt AGL dependency (macOS only)
+    - name: Patch macOS Qt headers (macOS only)
       if: matrix.os == 'macos-latest'
       run: |
         find "$RUNNER_WORKSPACE" -name "mac.conf" -exec sed -i '' 's/-framework AGL//g' {} + 2>/dev/null || true
+        find "$RUNNER_WORKSPACE" -name "qyieldcpu.h" -exec sed -i '' 's/__yield()/__builtin_arm_yield()/g' {} + 2>/dev/null || true
 
     - name: Build Main Application
       run: |
@@ -96,7 +97,7 @@ jobs:
         
         # Build AppImage (VERSION is required by linuxdeployqt)
         export VERSION="2.0"
-        ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/boncuk.desktop -appimage
+        ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/boncuk.desktop -appimage -unsupported-allow-new-glibc
 
     - name: Upload Windows Artifact
       if: matrix.os == 'windows-latest'

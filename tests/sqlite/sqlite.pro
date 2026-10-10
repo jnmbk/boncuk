@@ -7,6 +7,7 @@ macx {
     QMAKE_LIBS_OPENGL -= -framework AGL
     QMAKE_LIBS_OPENGL_ES2 -= -framework AGL
     LIBS -= -framework AGL
+    QMAKE_CXXFLAGS += -Wno-error=implicit-function-declaration
 }
 
 INCLUDEPATH += ../../src
