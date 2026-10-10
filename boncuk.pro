@@ -8,6 +8,9 @@ macx {
     LIBS -= -framework AGL
     QMAKE_CXXFLAGS += -Wno-error=implicit-function-declaration
 }
+win32 {
+    RC_ICONS = resources/boncuk.ico
+}
 DEFINES += \
     BONCUK_VERSION=\\\"$$VERSION\\\"
 

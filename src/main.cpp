@@ -12,6 +12,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QIcon>
 #include <QLocale>
 #include <QMainWindow>
 #include <QTranslator>
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
 
     app.setOrganizationName(QString("boncuk"));
     app.setApplicationName(QString("boncuk"));
+    app.setWindowIcon(QIcon(":/boncuk.png"));
 
     QString locale = QLocale::system().name();
     QTranslator translator;
