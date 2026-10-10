@@ -143,7 +143,7 @@ void MainWindow::setSettings()
     settings.setValue("fatdb", QVariant(-1));
 }
 
-void MainWindow::on_actionHistoryClear_activated()
+void MainWindow::on_actionHistoryClear_triggered()
 {
     if(completer){
         history->setStringList(QStringList());
@@ -304,7 +304,7 @@ QString MainWindow::prettyResult( QList<QString> lang, QString text )
 }
 
 
-void MainWindow::on_actionAbout_Boncuk_activated()
+void MainWindow::on_actionAbout_Boncuk_triggered()
 {
     QString aboutText = QString::fromUtf8((tr("Boncuk %1 - online/offline dictionary\n\
 This software is released under the terms of GPL v2.\n\
@@ -318,7 +318,7 @@ Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toUtf8().constD
     QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }
 
-void MainWindow::on_actionAbout_Qt_activated()
+void MainWindow::on_actionAbout_Qt_triggered()
 {
     QMessageBox::aboutQt(this);
 }
@@ -348,7 +348,7 @@ void MainWindow::writeHistory()
     }
 }
 
-void MainWindow::on_actionQuit_activated()
+void MainWindow::on_actionQuit_triggered()
 {
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.setValue("mainWindow/geo", QVariant(this->size()));
