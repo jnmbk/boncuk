@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 
     QString locale = QLocale::system().name();
     QTranslator translator;
-    translator.load(QString(":/boncuk_") + locale);
+    (void)translator.load(QString(":/boncuk_") + locale);
     app.installTranslator(&translator);
 
     MainWindow *mainWindow = NULL;
