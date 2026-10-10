@@ -1,7 +1,12 @@
 TEMPLATE = app
 TARGET = boncuk
 VERSION = "2.0.0"
-macx: ICON = resources/boncuk.icns
+macx {
+    ICON = resources/boncuk.icns
+    QMAKE_LIBS_OPENGL -= -framework AGL
+    QMAKE_LIBS_OPENGL_ES2 -= -framework AGL
+    LIBS -= -framework AGL
+}
 DEFINES += \
     Q_OS_UNIX \
     BONCUK_VERSION=\\\"$$VERSION\\\"
