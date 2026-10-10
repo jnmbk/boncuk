@@ -15,6 +15,8 @@
 #include <QSettings>
 #include <QStringList>
 #include <QTextStream>
+#include <QEventLoop>
+#include <QTimer>
 #include "console.h"
 #include "searchthread.h"
 
@@ -40,12 +42,23 @@ void Console::search()
     qDebug() << "Searching : " << keyword;
     searchThread->search(keyword);
 
-    // 5 sec. internet search timeout
+    QEventLoop loop;
+    connect(searchThread, SIGNAL(found(QString, QList< QList<QVariant> >)), &loop, SLOT(quit()));
+    
+    QTimer timer;
+    timer.setSingleShot(true);
+    connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+    
     if (searchThread->currentSearch() == SESLI) {
-        searchThread->wait(5000);
-        qDebug() << "Time out";
+        timer.start(5000);
     } else {
-        searchThread->wait(500);
+        timer.start(500);
+    }
+
+    loop.exec();
+
+    if (!timer.isActive() && searchThread->currentSearch() == SESLI) {
+        qDebug() << "Time out";
     }
 }
 

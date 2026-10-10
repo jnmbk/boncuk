@@ -67,6 +67,8 @@ void SesliSozluk::continueSearch(QNetworkReply* reply)
     if(reply->error() != QNetworkReply::NoError){
         qDebug() << "Error getting internet result: " << reply->errorString();
         reply->deleteLater();
+        QList< QList<QVariant> > results;
+        emit found(word, results);
         return;
     }
 

@@ -37,14 +37,14 @@ jobs:
 
     - name: Build Main Application
       run: |
-        qmake "CONFIG-=debug" "CONFIG+=release" boncuk.pro
+        qmake "CONFIG-=debug" "CONFIG+=release" "DEFINES+=QT_NO_DEBUG_OUTPUT" boncuk.pro
         ${{ matrix.os == 'windows-latest' && 'nmake' || 'make' }}
 
     - name: Build and Run Tests
       shell: bash
       run: |
         cd tests/sqlite
-        qmake "CONFIG-=debug" "CONFIG+=release" sqlite.pro
+        qmake "CONFIG-=debug" "CONFIG+=release" "DEFINES+=QT_NO_DEBUG_OUTPUT" sqlite.pro
         if [ "$RUNNER_OS" == "Windows" ]; then
           nmake
           ./release/test_sqlite.exe || ./test_sqlite.exe || ./debug/test_sqlite.exe
