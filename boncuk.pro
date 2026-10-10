@@ -41,4 +41,5 @@ RCC_DIR = build
 
 QT += \
     network \
-    sql
+    sql \
+    widgets

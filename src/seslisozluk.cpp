@@ -11,32 +11,28 @@
  */
 
 #include <QDebug>
-#include <QHttp>
-#include <QHttpRequestHeader>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
 #include <QList>
 #include <QString>
-#include <QRegExp>
-#include <QTextCodec>
-#include <QVariant>
+#include <QRegularExpression>
 #include <QVariant>
 #include <QSettings>
 #include "seslisozluk.h"
 
 #define SESLISOZLUKHOSTNAME "www.seslisozluk.net"
 
-SesliSozluk::SesliSozluk(QObject *parent = 0)
+SesliSozluk::SesliSozluk(QObject *parent)
     : QObject(parent)
 {
-    http = new QHttp(this);
-    http->setHost(SESLISOZLUKHOSTNAME);
-    connect(http, SIGNAL(done(bool)), this, SLOT(continueSearch(bool)));
+    manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(continueSearch(QNetworkReply*)));
 }
 
 SesliSozluk::~SesliSozluk()
 {
-    http->abort();
-    http->close();
-    delete(http);
 }
 
 void SesliSozluk::convertToTurkishWeb(QString *word)
@@ -58,30 +54,29 @@ void SesliSozluk::convertToTurkishWeb(QString *word)
 
 void SesliSozluk::search(QString keyword)
 {
-    QHttpRequestHeader header;
     word = keyword;
     convertToTurkishWeb(&keyword);
-    header.setRequest("GET", QString("/?word=%1").arg(keyword));
-    header.setValue("Cookie", "compact_view=1");
-    header.setValue("Host", SESLISOZLUKHOSTNAME);
-    qDebug() << "Header:" << header.toString();
-    http->request(header);
+    QNetworkRequest request(QUrl(QString("http://") + SESLISOZLUKHOSTNAME + "/?word=" + keyword));
+    request.setRawHeader("Cookie", "compact_view=1");
+    qDebug() << "Request URL:" << request.url().toString();
+    manager->get(request);
 }
 
-void SesliSozluk::continueSearch(bool err)
+void SesliSozluk::continueSearch(QNetworkReply* reply)
 {
-    if(err){
-        qDebug() << "Error getting internet result: " << http->errorString();
+    if(reply->error() != QNetworkReply::NoError){
+        qDebug() << "Error getting internet result: " << reply->errorString();
+        reply->deleteLater();
         return;
     }
 
     QList< QList<QVariant> > results;
-    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QString text;
     QStringList data;
     int i, j, turkish, english, german;
 
-    text = codec->toUnicode(http->readAll());
+    text = QString::fromUtf8(reply->readAll());
+    reply->deleteLater();
     qDebug() << "HTML:" << text;
 
     //now we can parse it
@@ -105,9 +100,9 @@ void SesliSozluk::continueSearch(bool err)
     // html parsing is done
 
     qDebug() << "RESULTS :" << data << '\n';
-    turkish = data.indexOf("1.", data.indexOf(QRegExp(QString::fromUtf8(".*Türkçe çevirisi.*"))));
-    english = data.indexOf("1.", data.indexOf(QRegExp(QString::fromUtf8(".*İngilizce çevirisi.*"))));
-    german = data.indexOf("1.", data.indexOf(QRegExp(QString::fromUtf8(".*Almanca çevirisi.*"))));
+    turkish = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*Türkçe çevirisi.*"))));
+    english = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*İngilizce çevirisi.*"))));
+    german = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*Almanca çevirisi.*"))));
 
     if (turkish != -1)
         results << pick(0,

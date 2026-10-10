@@ -36,7 +36,7 @@ bool check_instance(char **argv)
 
     QProcess *instancecheck = new QProcess;
     QStringList env = instancecheck->systemEnvironment().filter("USER");
-    instancecheck->setReadChannelMode(QProcess::SeparateChannels);
+    instancecheck->setProcessChannelMode(QProcess::SeparateChannels);
     instancecheck->start("ps", QStringList() << "-U" << env.first().split("=").last() << "-x");
 
     if(!instancecheck->waitForFinished()) {

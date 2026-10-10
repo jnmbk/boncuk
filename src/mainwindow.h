@@ -18,7 +18,7 @@
 #include <QSystemTrayIcon>
 #include <QVariant>
 #include <QSettings>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QWidget>
 
 #include "searchthread.h"
@@ -69,7 +69,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     private:
         QMenu *menu;
         QMenu *smenu;
-        QTime time;
+        QElapsedTimer time;
         QCompleter *completer;
         QSystemTrayIcon *tray;
         QStringListModel *history;

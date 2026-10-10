@@ -27,6 +27,7 @@
 #include <QProcess>
 #include <QEvent>
 #include <QStringListModel>
+#include <QRegularExpressionValidator>
 
 #include "configwindow.h"
 #include "mainwindow.h"
@@ -71,8 +72,8 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar()->showMessage(tr("Type in a keyword to search"));
     searchButton->setEnabled(0);
 
-    QRegExp searchLineRx("[\\w\\s]*");
-    validator = new QRegExpValidator(searchLineRx, this);
+    QRegularExpression searchLineRx("[\\w\\s]*");
+    validator = new QRegularExpressionValidator(searchLineRx, this);
     keyword->setValidator(validator);
     keyword->setMaxLength(64);
 
@@ -250,7 +251,8 @@ void MainWindow::search()
 
         list.append(keyword->text());
 
-        history->setStringList( list.toSet().toList() );
+        list.removeDuplicates();
+        history->setStringList( list );
         writeHistory();
         emit historyChanged(true);
     }
@@ -359,7 +361,7 @@ Developers:\n\
 İlker Kesen <ilker.kde at gmail.com>\n\
 İşbaran Akçayır <isbaran at gmail.com>\n\
 Uğur Çetin <ugur.jnmbk at gmail.com>\n\
-Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toAscii().constData());
+Gökmen Görgen <gkmngrgn at gmail.com>\n").arg(BONCUK_VERSION)).toUtf8().constData());
 
     QMessageBox::about(this, tr("About Boncuk"), aboutText);
 }

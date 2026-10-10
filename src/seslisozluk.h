@@ -15,8 +15,10 @@
 
 #include <QList>
 #include <QVariant>
+#include <QObject>
 
-class QHttp;
+class QNetworkAccessManager;
+class QNetworkReply;
 class QString;
 
 class SesliSozluk : public QObject
@@ -32,7 +34,7 @@ class SesliSozluk : public QObject
         void found(QString, QList< QList<QVariant> >);
 
     private:
-        QHttp *http;
+        QNetworkAccessManager *manager;
 
         void convertToTurkishWeb(QString *);
         void parse();
@@ -40,7 +42,7 @@ class SesliSozluk : public QObject
         QString word;
 
     private slots:
-        void continueSearch(bool);
+        void continueSearch(QNetworkReply* reply);
 };
 
 #endif
