@@ -84,7 +84,11 @@ jobs:
       run: |
         macdeployqt bin/boncuk.app
         codesign --force --deep --sign - bin/boncuk.app
-        hdiutil create -volname Boncuk -srcfolder bin/boncuk.app -ov -format UDZO bin/boncuk.dmg
+        mkdir -p dmg_root
+        cp -R bin/boncuk.app dmg_root/
+        ln -s /Applications dmg_root/Applications
+        hdiutil create -volname "Boncuk" -srcfolder dmg_root -ov -format UDZO bin/boncuk.dmg
+        rm -rf dmg_root
       
     - name: Package Linux AppImage
       if: runner.os == 'Linux' && startsWith(github.ref, 'refs/tags/v')
