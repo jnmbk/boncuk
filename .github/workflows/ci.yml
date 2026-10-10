@@ -14,8 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
-        qt_version: [6.6.2]
+        os: [ubuntu-22.04, macos-latest, windows-latest]
+        qt_version: [6.8.2]
 
     steps:
     - name: Checkout code
@@ -26,14 +26,14 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
 
     - name: Install Linux Dependencies (Ubuntu only)
-      if: matrix.os == 'ubuntu-20.04'
+      if: runner.os == 'Linux'
       run: sudo apt-get update && sudo apt-get install -y build-essential libgl1-mesa-dev file
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
       with:
         version: ${{ matrix.qt_version }}
-        arch: ${{ matrix.os == 'windows-latest' && 'win64_msvc2019_64' || '' }}
+        arch: ${{ matrix.os == 'windows-latest' && 'win64_msvc2022_64' || '' }}
 
     - name: Patch macOS Qt AGL dependency (macOS only)
       if: matrix.os == 'macos-latest'
@@ -79,7 +79,7 @@ jobs:
         macdeployqt bin/boncuk.app -dmg
       
     - name: Package Linux AppImage
-      if: matrix.os == 'ubuntu-20.04'
+      if: runner.os == 'Linux'
       run: |
         # Set up AppDir structure
         mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
@@ -111,7 +111,7 @@ jobs:
         path: bin/boncuk.dmg
 
     - name: Upload Linux Artifact
-      if: matrix.os == 'ubuntu-20.04'
+      if: runner.os == 'Linux'
       uses: actions/upload-artifact@v4
       with:
         name: Boncuk-Linux-AppImage
