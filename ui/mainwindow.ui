@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -32,7 +32,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="keyword"/>
+       <widget class="QLineEdit" name="keyword" />
       </item>
       <item>
        <widget class="QToolButton" name="searchButton">
@@ -71,15 +71,15 @@
        <bool>true</bool>
       </property>
       <property name="html">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+       <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;0&quot; style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;"&gt;
+&lt;table border="0" style="-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;"&gt;
 &lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;td style="border: none;"&gt;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -98,28 +98,28 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Boncuk</string>
     </property>
-    <addaction name="actionConfigure"/>
-    <addaction name="separator"/>
-    <addaction name="actionQuit"/>
+    <addaction name="actionConfigure" />
+    <addaction name="separator" />
+    <addaction name="actionQuit" />
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionAbout_Boncuk"/>
-    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAbout_Boncuk" />
+    <addaction name="actionAbout_Qt" />
    </widget>
    <widget class="QMenu" name="menuHistory">
     <property name="title">
      <string>Hi&amp;story</string>
     </property>
-    <addaction name="actionHistoryClear"/>
+    <addaction name="actionHistoryClear" />
    </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuHistory"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menuFile" />
+   <addaction name="menuHistory" />
+   <addaction name="menuHelp" />
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar" />
   <action name="actionHelp">
    <property name="text">
     <string>&amp;Index</string>
@@ -136,7 +136,7 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>&amp;About Boncuk</string>
    </property>
-  </action>
+  <property name="menuRole"><enum>QAction::AboutRole</enum></property></action>
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About &amp;Qt</string>
@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
    <property name="text">
     <string>&amp;Configure</string>
    </property>
-  </action>
+  <property name="menuRole"><enum>QAction::PreferencesRole</enum></property><property name="shortcut"><string>Ctrl+,</string></property></action>
   <action name="actionShow_Toolbar">
    <property name="checkable">
     <bool>true</bool>
@@ -188,7 +188,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="icon">
     <iconset>
-     <normaloff/>
+     <normaloff />
     </iconset>
    </property>
    <property name="text">
@@ -201,7 +201,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="icon">
     <iconset>
-     <normaloff/>
+     <normaloff />
     </iconset>
    </property>
    <property name="text">
@@ -248,7 +248,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>resultBrowser</tabstop>
  </tabstops>
  <resources>
-  <include location="../resources/boncuk.qrc"/>
+  <include location="../resources/boncuk.qrc" />
  </resources>
- <connections/>
+ <connections />
 </ui>

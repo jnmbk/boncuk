@@ -17,13 +17,11 @@
 #include <QSettings>
 #include <QVariant>
 #include <QKeyEvent>
-#include <QSystemTrayIcon>
 #include "configwindow.h"
 
-ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
+ConfigWindow::ConfigWindow(QWidget *parent)
     : QDialog(parent)
 {
-    trayptr = tptr;
     parentptr = parent;
     setupUi(this);
 
@@ -49,22 +47,6 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
 
     if (settings.value("add/enabled", QVariant(true)).toBool() == 1)
         add_enable->setCheckState(Qt::Checked);
-
-    if (settings.value("tray/minimizeOnClose", QVariant(true)).toBool() == 1)
-        trayIcon_minimizeOnClose->setCheckState(Qt::Checked);
-
-    if (settings.value("tray/startMinimized", QVariant(true)).toBool() == 1){
-        trayIcon_startMinimized->setCheckState(Qt::Checked); }
-
-    if (settings.value("tray/enabled", QVariant(true)).toBool()){
-        trayIcon_enable->setCheckState(Qt::Checked);
-    }else{
-        trayIcon_enable->setCheckState(Qt::Unchecked); 
-        stateSync(0);
-    }
-
-    connect(trayIcon_enable, SIGNAL(stateChanged(int)),
-        this, SLOT(stateSync(int)));
     connect(history_enable, SIGNAL(stateChanged(int)),
         this, SLOT(slotHistorySync(int)));
 }
@@ -78,8 +60,6 @@ void ConfigWindow::keyPressEvent( QKeyEvent *event )
 
 void ConfigWindow::stateSync(int state)
 {
-    trayIcon_minimizeOnClose->setEnabled(state);
-    trayIcon_startMinimized->setEnabled(state);
 }
 
 void ConfigWindow::slotHistorySync(int state)
@@ -93,12 +73,6 @@ void ConfigWindow::slotHistorySync(int state)
 void ConfigWindow::writeSettings() {
     settings.setValue("translation/method",
             QVariant(online_search_enable->isChecked() ? 0 : 1));
-    settings.setValue("tray/enabled",
-            QVariant(trayIcon_enable->checkState()).toBool());
-    settings.setValue("tray/minimizeOnClose",
-            QVariant(trayIcon_minimizeOnClose->checkState()).toBool());
-    settings.setValue("tray/startMinimized",
-            QVariant(trayIcon_startMinimized->checkState()).toBool());
     settings.setValue("history/count",
             QVariant(wordcountSpinBox->value()));
     settings.setValue("history/enabled",
@@ -109,15 +83,5 @@ void ConfigWindow::writeSettings() {
 }
 
 void ConfigWindow::applySettings() {
-    if(trayIcon_enable->checkState() == Qt::Unchecked) {
-        parentptr->show();
-        trayptr->hide();
-        qApp->setQuitOnLastWindowClosed(true);
-    } else if(trayIcon_enable->checkState() == Qt::Checked) {
-        trayptr->show();
-        if (settings.value("tray/minimizeOnClose").toBool())
-            qApp->setQuitOnLastWindowClosed(false);
-        else qApp->setQuitOnLastWindowClosed(true);
-    }
     settings.sync();
 }

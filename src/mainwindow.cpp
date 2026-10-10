@@ -38,22 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi(this);
 
     setSettings();
-
-    tray = new QSystemTrayIcon(this->windowIcon(), this);
-
-    createMenu();
     connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
-
-    if(settings.value("tray/enabled", true).toBool()) {
-        tray->show();
-        qApp->setQuitOnLastWindowClosed(
-            !settings.value("tray/minimizeOnClose", true).toBool());
-    }
-    if(settings.value("tray/startMinimized", true).toBool() &&
-        settings.value("tray/enabled", true).toBool())
-        this->hide();
-    else
-        this->show();
+    this->show();
 
     if(settings.value("history/enabled").toBool()){
         initCompleter();
@@ -68,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "Gui Language : " << guiLanguage;
 
     searchThread = new SearchThread(this);
-    configWindow = new ConfigWindow(this, tray);
+    configWindow = new ConfigWindow(this);
     statusBar()->showMessage(tr("Type in a keyword to search"));
     searchButton->setEnabled(0);
 
@@ -82,8 +68,6 @@ MainWindow::MainWindow(QWidget *parent)
         this, SLOT(showResults(QString, QList< QList<QVariant> >)));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
-    connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     connect(this, SIGNAL(historyChanged(bool)),
             actionHistoryClear, SLOT(setEnabled(bool)));
     connect(actionConfigure, SIGNAL(triggered()), configWindow, SLOT(show()));
@@ -93,8 +77,6 @@ MainWindow::~MainWindow()
 {
     // Bunlar otomatik siliniyor aslında ..
     delete(history);
-    delete(menu);
-    delete(tray);
     delete(validator);
     delete(completer);
 }
@@ -156,11 +138,7 @@ void MainWindow::on_actionHistoryClear_triggered()
 void MainWindow::keyPressEvent( QKeyEvent *event )
 {
     if( event->key() == Qt::Key_Escape ){
-        if( settings.value("tray/enabled").toBool() &&
-            settings.value("tray/minimizeOnClose").toBool() ){
-            this->close();
-        }else
-            QWidget::keyPressEvent(event);
+        this->close();
     }else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && searchButton->isEnabled() && keyword->hasFocus()){
         search();
     }else
@@ -172,34 +150,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     settings.setValue("mainWindow/pos", QVariant(this->pos()));
     settings.setValue("mainWindow/geo", QVariant(this->size()));
     event->accept();
-}
-
-void MainWindow::showOrHideUi(
-        QSystemTrayIcon::ActivationReason activation_reason)
-{
-    if(activation_reason == QSystemTrayIcon::Trigger) {
-        if(this->isVisible()) {
-          settings.setValue("mainWindow/pos", QVariant(this->pos()));
-          settings.setValue("mainWindow/geo", QVariant(this->size()));
-          this->hide();
-        } else {
-            this->move(settings.value("mainWindow/pos").toPoint());
-            this->resize(settings.value("mainWindow/geo").toSize());
-            keyword->setSelection(0, (keyword->text()).size());
-            this->show();
-        }
-    }
-}
-
-void MainWindow::createMenu()
-{
-    // popup menu for tray
-    menu = new QMenu();
-    menu->addAction(actionAbout_Boncuk);
-    menu->addAction(actionConfigure);
-    menu->addSeparator();
-    menu->addAction(actionQuit);
-    tray->setContextMenu(menu);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)

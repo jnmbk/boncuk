@@ -20,15 +20,13 @@
 class QDialog;
 class QWidget;
 class QKeyEvent;
-class QSystemTrayIcon;
 
 class ConfigWindow : public QDialog, private Ui::ConfigWindow
 {
     Q_OBJECT
 
     public:
-        ConfigWindow(QWidget *parent = 0, QSystemTrayIcon *tptr = 0);
-        QSystemTrayIcon *trayptr;
+        ConfigWindow(QWidget *parent = 0);
         QWidget *parentptr;
 
     public:

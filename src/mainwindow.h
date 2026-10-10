@@ -15,7 +15,6 @@
 
 #include <QList>
 #include <QMainWindow>
-#include <QSystemTrayIcon>
 #include <QVariant>
 #include <QSettings>
 #include <QElapsedTimer>
@@ -44,8 +43,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         QSettings settings;
         ConfigWindow *configWindow;
         QString guiLanguage;
-
-        void createMenu();
         void initCompleter();
         void setSettings();
 
@@ -53,7 +50,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showResults(QString, QList< QList<QVariant> >);
         void on_actionHistoryClear_triggered();
         void search();
-        void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void on_actionQuit_triggered();
 
     signals:
@@ -65,10 +61,8 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         bool eventFilter(QObject *obj, QEvent *ev);
 
     private:
-        QMenu *menu;
         QElapsedTimer time;
         QCompleter *completer;
-        QSystemTrayIcon *tray;
         QStringListModel *history;
         SearchThread *searchThread;
         QValidator *validator;
