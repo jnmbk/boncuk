@@ -9,6 +9,12 @@ private slots:
 };
 
 void TestSqliteDatabase::testAddAndSearch() {
+    QCoreApplication::setOrganizationName("boncuk");
+    QCoreApplication::setApplicationName("boncuk");
+    QSettings settings;
+    settings.setValue("add/enabled", true);
+    settings.setValue("fatdb", -1);
+
     SqliteDatabase db(nullptr, "");
     
     QSignalSpy spy(&db, SIGNAL(found(QString,QList<QList<QVariant>>)));

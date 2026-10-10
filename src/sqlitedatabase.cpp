@@ -189,7 +189,7 @@ void SqliteDatabase::add(QString word, QList<QList<QVariant> > results)
     }
 
     QSettings settings;
-    if (settings.value("fatdb").toInt() != -1){
+    if (settings.value("fatdb", -1).toInt() != -1){
         settings.setValue("add/enabled", QVariant(settings.value("fatdb").toBool()));
         settings.setValue("fatdb", QVariant(-1));
         return;
