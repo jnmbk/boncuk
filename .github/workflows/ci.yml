@@ -49,10 +49,13 @@ jobs:
 
     - name: Build and Run Tests (Windows)
       if: matrix.os == 'windows-latest'
+      env:
+        QT_QPA_PLATFORM: offscreen
       run: |
         cd tests\sqlite
         qmake "CONFIG-=debug" "CONFIG+=release" "DEFINES+=QT_NO_DEBUG_OUTPUT" sqlite.pro
         nmake
+        windeployqt --no-translations release\test_sqlite.exe
         .\release\test_sqlite.exe
 
     - name: Build and Run Tests (Unix)
