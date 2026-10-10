@@ -15,8 +15,8 @@
 ## Requirements
 
 To build and run Boncuk, you will need:
-- Qt 4.3 or higher (Compatible with newer Qt versions up to Qt 6)
-- SQLite extension for Qt (`libqt4-sql-sqlite` or equivalent depending on your Qt version)
+- Qt 6
+- SQLite plugin for Qt 6 (`libqt6sql6-sqlite` or equivalent depending on your system)
 - Make, GCC/Clang, or other standard C++ build tools
 
 ## Installation
@@ -49,7 +49,7 @@ To build and run Boncuk, you will need:
 ## Usage
 
 ### Graphical Interface (GUI)
-Simply run the `boncuk` executable to launch the graphical interface. You can type a word and press Enter to see translations. The search button also features a popup menu (long press) to toggle between online and offline search explicitly for that query.
+Simply run the `boncuk` executable to launch the graphical interface. You can type a word and press Enter (or click the search button) to see translations.
 
 ### Console Interface (CLI)
 You can use Boncuk directly from your terminal by passing a word as an argument:

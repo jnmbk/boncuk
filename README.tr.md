@@ -15,8 +15,8 @@
 ## Gereksinimler
 
 Boncuk'u derlemek ve çalıştırmak için şunlara ihtiyacınız vardır:
-- Qt 4.3 veya daha yenisi (Qt 6'ya kadar yeni Qt sürümleriyle uyumludur)
-- Qt için SQLite eklentisi (Qt sürümünüze bağlı olarak `libqt4-sql-sqlite` veya eşdeğeri)
+- Qt 6
+- Qt 6 için SQLite eklentisi (sisteminize bağlı olarak `libqt6sql6-sqlite` veya eşdeğeri)
 - Make, GCC/Clang veya standart C++ derleme araçları
 
 ## Kurulum
@@ -49,7 +49,7 @@ Boncuk'u derlemek ve çalıştırmak için şunlara ihtiyacınız vardır:
 ## Kullanım
 
 ### Grafiksel Arayüz (GUI)
-Grafiksel arayüzü başlatmak için `boncuk` uygulamasını çalıştırmanız yeterlidir. Bir kelime yazıp Enter tuşuna basarak çevirileri görebilirsiniz. Arama butonuna basılı tutarak (veya menüyü kullanarak) aramanızı yalnızca o kelime için çevrimiçi veya çevrimdışı olacak şekilde değiştirebilirsiniz.
+Grafiksel arayüzü başlatmak için `boncuk` uygulamasını çalıştırmanız yeterlidir. Bir kelime yazıp Enter tuşuna basarak (veya arama butonuna tıklayarak) çevirileri görebilirsiniz.
 
 ### Konsol Arayüzü (CLI)
 Aranacak kelimeyi argüman olarak vererek Boncuk'u doğrudan terminalinizden de kullanabilirsiniz:
