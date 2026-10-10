@@ -40,13 +40,14 @@ class SearchThread : public QThread
 
     private:
         QString keyword;
-        bool lastSearchWasOffline;
         SesliSozluk *sesliSozluk;
         SqliteDatabase *sqliteDatabase;
         SearchType searchType;
+        QList< QList<QVariant> > mergedResults;
 
     private slots:
-        void returnResult(QString, QList< QList<QVariant> >);
+        void offlineResultReady(QString, QList< QList<QVariant> >);
+        void onlineResultReady(QString, QList< QList<QVariant> >);
 
     protected:
         void run();

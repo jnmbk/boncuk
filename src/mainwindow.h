@@ -53,8 +53,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
         void showResults(QString, QList< QList<QVariant> >);
         void on_actionHistoryClear_activated();
         void search();
-        void on_actionSearchOn_activated();
-        void on_actionSearchOff_activated();
         void showOrHideUi(QSystemTrayIcon::ActivationReason);
         void on_actionQuit_activated();
 
@@ -68,7 +66,6 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     private:
         QMenu *menu;
-        QMenu *smenu;
         QElapsedTimer time;
         QCompleter *completer;
         QSystemTrayIcon *tray;

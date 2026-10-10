@@ -31,34 +31,11 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout" >
        <item row="0" column="0" >
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_2" >
-           <property name="text" >
-            <string>Method:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="translation_method" >
-           <item>
-            <property name="text" >
-             <string>Try Offline First</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Offline</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Always Online</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QCheckBox" name="online_search_enable" >
+         <property name="text" >
+          <string>Include online results</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0" >
         <layout class="QHBoxLayout" >

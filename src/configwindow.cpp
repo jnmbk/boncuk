@@ -29,8 +29,11 @@ ConfigWindow::ConfigWindow(QWidget *parent, QSystemTrayIcon *tptr)
 
     connect(this, SIGNAL(accepted()), this, SLOT(writeSettings()));
 
-    translation_method->setCurrentIndex(
-            settings.value("translation/method").toInt());
+    if (settings.value("translation/method", 0).toInt() != 1) {
+        online_search_enable->setCheckState(Qt::Checked);
+    } else {
+        online_search_enable->setCheckState(Qt::Unchecked);
+    }
 
     /* Always check values that user can change */
     if (settings.value("history/count", 100).toInt() < 1)
@@ -89,7 +92,7 @@ void ConfigWindow::slotHistorySync(int state)
 
 void ConfigWindow::writeSettings() {
     settings.setValue("translation/method",
-            QVariant(translation_method->currentIndex()));
+            QVariant(online_search_enable->isChecked() ? 0 : 1));
     settings.setValue("tray/enabled",
             QVariant(trayIcon_enable->checkState()).toBool());
     settings.setValue("tray/minimizeOnClose",

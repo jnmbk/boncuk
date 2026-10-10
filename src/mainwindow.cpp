@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     tray = new QSystemTrayIcon(this->windowIcon(), this);
 
     createMenu();
-    searchButton->installEventFilter(this);
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
 
     if(settings.value("tray/enabled", true).toBool()) {
         tray->show();
@@ -80,7 +80,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(
         searchThread, SIGNAL(found(QString, QList< QList<QVariant> >)),
         this, SLOT(showResults(QString, QList< QList<QVariant> >)));
-    //connect(searchButton, SIGNAL(clicked()), this, SLOT(search()));
     connect(keyword, SIGNAL(textEdited(const QString &)),
             this, SLOT(pressEnterMessage()));
     connect(tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -201,37 +200,11 @@ void MainWindow::createMenu()
     menu->addSeparator();
     menu->addAction(actionQuit);
     tray->setContextMenu(menu);
-
-    // popup menu for search button
-    smenu = new QMenu();
-    smenu->addAction(actionSearchOn);
-    smenu->addSeparator();
-    smenu->addAction(actionSearchOff);
-    searchButton->setMenu(smenu);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-    if(obj == searchButton && searchButton->isEnabled()){
-        qApp->setDoubleClickInterval(0);
-        if(event->type() == QEvent::MouseButtonPress){
-            time.restart();
-            return true;
-        }else if(event->type() == QEvent::MouseButtonRelease){
-            if(qApp->doubleClickInterval() < time.elapsed() && time.elapsed() < 800){
-                search();
-                return true;
-            }else{
-                searchButton->showMenu();
-                return true;
-            }
-        }else if(event->type() == QEvent::MouseButtonDblClick){
-            searchButton->showMenu();
-            return false;
-        }else
-            return false;
-    }else
-        return QMainWindow::eventFilter(obj, event);
+    return QMainWindow::eventFilter(obj, event);
 }
 
 void MainWindow::search()
@@ -262,27 +235,6 @@ void MainWindow::search()
     searchButton->setEnabled(false);
     searchThread->search(keyword->text());
     keyword->setSelection(0, (keyword->text()).size());
-}
-
-void MainWindow::on_actionSearchOn_activated()
-{
-    int old_method = settings.value("translation/method", 0).toInt();
-    // set dont add to database value
-    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
-
-    settings.setValue("translation/method", QVariant(2));
-    search();
-    settings.setValue("translation/method", QVariant(old_method));
-}
-
-void MainWindow::on_actionSearchOff_activated()
-{
-    int old_ = settings.value("translation/method", 0).toInt();
-    settings.setValue("fatdb", QVariant(settings.value("add/enabled").toInt()));
-
-    settings.setValue("translation/method", QVariant(1));
-    search();
-    settings.setValue("translation/method", QVariant(old_));
 }
 
 void MainWindow::showResults(QString, QList< QList<QVariant> > results)
