@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, macos-latest, windows-latest]
-        qt_version: [5.15.2]
+        qt_version: [6.6.2]
 
     steps:
     - name: Checkout code
@@ -30,9 +30,9 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y build-essential libgl1-mesa-dev file
 
     - name: Install Qt
-      uses: miurahr/setup-qt@v3
+      uses: jurplel/install-qt-action@v4
       with:
-        qt-version: ${{ matrix.qt_version }}
+        version: ${{ matrix.qt_version }}
         arch: ${{ matrix.os == 'windows-latest' && 'win64_msvc2019_64' || '' }}
 
     - name: Build Main Application
