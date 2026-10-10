@@ -29,6 +29,7 @@
 SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
     : QObject(parent)
 {
+    Q_UNUSED(databaseFile);
     QSettings settings;
     // keeps database names
     dbs << "default";

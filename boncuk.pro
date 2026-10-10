@@ -32,6 +32,13 @@ TRANSLATIONS += \
 
 CONFIG += debug
 
+# Generate .qm files from .ts
+qm.input = TRANSLATIONS
+qm.output = $$PWD/resources/${QMAKE_FILE_BASE}.qm
+qm.commands = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
+qm.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += qm
+
 DESTDIR = bin
 OBJECTS_DIR = build
 MOC_DIR = build

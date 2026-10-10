@@ -37,6 +37,7 @@ jobs:
 
     - name: Build Main Application
       run: |
+        lrelease boncuk.pro
         qmake "CONFIG-=debug" "CONFIG+=release" "DEFINES+=QT_NO_DEBUG_OUTPUT" boncuk.pro
         ${{ matrix.os == 'windows-latest' && 'nmake' || 'make' }}
 
