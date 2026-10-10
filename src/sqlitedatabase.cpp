@@ -33,10 +33,28 @@ SqliteDatabase::SqliteDatabase(QObject *parent, QString databaseFile)
     // keeps database names
     dbs << "default";
 
+    QString defaultDbPath = QString(HOME_DIR) + "/default.db";
+    QDir directory(QString(HOME_DIR));
+    if(!directory.exists()){
+        directory.mkpath(QString(HOME_DIR));
+    }
+
+    QFile resourceFile(":/boncuk.db");
+    QFile localFile(defaultDbPath);
+    if (!localFile.exists() || localFile.size() != resourceFile.size()) {
+        if (localFile.exists()) {
+            localFile.remove();
+        }
+        if (resourceFile.exists()) {
+            resourceFile.copy(defaultDbPath);
+            QFile::setPermissions(defaultDbPath, QFile::ReadOwner | QFile::WriteOwner);
+        }
+    }
+
     QSqlDatabase db = QSqlDatabase::database("default");
     if (!db.isValid()) {
         db = QSqlDatabase::addDatabase("QSQLITE", "default");
-        db.setDatabaseName(databaseFile);
+        db.setDatabaseName(defaultDbPath);
         db.open();
     }
 

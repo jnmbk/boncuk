@@ -1,11 +1,9 @@
 TEMPLATE = app
 TARGET = boncuk
 VERSION = "1.1"
-DATABASE = "/usr/share/boncuk/boncuk.db"
 DEFINES += \
     Q_OS_UNIX \
-    BONCUK_VERSION=\\\"$$VERSION\\\" \
-    DATABASE_LOCATION=\\\"$$DATABASE\\\"
+    BONCUK_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += \

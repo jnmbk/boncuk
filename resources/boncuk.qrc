@@ -8,5 +8,6 @@
         <file>online.png</file>
         <file>offline.png</file>
         <file>boncuk_tr_TR.qm</file>
+        <file>boncuk.db</file>
     </qresource>
 </RCC>

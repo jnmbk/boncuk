@@ -20,8 +20,7 @@ SearchThread::SearchThread(QObject *parent)
 {
     lastSearchWasOffline = true;
     searchType = None;
-    sqliteDatabase = new SqliteDatabase(this,
-        DATABASE_LOCATION);
+    sqliteDatabase = new SqliteDatabase(this, "");
 
     sesliSozluk = new SesliSozluk(this);
 }
