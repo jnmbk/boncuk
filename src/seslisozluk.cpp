@@ -71,62 +71,49 @@ void SesliSozluk::continueSearch(QNetworkReply* reply)
     }
 
     QList< QList<QVariant> > results;
-    QString text;
-    QStringList data;
-    int i, j, turkish, english, german;
-
-    text = QString::fromUtf8(reply->readAll());
+    QString text = QString::fromUtf8(reply->readAll());
     reply->deleteLater();
-    qDebug() << "HTML:" << text;
 
-    //now we can parse it
-    text.remove(0, text.indexOf('>', text.indexOf("tabsResult")) + 1);
-    text.remove(text.indexOf("<!-- id=translations -->"), text.size());
-    qDebug() << "Clipped HTML:" << text;
-    if (text.count('<') != text.count('>')){
-        qDebug() << "Ignoring HTML tag closing mismatch.";
-    }
-    do {
-        /* remove all html tags like <div>, </div> */
-        i = text.indexOf('<');
-        text.remove(i, text.indexOf('>') - i + 1);
-        j = text.indexOf('<');
-        if (j != -1 && j!= 0) {
-            data << text.left(j).simplified();
-            text.remove(0, j);
+    QRegularExpression dlRegex("<h2 class=\"h2-sozluk-anlami[^>]*>(.*?)sözlükte anlamı</h2>(.*?)</dl>", QRegularExpression::DotMatchesEverythingOption);
+    QRegularExpressionMatchIterator dlIt = dlRegex.globalMatch(text);
+    
+    while (dlIt.hasNext()) {
+        QRegularExpressionMatch dlMatch = dlIt.next();
+        QString header = dlMatch.captured(1);
+        QString dlContent = dlMatch.captured(2);
+        
+        header.remove(QRegularExpression("<[^>]+>"));
+        header = header.trimmed();
+        QString langName = header.section(' ', -1);
+        
+        int lang = -1;
+        if (langName == QString::fromUtf8("Türkçe")) {
+            lang = 0;
+        } else if (langName == QString::fromUtf8("İngilizce")) {
+            lang = 1;
+        } else if (langName == QString::fromUtf8("Almanca")) {
+            lang = 2;
         }
-    } while(i != -1);
-
-    // html parsing is done
-
-    qDebug() << "RESULTS :" << data << '\n';
-    turkish = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*Türkçe çevirisi.*"))));
-    english = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*İngilizce çevirisi.*"))));
-    german = data.indexOf("1.", data.indexOf(QRegularExpression(QString::fromUtf8(".*Almanca çevirisi.*"))));
-
-    if (turkish != -1)
-        results << pick(0,
-                    data.mid(turkish, data.indexOf("", turkish) - turkish));
-    if (english != -1)
-        results << pick(1,
-                data.mid(english, data.indexOf("", english) - english));
-    if (german != -1)
-        results << pick(2,
-                    data.mid(german, data.indexOf("", german) - german));
-    // qDebug() << turkish << data.indexOf("", turkish) << english << data.indexOf("", english) << german << data.indexOf("", german);
+        
+        if (lang != -1) {
+            QRegularExpression aRegex("<a\\s+[^>]*class=\"definition-link\"[^>]*>(.*?)</a>", QRegularExpression::DotMatchesEverythingOption);
+            QRegularExpressionMatchIterator aIt = aRegex.globalMatch(dlContent);
+            
+            while (aIt.hasNext()) {
+                QRegularExpressionMatch aMatch = aIt.next();
+                QString content = aMatch.captured(1);
+                content.remove(QRegularExpression("<[^>]+>"));
+                content = content.replace(QRegularExpression("\\s+"), " ").trimmed();
+                
+                QList<QVariant> list;
+                list << QVariant(lang) << QVariant(content);
+                if (!results.contains(list)) {
+                    results << list;
+                }
+            }
+        }
+    }
 
     emit found(word, results);
 }
 
-QList< QList<QVariant> > SesliSozluk::pick(int lang, QList<QString> text)
-{
-    QList< QList<QVariant> > translations;
-
-    for(int i = 1; i < text.size(); i+=2) {
-        QList<QVariant> list;
-        list << QVariant(lang) << QVariant(text[i]);
-        translations << list;
-    }
-
-    return translations;
-}

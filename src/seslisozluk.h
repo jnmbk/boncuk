@@ -37,8 +37,6 @@ class SesliSozluk : public QObject
         QNetworkAccessManager *manager;
 
         void convertToTurkishWeb(QString *);
-        void parse();
-        QList< QList<QVariant> > pick(int, QList<QString>);
         QString word;
 
     private slots:
