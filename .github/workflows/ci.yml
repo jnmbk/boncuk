@@ -74,9 +74,11 @@ jobs:
       run: |
         $exePath = Get-ChildItem -Path bin -Filter boncuk.exe -Recurse | Select-Object -First 1
         if ($exePath -and $exePath.FullName -ne (Resolve-Path "bin\boncuk.exe" -ErrorAction SilentlyContinue).Path) {
-          Copy-Item $exePath.FullName bin\boncuk.exe -ErrorAction SilentlyContinue
+          Move-Item $exePath.FullName bin\boncuk.exe -Force
         }
-        windeployqt bin\boncuk.exe
+        if (Test-Path "bin\release") { Remove-Item -Recurse -Force "bin\release" }
+        if (Test-Path "bin\debug") { Remove-Item -Recurse -Force "bin\debug" }
+        windeployqt --release --compiler-runtime --no-translations bin\boncuk.exe
         & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows\boncuk.iss
       
     - name: Package macOS DMG

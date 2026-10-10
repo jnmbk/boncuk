@@ -9,7 +9,6 @@ macx {
     QMAKE_CXXFLAGS += -Wno-error=implicit-function-declaration
 }
 DEFINES += \
-    Q_OS_UNIX \
     BONCUK_VERSION=\\\"$$VERSION\\\"
 
 # Input
@@ -36,7 +35,7 @@ RESOURCES += \
 TRANSLATIONS += \
     resources/boncuk_tr_TR.ts
 
-CONFIG += debug
+CONFIG += release
 
 # Generate .qm files from .ts
 qm.input = TRANSLATIONS
