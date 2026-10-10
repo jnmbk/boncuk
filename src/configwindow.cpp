@@ -58,9 +58,6 @@ void ConfigWindow::keyPressEvent( QKeyEvent *event )
     QWidget::keyPressEvent(event);
 }
 
-void ConfigWindow::stateSync(int state)
-{
-}
 
 void ConfigWindow::slotHistorySync(int state)
 {
