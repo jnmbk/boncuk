@@ -88,8 +88,10 @@ jobs:
       if: runner.os == 'Linux'
       env:
         QMAKE: qmake
-        EXTRA_QT_PLUGINS: sqldrivers
       run: |
+        # Remove unused SQL plugins with missing third-party libs (e.g. Mimer)
+        find "$RUNNER_WORKSPACE" -name "libqsqlmimer.so" -delete 2>/dev/null || true
+
         # Download linuxdeploy and plugins
         wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
         wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
