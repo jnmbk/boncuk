@@ -26,8 +26,8 @@ SearchThread::SearchThread(QObject *parent)
 
 SearchThread::~SearchThread()
 {
-    wait();
     quit();
+    wait();
 }
 
 void SearchThread::run()
