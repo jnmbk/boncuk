@@ -1,6 +1,6 @@
 [Setup]
 AppName=Boncuk
-AppVersion=2.0
+AppVersion=2.0.0
 AppPublisher=Boncuk Development Team
 DefaultDirName={autopf}\Boncuk
 DefaultGroupName=Boncuk

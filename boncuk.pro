@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = boncuk
-VERSION = "2.0"
+VERSION = "2.0.0"
 macx: ICON = resources/boncuk.icns
 DEFINES += \
     Q_OS_UNIX \
