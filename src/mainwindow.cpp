@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(showOrHideUi(QSystemTrayIcon::ActivationReason)));
     connect(this, SIGNAL(historyChanged(bool)),
             actionHistoryClear, SLOT(setEnabled(bool)));
-    connect(actionConfigure, SIGNAL(activated()), configWindow, SLOT(show()));
+    connect(actionConfigure, SIGNAL(triggered()), configWindow, SLOT(show()));
 }
 
 MainWindow::~MainWindow()
