@@ -16,7 +16,7 @@
 #include <QMainWindow>
 #include <QTranslator>
 #include <QSettings>
-#include <QSharedMemory>
+#include <QLockFile>
 #include <QStringList>
 #include <QDir>
 #include <QByteArray>
@@ -44,7 +44,8 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     MainWindow *mainWindow = NULL;
-    QSharedMemory sharedMemory("boncuk_shared_instance");
+    QLockFile lockFile(QDir::temp().absoluteFilePath("boncuk_instance.lock"));
+    lockFile.setStaleLockTime(0);
 
     if (app.arguments().size() > 1) {
         Console *console = new Console();
@@ -53,16 +54,10 @@ int main(int argc, char *argv[])
         return 0;
     } else {
         // check instance for only gui startups
-        if (!sharedMemory.create(1)) {
-            // Attempt to clean up in case of a crashed instance on Unix
-            if (sharedMemory.error() == QSharedMemory::AlreadyExists && sharedMemory.attach()) {
-                sharedMemory.detach();
-            }
-            if (!sharedMemory.create(1)) {
-                QTextStream out(stdout);
-                out << app.translate("main", "There's an instance of program running\n");
-                return 1;
-            }
+        if (!lockFile.tryLock(100)) {
+            QTextStream out(stdout);
+            out << app.translate("main", "There's an instance of program running\n");
+            return 1;
         }
         mainWindow = new MainWindow();
     }
