@@ -98,6 +98,7 @@ jobs:
         
         # Build AppImage with Qt plugin and AppImage output
         ./linuxdeploy-x86_64.AppImage \
+          --appdir AppDir \
           --executable bin/boncuk \
           --desktop-file linux/boncuk.desktop \
           --icon-file resources/boncuk.png \
