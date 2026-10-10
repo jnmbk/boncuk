@@ -13,3 +13,14 @@ Makefile
 .DS_Store
 *.app/
 
+
+# Test artifacts
+*.o
+moc_*
+*.moc
+test_*
+!test_*.cpp
+!test_*.pro
+!test_*.h
+moc_predefs.h
+qrc_*.cpp
