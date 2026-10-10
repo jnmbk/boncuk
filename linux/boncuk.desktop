@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Boncuk
+Comment=Offline/Online Dictionary
+Exec=boncuk
+Icon=boncuk
+Categories=Education;Dictionary;Utility;
+Terminal=false
+

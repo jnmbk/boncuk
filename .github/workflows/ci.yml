@@ -1,0 +1,109 @@
+name: Cross-Platform CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    name: Build & Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+        qt_version: [5.15.2]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC (Windows only)
+      if: matrix.os == 'windows-latest'
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Install Linux Dependencies (Ubuntu only)
+      if: matrix.os == 'ubuntu-20.04'
+      run: sudo apt-get update && sudo apt-get install -y build-essential libgl1-mesa-dev file
+
+    - name: Install Qt
+      uses: miurahr/setup-qt@v3
+      with:
+        qt-version: ${{ matrix.qt_version }}
+        arch: ${{ matrix.os == 'windows-latest' && 'win64_msvc2019_64' || '' }}
+
+    - name: Build Main Application
+      run: |
+        qmake "CONFIG-=debug" "CONFIG+=release" boncuk.pro
+        ${{ matrix.os == 'windows-latest' && 'nmake' || 'make' }}
+
+    - name: Build and Run Tests
+      shell: bash
+      run: |
+        cd tests/sqlite
+        qmake "CONFIG-=debug" "CONFIG+=release" sqlite.pro
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          nmake
+          ./release/test_sqlite.exe || ./test_sqlite.exe || ./debug/test_sqlite.exe
+        else
+          make
+          ./test_sqlite
+        fi
+
+    - name: Package Windows Installer
+      if: matrix.os == 'windows-latest'
+      shell: pwsh
+      run: |
+        $exePath = Get-ChildItem -Path bin -Filter boncuk.exe -Recurse | Select-Object -First 1
+        if ($exePath -and $exePath.FullName -ne (Resolve-Path "bin\boncuk.exe" -ErrorAction SilentlyContinue).Path) {
+          Copy-Item $exePath.FullName bin\boncuk.exe -ErrorAction SilentlyContinue
+        }
+        windeployqt bin\boncuk.exe
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows\boncuk.iss
+      
+    - name: Package macOS DMG
+      if: matrix.os == 'macos-latest'
+      run: |
+        macdeployqt bin/boncuk.app -dmg
+      
+    - name: Package Linux AppImage
+      if: matrix.os == 'ubuntu-20.04'
+      run: |
+        # Set up AppDir structure
+        mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+        cp bin/boncuk AppDir/usr/bin/
+        cp linux/boncuk.desktop AppDir/usr/share/applications/
+        cp resources/boncuk.png AppDir/boncuk.png
+        cp resources/boncuk.png AppDir/usr/share/icons/hicolor/256x256/apps/
+        
+        # Download linuxdeployqt
+        wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+        chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+        
+        # Build AppImage (VERSION is required by linuxdeployqt)
+        export VERSION="2.0"
+        ./linuxdeployqt-continuous-x86_64.AppImage AppDir/usr/share/applications/boncuk.desktop -appimage
+
+    - name: Upload Windows Artifact
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v4
+      with:
+        name: Boncuk-Windows-Installer
+        path: dist/Boncuk_Setup.exe
+        
+    - name: Upload macOS Artifact
+      if: matrix.os == 'macos-latest'
+      uses: actions/upload-artifact@v4
+      with:
+        name: Boncuk-macOS-DMG
+        path: bin/boncuk.dmg
+
+    - name: Upload Linux Artifact
+      if: matrix.os == 'ubuntu-20.04'
+      uses: actions/upload-artifact@v4
+      with:
+        name: Boncuk-Linux-AppImage
+        path: Boncuk-*-x86_64.AppImage
