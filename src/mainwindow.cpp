@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent)
     statusBar()->showMessage(tr("Type in a keyword to search"));
     searchButton->setEnabled(0);
 
-    QRegularExpression searchLineRx("[\\w\\s]*");
+    QRegularExpression searchLineRx("[\\w\\s]*", QRegularExpression::UseUnicodePropertiesOption);
     validator = new QRegularExpressionValidator(searchLineRx, this);
     keyword->setValidator(validator);
     keyword->setMaxLength(64);
