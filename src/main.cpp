@@ -16,7 +16,7 @@
 #include <QMainWindow>
 #include <QTranslator>
 #include <QSettings>
-#include <QProcess>
+#include <QSharedMemory>
 #include <QStringList>
 #include <QDir>
 #include <QByteArray>
@@ -24,39 +24,6 @@
 
 #include "mainwindow.h"
 #include "console.h"
-
-#ifdef Q_OS_UNIX
-bool check_instance(char **argv)
-{
-    /*! Checks if any instances are running
-    @return Returns true if theres an instance of program,
-    or there's been an error while reading process list
-    @return Returns false otherwise
-    */
-
-    QProcess *instancecheck = new QProcess;
-    QStringList env = instancecheck->systemEnvironment().filter("USER");
-    instancecheck->setProcessChannelMode(QProcess::SeparateChannels);
-    instancecheck->start("ps", QStringList() << "-U" << env.first().split("=").last() << "-x");
-
-    if(!instancecheck->waitForFinished()) {
-        instancecheck->close();
-        delete instancecheck;
-        return true;
-    }
-
-    QByteArray result = instancecheck->readAllStandardOutput();
-    instancecheck->close();
-    delete instancecheck;
-
-    if( result.count( QByteArray(argv[0]).prepend(" ") ) <= 1 ){
-        return false;
-    }else{
-        return true;
-    }
-    return 0;
-}
-#endif
 
 int main(int argc, char *argv[])
 {
@@ -77,6 +44,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     MainWindow *mainWindow = NULL;
+    QSharedMemory sharedMemory("boncuk_shared_instance");
 
     if (app.arguments().size() > 1) {
         Console *console = new Console();
@@ -84,18 +52,19 @@ int main(int argc, char *argv[])
         delete console;
         return 0;
     } else {
-#ifdef Q_OS_UNIX
         // check instance for only gui startups
-        if(!check_instance(argv)){
-            mainWindow = new MainWindow();
-        }else {
-            QTextStream out(stdout);
-            out << app.translate("main", "There's an instance of program running\n");
-            app.exit(1);
+        if (!sharedMemory.create(1)) {
+            // Attempt to clean up in case of a crashed instance on Unix
+            if (sharedMemory.error() == QSharedMemory::AlreadyExists && sharedMemory.attach()) {
+                sharedMemory.detach();
+            }
+            if (!sharedMemory.create(1)) {
+                QTextStream out(stdout);
+                out << app.translate("main", "There's an instance of program running\n");
+                return 1;
+            }
         }
-#else
         mainWindow = new MainWindow();
-#endif
     }
 
     int exit_code = app.exec();
